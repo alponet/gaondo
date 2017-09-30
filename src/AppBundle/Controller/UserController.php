@@ -39,28 +39,28 @@ class UserController extends Controller
         $name = $request->request->get("name");
         $email = $request->request->get("email");
 
-        $response = new Response();
+        $response = [];
 
         if (!preg_match("/\b[a-zA-Z][a-zA-Z\d_-]{3,15}/", $name)) {
-            $response->setContent('Invalid user name!');
-            return $response;
+            $response['errors']['name'] = 'Invalid user name!';
+            return $this->json($response);
         }
         if (!preg_match("/\w+@\w+.[a-zA-Z]{2,}/", $email)) {
-            $response->setContent('Invalid email address');
-            return $response;
+            $response['errors']['email'] = 'Invalid email address!';
+            return $this->json($response);
         }
 
         $repository = $this->getDoctrine()->getRepository(User::class);
         $user = $repository->findOneByName($name);
         if ($user) {
-            $response->setContent('Name already taken.');
-            return $response;
+            $response['errors']['name'] = 'Name already taken.';
+            return $this->json($response);
         }
 
         $user = $repository->findOneByEmail($email);
         if ($user) {
-            $response->setContent('Email address is already registered');
-            return $response;
+            $response['errors']['email'] = 'Email address is already registered.';
+            return $this->json($response);
         }
 
         $password = bin2hex(openssl_random_pseudo_bytes(5));
@@ -91,8 +91,8 @@ class UserController extends Controller
         $mailer = $this->get('mailer');
         $mailer->send($message);
 
-        $response->setContent('Please check your email.');
-        return $response;
+        $response['success'] = 'Please check your email.';
+        return $this->json($response);
     }
 
 
