@@ -42,24 +42,36 @@ class UserController extends Controller
         $response = [];
 
         if (!preg_match("/\b[a-zA-Z][a-zA-Z\d_-]{3,15}/", $name)) {
-            $response['errors']['name'] = 'Invalid user name!';
+            $response['errors'][] = [
+                'source' => 'name',
+                'detail' => 'Invalid user name!'
+            ];
             return $this->json($response);
         }
         if (!preg_match("/\w+@\w+.[a-zA-Z]{2,}/", $email)) {
-            $response['errors']['email'] = 'Invalid email address!';
+            $response['errors'][] = [
+                'source' => 'email',
+                'detail' => 'Invalid email address!'
+            ];
             return $this->json($response);
         }
 
         $repository = $this->getDoctrine()->getRepository(User::class);
         $user = $repository->findOneByName($name);
         if ($user) {
-            $response['errors']['name'] = 'Name already taken.';
+            $response['errors'][] = [
+                'source' => 'name',
+                'detail' => 'Name already taken.'
+            ];
             return $this->json($response);
         }
 
         $user = $repository->findOneByEmail($email);
         if ($user) {
-            $response['errors']['email'] = 'Email address is already registered.';
+            $response['errors'][] = [
+                'source' => 'email',
+                'detail' => 'Email address is already registered.'
+            ];
             return $this->json($response);
         }
 
