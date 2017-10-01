@@ -57,7 +57,7 @@ class UserController extends Controller
         }
 
         $repository = $this->getDoctrine()->getRepository(User::class);
-        $user = $repository->findOneByName($name);
+        $user = $repository->findOneByUsername($name);
         if ($user) {
             $response['errors'][] = [
                 'source' => 'name',
@@ -80,7 +80,7 @@ class UserController extends Controller
 
         $em = $this->getDoctrine()->getManager();
         $user = new User();
-        $user->setName($name);
+        $user->setUsername($name);
         $user->setEmail($email);
         $user->setPassword($passwordHash);
         $user->setRegDate(new \DateTime());
