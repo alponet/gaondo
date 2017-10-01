@@ -29,7 +29,26 @@ body {
   #content {
     display: block;
     margin: 4em auto;
-    max-width: 80%;
+    max-width: 640px;
+
+    .register {
+      input {
+        margin-bottom: 1em;
+      }
+
+      .error {
+        color: #ff0000;
+      }
+
+      .success {
+        color: #00a000;
+      }
+
+      button {
+        display: block;
+        margin: 1em 0;
+      }
+    }
   }
 
   #footer {
