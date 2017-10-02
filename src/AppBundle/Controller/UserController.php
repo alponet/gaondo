@@ -126,9 +126,29 @@ class UserController extends Controller
      * @Method({"GET"})
      * @return Response
      */
-    public function userAction($name) {
-        return $this->render('user/profile.html.twig', array(
-            'name' => $name
-        ));
+    public function getUserAction($name) {
+        /** @var User $currentUser */
+        $currentUser = $this->get('security.token_storage')->getToken()->getUser();
+
+        if (gettype($currentUser) !== 'object') {
+            throw $this->createAccessDeniedException('please log in');
+        }
+
+        $repository = $this->getDoctrine()->getRepository(User::class);
+        $user = $repository->findOneByUsername($name);
+
+        if ($user) {
+            $response = [
+                'id' => $user->getId(),
+                'name' => $user->getUsername(),
+                'email' => $user->getEmail(),
+                'registrationDate' => $user->getRegDate(),
+                'lastActionDate' => $user->getActiveDate()
+            ];
+
+            return $this->json($response);
+        }
+
+        throw $this->createNotFoundException();
     }
 }
