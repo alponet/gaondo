@@ -19,13 +19,26 @@ class UserController extends Controller
 {
 
     /**
-     * ToDo: will this be index or self/login?
-     *
      * @Route("/u/")
      * @Method("GET")
      */
-    public function indexAction() {
-        return $this->render('user/index.html.twig');
+    public function getCurrentUserAction() {
+        /** @var User $user */
+        $user = $this->get('security.token_storage')->getToken()->getUser();
+
+        if (gettype($user) !== 'object') {
+            throw $this->createAccessDeniedException('please log in');
+        }
+
+        $response = [
+            'id' => $user->getId(),
+            'name' => $user->getUsername(),
+            'email' => $user->getEmail(),
+            'registrationDate' => $user->getRegDate(),
+            'lastActionDate' => $user->getActiveDate()
+        ];
+
+        return $this->json($response);
     }
 
 
