@@ -27,7 +27,7 @@ class UserController extends Controller
         $user = $this->get('security.token_storage')->getToken()->getUser();
 
         if (gettype($user) !== 'object') {
-            throw $this->createAccessDeniedException('please log in');
+            return $this->json([]);
         }
 
         $response = [
@@ -149,6 +149,6 @@ class UserController extends Controller
             return $this->json($response);
         }
 
-        throw $this->createNotFoundException();
+        return $this->json([]);
     }
 }
