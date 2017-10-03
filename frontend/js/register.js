@@ -22,8 +22,8 @@ var Register = {
         });
     },
     view: function (vnode) {
-        return m(".register",
-            m("h1", "register"),
+        return [
+            m("h2", "Register"),
             m("form",
                 m("label", "name"),
                 m("input[type=text][placeholder=name]", {
@@ -44,8 +44,8 @@ var Register = {
                     }) : Register.status.hasOwnProperty('success') ? m("label.success", Register.status.success) : ''),
                 m("button", { onclick: Register.submit }, "register")
             )
-        )
+        ];
     }
-}
+};
 
 module.exports = Register;

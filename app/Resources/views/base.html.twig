@@ -2,14 +2,25 @@
 <html>
     <head>
         <meta charset="UTF-8" />
-        <title>{% block title %}Welcome!{% endblock %}</title>
+        <title>{% block title %}G!{% endblock %}</title>
         <link rel="stylesheet" href="{{ asset('build/global.css') }}">
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     </head>
     <body>
-        <div id="header"></div>
-        <div id="content"></div>
-        <div id="footer"></div>
-        <script src="{{ asset('build/app.js') }}"></script>
+        {% block header %}
+            <div id="header"></div>
+        {% endblock %}
+
+        {% block content %}
+            <div id="content"></div>
+        {% endblock %}
+
+        <div id="footer">
+            <div class="copyright">© 2017</div>
+        </div>
+
+        {% block scripts %}
+            <script src="{{ asset('build/app.js') }}"></script>
+        {% endblock %}
     </body>
 </html>
