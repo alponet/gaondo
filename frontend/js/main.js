@@ -7,9 +7,9 @@ var Footer = require("./footer");
 m.mount(document.getElementById("header"), Header);
 
 var content = document.getElementById("content");
-m.route(content, "/feed", {
-    "/feed": Feed,
-    "/register": Register
+m.route(content, "feed", {
+    "feed": Feed,
+    "register": Register
 });
 
 m.mount(document.getElementById("footer"), Footer);

@@ -12,7 +12,7 @@ var LoggedInView = {
 var LoggedOutView = {
     view: function () {
         return [
-            m("a[href=#!/register]", "Register"),
+            m("a[href=#!register]", "Register"),
             m("a[href=/login]", "Login")
         ];
     }
