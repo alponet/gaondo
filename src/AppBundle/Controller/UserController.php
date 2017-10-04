@@ -151,4 +151,63 @@ class UserController extends Controller
 
         return $this->json([]);
     }
+
+
+    /**
+     * @Route("/u/{id}")
+     * @Method("PUT")
+     * @param int $id
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\JsonResponse
+     */
+    public function updateUserAction($id, Request $request) {
+        /** @var User $currentUser */
+        $currentUser = $this->get('security.token_storage')->getToken()->getUser();
+
+        if (gettype($currentUser) !== 'object') {
+            throw $this->createAccessDeniedException('please log in');
+        }
+
+        if ($currentUser->getId() != $id) {
+            return $this->json([ "success" => false, "detail" => "permission denied" ]);
+        }
+
+        $attributes = json_decode($request->getContent());
+
+        $response = [];
+
+        if (!password_verify($attributes->oldPassword, $currentUser->getPassword())) {
+            $response["success"] = false;
+            $response["errors"][] = [
+                "source" => "oldPassword",
+                "detail" => "your old password is wrong"
+            ];
+            return $this->json($response);
+        }
+
+        if (strlen($attributes->newPassword) < 8) {
+            $response["success"] = false;
+            $response["errors"][] = [
+                "source" => "newPassword",
+                "detail" => "password must be minimum 8 characters"
+            ];
+            return $this->json($response);
+        }
+        if (strlen($attributes->newPassword) > 32) {
+            $response["success"] = false;
+            $response["errors"][] = [
+                "source" => "newPassword",
+                "detail" => "password must be maximum 32 characters"
+            ];
+            return $this->json($response);
+        }
+
+        $newPasswordHash = password_hash($attributes->newPassword, PASSWORD_BCRYPT);
+        $currentUser->setPassword($newPasswordHash);
+
+        $em = $this->getDoctrine()->getManager();
+        $em->flush();
+
+        return $this->json([ "success" => true]);
+    }
 }
