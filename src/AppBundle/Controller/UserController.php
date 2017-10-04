@@ -124,6 +124,7 @@ class UserController extends Controller
     /**
      * @Route("/u/{name}/")
      * @Method({"GET"})
+     * @param string $name
      * @return Response
      */
     public function getUserAction($name) {
@@ -135,13 +136,13 @@ class UserController extends Controller
         }
 
         $repository = $this->getDoctrine()->getRepository(User::class);
+        /** @var User $user */
         $user = $repository->findOneByUsername($name);
 
         if ($user) {
             $response = [
                 'id' => $user->getId(),
                 'name' => $user->getUsername(),
-                'email' => $user->getEmail(),
                 'registrationDate' => $user->getRegDate(),
                 'lastActionDate' => $user->getActiveDate()
             ];
