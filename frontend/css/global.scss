@@ -46,16 +46,33 @@ body {
       color: #00a000;
     }
 
+    .border {
+      border: 1px solid #cccccc;
+      padding: 5px;
+    }
+
     h2 {
       padding-top: 1em;
     }
 
     form {
+      label {
+        display: block;
+      }
+
       input {
+        display: block;
         margin-bottom: 1em;
       }
 
       button {
+        display: inline-block;
+        margin: 1em 0;
+      }
+    }
+
+    .profile {
+      a {
         display: block;
         margin: 1em 0;
       }
@@ -75,12 +92,6 @@ body {
       color: #fff;
       text-align: center;
       padding:10px;
-    }
-  }
-
-  form {
-    input {
-      display: block;
     }
   }
 }
