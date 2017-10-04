@@ -155,7 +155,7 @@ class UserController extends Controller
 
 
     /**
-     * @Route("/u/{id}")
+     * @Route("/u/{id}/")
      * @Method("PUT")
      * @param int $id
      * @param Request $request
@@ -210,5 +210,45 @@ class UserController extends Controller
         $em->flush();
 
         return $this->json([ "success" => true]);
+    }
+
+
+    /**
+     * @Route("/u/{id}")
+     * @Method("DELETE")
+     * @param $id
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\JsonResponse
+     */
+    public function deleteUserAction($id, Request $request) {
+        /** @var User $currentUser */
+        $currentUser = $this->get('security.token_storage')->getToken()->getUser();
+
+        if (gettype($currentUser) !== 'object') {
+            throw $this->createAccessDeniedException('please log in');
+        }
+
+        if ($currentUser->getId() != $id) {
+            return $this->json([ "success" => false, "detail" => "permission denied" ]);
+        }
+
+        $attributes = json_decode($request->getContent());
+
+        $response = [];
+
+        if (!password_verify($attributes->password, $currentUser->getPassword())) {
+            $response["success"] = false;
+            $response["errors"][] = [
+                "source" => "password",
+                "detail" => "your password is wrong"
+            ];
+            return $this->json($response);
+        }
+
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($currentUser);
+        $em->flush();
+
+        return $this->json([ 'success' => true ]);
     }
 }
