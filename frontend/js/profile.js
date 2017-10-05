@@ -96,7 +96,7 @@ var DeleteAccountView = {
                         DeleteAccountView.status = response;
                         if (response.success) {
                             setTimeout(function () {
-                                window.location.href = "/logout";
+                                window.location.replace("/");
                             }, 2000);
                         }
                     });

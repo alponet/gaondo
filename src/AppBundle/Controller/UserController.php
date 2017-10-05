@@ -155,7 +155,7 @@ class UserController extends Controller
 
 
     /**
-     * @Route("/u/{id}/")
+     * @Route("/u/{id}")
      * @Method("PUT")
      * @param int $id
      * @param Request $request
@@ -248,6 +248,8 @@ class UserController extends Controller
         $em = $this->getDoctrine()->getManager();
         $em->remove($currentUser);
         $em->flush();
+
+        $request->getSession()->invalidate(1);
 
         return $this->json([ 'success' => true ]);
     }
