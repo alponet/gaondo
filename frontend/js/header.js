@@ -28,7 +28,7 @@ var Header = {
     },
     view: function () {
         return m(".header", [
-            m("h1", "Gaonda"),
+            m("h1.logo", m("a[href=/]", "Gaonda")),
             m(".nav", Header.username ? m(LoggedInView) : m(LoggedOutView))
         ]);
     }

@@ -18,7 +18,7 @@
 !var/logs/.gitkeep
 !var/sessions/.gitkeep
 
-npm-debug.log
+npm-debug.log*
 
 # Parameters
 /app/config/parameters.yml
