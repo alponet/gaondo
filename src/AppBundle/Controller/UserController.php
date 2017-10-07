@@ -100,8 +100,9 @@ class UserController extends Controller
         $em->persist($user);
         $em->flush();
 
+        $fromAddress = $this->container->getParameter('mailer_address');
         $message = (new \Swift_Message('Your gato peroncho login'))
-            ->setFrom('no-reply@alpers.it')
+            ->setFrom($fromAddress)
             ->setTo($email)
             ->setBody(
                 $this->renderView(
