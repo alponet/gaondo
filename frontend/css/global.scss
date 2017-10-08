@@ -82,13 +82,28 @@ body {
         margin: 1em 0;
       }
     }
+
+    .stream {
+      display: block;
+
+      .meme {
+        margin-top: 1em;
+        padding: 10px;
+        border: 2px solid #DDDDDD;
+      }
+
+      img {
+        width: 100%;
+        height: auto;
+      }
+    }
   }
 
   #footer {
     display: block;
     position: fixed;
     bottom: 0;
-    height: 4em;
+    height: 2em;
     width: 100%;
     margin: 0;
     background-color: #3f4e5e;
