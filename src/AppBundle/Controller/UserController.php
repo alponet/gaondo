@@ -11,7 +11,6 @@ use Psr\Log\LoggerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\Console\Application;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -22,7 +21,8 @@ class UserController extends Controller
      * @Route("/u/")
      * @Method("GET")
      */
-    public function getCurrentUserAction() {
+    public function getCurrentUserAction()
+    {
         /** @var User $user */
         $user = $this->get('security.token_storage')->getToken()->getUser();
 
@@ -48,7 +48,8 @@ class UserController extends Controller
      * @param Request $request
      * @return Response
      */
-    public function createUserAction(Request $request) {
+    public function createUserAction(Request $request)
+    {
         $name = $request->request->get("name");
         $email = $request->request->get("email");
 
@@ -128,7 +129,8 @@ class UserController extends Controller
      * @param string $name
      * @return Response
      */
-    public function getUserAction($name) {
+    public function getUserAction($name)
+    {
         /** @var User $currentUser */
         $currentUser = $this->get('security.token_storage')->getToken()->getUser();
 
@@ -162,7 +164,8 @@ class UserController extends Controller
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\JsonResponse
      */
-    public function updateUserAction($id, Request $request) {
+    public function updateUserAction($id, Request $request)
+    {
         /** @var User $currentUser */
         $currentUser = $this->get('security.token_storage')->getToken()->getUser();
 
@@ -221,7 +224,8 @@ class UserController extends Controller
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\JsonResponse
      */
-    public function deleteUserAction($id, Request $request) {
+    public function deleteUserAction($id, Request $request)
+    {
         /** @var User $currentUser */
         $currentUser = $this->get('security.token_storage')->getToken()->getUser();
 
@@ -235,9 +239,8 @@ class UserController extends Controller
 
         $attributes = json_decode($request->getContent());
 
-        $response = [];
-
         if (!password_verify($attributes->password, $currentUser->getPassword())) {
+            $response = [];
             $response["success"] = false;
             $response["errors"][] = [
                 "source" => "password",
