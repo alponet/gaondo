@@ -3,6 +3,7 @@ var m = require("mithril");
 var LoggedInView = {
     view: function () {
         return [
+            m("a[href=/#!newMeme]", "Upload"),
             m("a[href=/#!profile]", Header.username),
             m("a[href=/logout]", "Logout")
         ];
