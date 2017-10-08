@@ -13,9 +13,9 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Entity
  * @ORM\InheritanceType("JOINED")
  * @ORM\DiscriminatorColumn(name="typeDiscr", type="string")
- * @ORM\DiscriminatorMap({})
+ * @ORM\DiscriminatorMap({ "meme" = "Meme" })
  */
-class BasePost
+abstract class BasePost
 {
     /**
      * @ORM\Id
