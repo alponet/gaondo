@@ -24,7 +24,7 @@ class Meme extends BasePost
     private $file;
 
     /**
-     * @ORM\Column(type="text")
+     * @ORM\Column(type="text", nullable=true)
      */
     private $description;
 
