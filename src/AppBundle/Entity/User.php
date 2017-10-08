@@ -6,6 +6,7 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 
@@ -51,6 +52,20 @@ class User implements UserInterface, \Serializable
      * @ORM\Column(type="string", length=128, nullable=true)
      */
     private $avatarUrl;
+
+    /**
+     * @ORM\OneToMany(targetEntity="BasePost", mappedBy="author")
+     */
+    private $posts;
+
+
+    /**
+     * User constructor.
+     */
+    public function __construct()
+    {
+        $this->posts = new ArrayCollection();
+    }
 
 
     /**
