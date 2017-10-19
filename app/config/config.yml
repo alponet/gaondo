@@ -74,3 +74,12 @@ swiftmailer:
 # VichUploader Configuration
 vich_uploader:
     db_driver: orm
+
+    mappings:
+        meme_image:
+            uri_prefix: /images/memes
+            upload_destination: '%kernel.root_dir%/../web/images/memes'
+            namer: vich_uploader.namer_uniqid
+            inject_on_load:     false
+            delete_on_update:   true
+            delete_on_remove:   true
