@@ -7,9 +7,12 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\File;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
  * @ORM\Entity
+ * @Vich\Uploadable
  */
 class Meme extends BasePost
 {
@@ -19,9 +22,26 @@ class Meme extends BasePost
     private $title;
 
     /**
-     * @ORM\Column(type="string", length=128)
+     * @Vich\UploadableField(mapping="meme_image", fileNameProperty="imageName", size="imageSize")
+     *
+     * @var File
      */
-    private $file;
+    private $imageFile;
+
+    /**
+     * @ORM\Column(type="string", length=128)
+     *
+     * @var string
+     */
+    private $imageName;
+
+    /**
+     * @ORM\Column(type="integer")
+     *
+     * @var integer
+     */
+    private $imageSize;
+
 
     /**
      * @ORM\Column(type="text", nullable=true)
@@ -48,20 +68,68 @@ class Meme extends BasePost
 
 
     /**
-     * @return string
+     * @return File|null
      */
-    public function getFile()
+    public function getImageFile()
     {
-        return $this->file;
+        return $this->imageFile;
     }
 
 
     /**
-     * @param string $file
+     * @param File|\Symfony\Component\HttpFoundation\File\UploadedFile $file
      */
-    public function setFile($file)
+    public function setImageFile(File $file = null)
     {
-        $this->file = $file;
+        $this->imageFile = $file;
+
+        if ($file) {
+            $this->setCreationDate(new \DateTime('now'));
+        }
+    }
+
+
+    /**
+     * @return string
+     */
+    public function getImageName()
+    {
+        return $this->imageName;
+    }
+
+
+    /**
+     * @param string $imageName
+     *
+     * @return Meme
+     */
+    public function setImageName($imageName)
+    {
+        $this->imageName = $imageName;
+
+        return $this;
+    }
+
+
+    /**
+     * @return integer
+     */
+    public function getImageSize()
+    {
+        return $this->imageSize;
+    }
+
+
+    /**
+     * @param integer $imageSize
+     *
+     * @return Meme
+     */
+    public function setImageSize($imageSize)
+    {
+        $this->imageSize = $imageSize;
+
+        return $this;
     }
 
 
