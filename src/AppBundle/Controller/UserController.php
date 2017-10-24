@@ -66,7 +66,7 @@ class UserController extends Controller
         if (!preg_match("/\w+@\w+.[a-zA-Z]{2,}/", $email)) {
             $response['errors'][] = [
                 'source' => 'email',
-                'detail' => 'Invalid email address!'
+                'detail' => $i18n->trans('error.invalidEmail')
             ];
             return $this->json($response);
         }
@@ -76,7 +76,7 @@ class UserController extends Controller
         if ($user) {
             $response['errors'][] = [
                 'source' => 'name',
-                'detail' => 'Name already taken.'
+                'detail' => $i18n->trans('error.nameTaken')
             ];
             return $this->json($response);
         }
@@ -85,7 +85,7 @@ class UserController extends Controller
         if ($user) {
             $response['errors'][] = [
                 'source' => 'email',
-                'detail' => 'Email address is already registered.'
+                'detail' => $i18n->trans('error.emailAlreadyRegistered')
             ];
             return $this->json($response);
         }
@@ -103,12 +103,12 @@ class UserController extends Controller
         $em->flush();
 
         $fromAddress = $this->container->getParameter('mailer_address');
-        $message = (new \Swift_Message('Your gato peroncho login'))
+        $message = (new \Swift_Message($i18n->trans('register.mailSubject')))
             ->setFrom($fromAddress)
             ->setTo($email)
             ->setBody(
                 $this->renderView(
-                    'Emails/registration.txt.twig',
+                    'emails/registration.txt.twig',
                     array(
                         'name' => $name,
                         'password' => $password
@@ -119,7 +119,7 @@ class UserController extends Controller
         $mailer = $this->get('mailer');
         $mailer->send($message);
 
-        $response['success'] = 'Please check your email.';
+        $response['success'] = $i18n->trans('register.success');
         return $this->json($response);
     }
 
@@ -135,8 +135,10 @@ class UserController extends Controller
         /** @var User $currentUser */
         $currentUser = $this->get('security.token_storage')->getToken()->getUser();
 
+        $i18n = $this->get("translator");
+
         if (gettype($currentUser) !== 'object') {
-            throw $this->createAccessDeniedException('please log in');
+            throw $this->createAccessDeniedException($i18n->trans('error.pleaseLogIn'));
         }
 
         $repository = $this->getDoctrine()->getRepository(User::class);
@@ -170,12 +172,14 @@ class UserController extends Controller
         /** @var User $currentUser */
         $currentUser = $this->get('security.token_storage')->getToken()->getUser();
 
+        $i18n = $this->get("translator");
+
         if (gettype($currentUser) !== 'object') {
-            throw $this->createAccessDeniedException('please log in');
+            throw $this->createAccessDeniedException($i18n->trans('error.pleaseLogIn'));
         }
 
         if ($currentUser->getId() != $id) {
-            return $this->json([ "success" => false, "detail" => "permission denied" ]);
+            return $this->json([ "success" => false, "detail" => $i18n->trans('error.permissionDenied') ]);
         }
 
         $attributes = json_decode($request->getContent());
@@ -186,7 +190,7 @@ class UserController extends Controller
             $response["success"] = false;
             $response["errors"][] = [
                 "source" => "oldPassword",
-                "detail" => "your old password is wrong"
+                "detail" => $i18n->trans('error.oldPasswordWrong')
             ];
             return $this->json($response);
         }
@@ -195,7 +199,7 @@ class UserController extends Controller
             $response["success"] = false;
             $response["errors"][] = [
                 "source" => "newPassword",
-                "detail" => "password must be minimum 8 characters"
+                "detail" => $i18n->trans('error.passwordTooShort')
             ];
             return $this->json($response);
         }
@@ -203,7 +207,7 @@ class UserController extends Controller
             $response["success"] = false;
             $response["errors"][] = [
                 "source" => "newPassword",
-                "detail" => "password must be maximum 32 characters"
+                "detail" => $i18n->trans('error.passwordTooLong')
             ];
             return $this->json($response);
         }
@@ -230,12 +234,14 @@ class UserController extends Controller
         /** @var User $currentUser */
         $currentUser = $this->get('security.token_storage')->getToken()->getUser();
 
+        $i18n = $this->get('translator');
+
         if (gettype($currentUser) !== 'object') {
-            throw $this->createAccessDeniedException('please log in');
+            throw $this->createAccessDeniedException($i18n->trans('error.pleaseLogIn'));
         }
 
         if ($currentUser->getId() != $id) {
-            return $this->json([ "success" => false, "detail" => "permission denied" ]);
+            return $this->json([ "success" => false, "detail" => $i18n->trans('error.permissionDenied') ]);
         }
 
         $attributes = json_decode($request->getContent());
@@ -245,7 +251,7 @@ class UserController extends Controller
             $response["success"] = false;
             $response["errors"][] = [
                 "source" => "password",
-                "detail" => "your password is wrong"
+                "detail" => $i18n->trans('error.passwordWrong')
             ];
             return $this->json($response);
         }
