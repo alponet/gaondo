@@ -3,7 +3,7 @@ var m = require("mithril");
 var Stream = {
     memes: [],
     oninit: function () {
-        m.request("/m").then(function (response) {
+        m.request("/m/").then(function (response) {
             Stream.memes = response;
         });
     },

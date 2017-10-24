@@ -6,14 +6,19 @@ var Profile = require("./profile");
 var MakeMeme = require("./makeMeme");
 var Footer = require("./footer");
 
-m.mount(document.getElementById("header"), Header);
+m.request("/i18n/").then(function (msgs) {
+    window.t = msgs;
 
-var content = document.getElementById("content");
-m.route(content, "stream", {
-    "stream": Stream,
-    "register": Register,
-    "profile": Profile,
-    "newMeme": MakeMeme
+    m.mount(document.getElementById("header"), Header);
+
+    var content = document.getElementById("content");
+    m.route(content, "stream", {
+        "stream": Stream,
+        "register": Register,
+        "profile": Profile,
+        "newMeme": MakeMeme
+    });
+
+    m.mount(document.getElementById("footer"), Footer);
 });
 
-m.mount(document.getElementById("footer"), Footer);

@@ -22,17 +22,17 @@ var Register = {
     },
     view: function (vnode) {
         return [
-            m("h2", "Register"),
+            m("h2", t.register.register),
             m("form",
-                m("label", "name"),
-                m("input[type=text][placeholder=name]", {
+                m("label", t.register.name),
+                m("input[type=text][placeholder=" + t.register.name + "]", {
                     value: Register.name,
                     onchange: function(e) {
                         Register.name = e.currentTarget.value;
                     }
                 }),
-                m("label", "email"),
-                m("input[placeholder=email]", {
+                m("label", t.register.email),
+                m("input[placeholder=" + t.register.email + "]", {
                     value: Register.email,
                     onchange: function(e) {
                         Register.email = e.currentTarget.value;
@@ -41,7 +41,7 @@ var Register = {
                 m(".status", Register.status.hasOwnProperty("errors") ? Register.status.errors.map(function (t) {
                         return m("label.error", t.detail);
                     }) : Register.status.hasOwnProperty('success') ? m("label.success", Register.status.success) : ''),
-                m("button", { onclick: Register.submit }, "register")
+                m("button", { onclick: Register.submit }, t.register.register)
             )
         ];
     }

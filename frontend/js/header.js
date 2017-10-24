@@ -3,9 +3,9 @@ var m = require("mithril");
 var LoggedInView = {
     view: function () {
         return [
-            m("a[href=/#!newMeme]", "Upload"),
+            m("a[href=/#!newMeme]", t.main.upload),
             m("a[href=/#!profile]", Header.username),
-            m("a[href=/logout]", "Logout")
+            m("a[href=/logout]", t.main.logout)
         ];
     }
 };
@@ -13,8 +13,8 @@ var LoggedInView = {
 var LoggedOutView = {
     view: function () {
         return [
-            m("a[href=#!register]", "Register"),
-            m("a[href=/login]", "Login")
+            m("a[href=#!register]", t.main.register),
+            m("a[href=/login]", t.main.login)
         ];
     }
 };
@@ -22,7 +22,7 @@ var LoggedOutView = {
 var Header = {
     username: '',
     oninit: function () {
-        m.request("/u")
+        m.request("/u/")
             .then(function (user) {
                 Header.username = user.name;
             })

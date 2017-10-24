@@ -7,34 +7,36 @@ var PasswordChangeView = {
     status: '',
     view: function () {
         return m("form.border",
-            m("h3", "Change password"),
-            m("label", "old password"),
+            m("h3", t.profile.changePassword),
+            m("label", t.profile.oldPassword),
             m("input[type=password]", {
                 value: PasswordChangeView.oldPassword,
                 onchange: function(e) {
                     PasswordChangeView.oldPassword = e.currentTarget.value;
                 }}
             ),
-            m("label", "new password"),
+            m("label", t.profile.newPassword),
             m("input[type=password]", {
                 value: PasswordChangeView.newPassword,
                 onchange: function(e) {
                     PasswordChangeView.newPassword = e.currentTarget.value;
                 }}),
-            m("label", "verify new password"),
+            m("label", t.profile.verifyNewPassword),
             m("input[type=password]", {
                 value: PasswordChangeView.verification,
                 onchange: function(e) {
                     PasswordChangeView.verification = e.currentTarget.value;
                 }}),
-            m(".status", PasswordChangeView.status.hasOwnProperty("errors") ? PasswordChangeView.status.errors.map(function (t) {
-                return m("label.error", t.detail);
-            }) : PasswordChangeView.status.success ? m("label.success", 'your password has been changed') : ''),
+            m(".status", PasswordChangeView.status.hasOwnProperty("errors") ?
+                PasswordChangeView.status.errors.map(function (err) {
+                    return m("label.error", err.detail);
+                }) :
+                PasswordChangeView.status.success ? m("label.success", t.profile.passwordChanged) : ''),
             m("button[type=reset]",
                 { onclick: function() {
                     Profile.passwordChange = false;
                 }},
-                "cancel"
+                t.main.cancel
             ),
             m("button[type=submit]",
                 { onclick: function () {
@@ -54,7 +56,7 @@ var PasswordChangeView = {
                         }
                     });
                 }}
-                , "submit")
+                , t.main.submit)
         );
     }
 };
@@ -64,25 +66,27 @@ var DeleteAccountView = {
     status: '',
     view: function () {
         return m("form.border",
-            m("h3", "Delete account"),
-            m("label.error", "Are you sure you want to delete your account?"),
-            m("label.error", "This is not reversible!"),
-            m("label.error", "Enter your password to confirm"),
-            m("label", "password"),
+            m("h3", t.profile.deleteAccount),
+            m("label.error", t.profile.reallyDeleteAcc),
+            m("label.error", t.profile.notReversible),
+            m("label.error", t.profile.passwordToConfirm),
+            m("label", t.main.password),
             m("input[type=password]", {
                 value: DeleteAccountView.password,
                 onchange: function(e) {
                     DeleteAccountView.password = e.currentTarget.value;
                 }}
             ),
-            m(".status", DeleteAccountView.status.hasOwnProperty("errors") ? DeleteAccountView.status.errors.map(function (t) {
-                return m("label.error", t.detail);
-            }) : DeleteAccountView.status.success ? m("label.success", 'your account has been deleted') : ''),
+            m(".status", DeleteAccountView.status.hasOwnProperty("errors") ?
+                DeleteAccountView.status.errors.map(function (err) {
+                    return m("label.error", err.detail);
+                }) :
+                DeleteAccountView.status.success ? m("label.success", t.profile.accDeleted) : ''),
             m("button[type=reset]",
                 { onclick: function() {
                     Profile.deleteAccount = false;
                 }},
-                "cancel"
+                t.main.cancel
             ),
             m("button[type=submit]",
                 { onclick: function () {
@@ -101,7 +105,7 @@ var DeleteAccountView = {
                         }
                     });
                 }}
-                , "submit")
+                , t.main.submit)
         );
     }
 };
@@ -131,7 +135,7 @@ var Profile = {
                                 e.preventDefault();
                                 Profile.passwordChange = true;
                             } },
-                            "change password"),
+                            t.profile.changePassword),
                     Profile.deleteAccount ?
                         m(DeleteAccountView) :
                         m("a[href=#]",
@@ -139,9 +143,9 @@ var Profile = {
                                 e.preventDefault();
                                 Profile.deleteAccount = true;
                             } },
-                            "delete account")
+                            t.profile.deleteAccount)
                 ] :
-                "loading..."
+                t.status.loading
         );
     }
 };

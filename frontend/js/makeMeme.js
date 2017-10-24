@@ -7,7 +7,7 @@ var MakeMeme = {
     status: '',
     upload: function (e) {
         e.preventDefault();
-        MakeMeme.status = 'uploading...';
+        MakeMeme.status = t.status.uploading;
 
         var formData = new FormData();
         formData.set("title", MakeMeme.title);
@@ -24,20 +24,20 @@ var MakeMeme = {
     },
     view: function () {
         return m(".newMeme",
-            m("h2", "New Meme"),
+            m("h2", t.meme.newMeme),
             m("form",
-                m("label", "title"),
-                m("input[type=text][placeholder=title]", {
+                m("label", t.meme.title),
+                m("input[type=text][placeholder=" + t.meme.title + "]", {
                     value: MakeMeme.title,
                     onchange: function(e) {
                         MakeMeme.title = e.currentTarget.value;
                     }}),
-                m("label", "file"),
+                m("label", t.meme.file),
                 m("input[type=file][accept=image/*]", {
                     onchange: function(e) {
                         MakeMeme.file = e.target.files[0];
                     }}),
-                m("label", "description"),
+                m("label", t.meme.description),
                 m("textarea", {
                     value: MakeMeme.description,
                     onchange: function(e) {
@@ -50,7 +50,7 @@ var MakeMeme = {
                     MakeMeme.status.hasOwnProperty('success') ?
                         m("label.success", MakeMeme.status.success) :
                         MakeMeme.status),
-                m("button[type=submit]", { onclick: MakeMeme.upload }, "upload")
+                m("button[type=submit]", { onclick: MakeMeme.upload }, t.main.upload)
             )
         );
     }
