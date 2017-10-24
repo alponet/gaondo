@@ -9,7 +9,8 @@
                 <a href="/">Gaondo</a>
             </h1>
             <div class="nav">
-                <a href="/#!register">Register</a><a href="/login">Login</a>
+                <a href="/#!register">{% trans %}main.register{% endtrans %}</a>
+                <a href="/login">{% trans %}main.login{% endtrans %}</a>
             </div>
         </div>
     </div>
@@ -17,20 +18,20 @@
 
 {% block content %}
     <div id="content">
-        <h2>Login</h2>
+        <h2>{% trans %}Login{% endtrans %}</h2>
 
         <form action="{{ path('login') }}" method="post">
-            <label for="username">Username:</label>
+            <label for="username">{% trans %}main.username{% endtrans %}:</label>
             <input type="text" id="username" name="_username" value="{{ last_username }}" />
 
-            <label for="password">Password:</label>
+            <label for="password">{% trans %}main.password{% endtrans %}:</label>
             <input type="password" id="password" name="_password" />
 
             {% if error %}
                 <div class="error">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
             {% endif %}
 
-            <button type="submit">login</button>
+            <button type="submit">{% trans %}main.login{% endtrans %}</button>
         </form>
     </div>
 {% endblock %}

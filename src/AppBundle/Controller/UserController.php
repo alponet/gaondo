@@ -7,7 +7,6 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\User;
-use Psr\Log\LoggerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -53,12 +52,14 @@ class UserController extends Controller
         $name = $request->request->get("name");
         $email = $request->request->get("email");
 
+        $i18n = $this->get("translator");
+
         $response = [];
 
         if (!preg_match("/\b[a-zA-Z][a-zA-Z\d_-]{3,15}/", $name)) {
             $response['errors'][] = [
                 'source' => 'name',
-                'detail' => 'Invalid user name!'
+                'detail' => $i18n->trans('error.invalidUserName')
             ];
             return $this->json($response);
         }

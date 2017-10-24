@@ -61,12 +61,13 @@ class MemeController extends Controller
     public function createMemeAction(Request $request)
     {
         $logger = $this->get("logger");
+        $i18n = $this->get("translator");
 
         /** @var User $currentUser */
         $currentUser = $this->get('security.token_storage')->getToken()->getUser();
 
         if (gettype($currentUser) !== 'object') {
-            throw $this->createAccessDeniedException('please log in');
+            throw $this->createAccessDeniedException($i18n->trans('error.pleaseLogIn'));
         }
 
         // ToDo: Validation
