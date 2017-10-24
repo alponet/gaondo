@@ -6,7 +6,6 @@ var Register = {
     status: {},
     submit: function (e) {
         e.preventDefault();
-        console.log(Register);
 
         var formData = new FormData();
         formData.set("name", Register.name);
