@@ -23,6 +23,7 @@ class AppKernel extends Kernel
             new Doctrine\Bundle\MigrationsBundle\DoctrineMigrationsBundle(),
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
             new Vich\UploaderBundle\VichUploaderBundle(),
+            new Gregwar\ImageBundle\GregwarImageBundle(),
             new AppBundle\AppBundle(),
         ];
 
