@@ -3,6 +3,7 @@ return [
     'error.emailAlreadyRegistered'  => 'Email address already registered!',
     'error.fileTooBig'              => 'The file is too big (maximum 8 MB)',
     'error.invalidEmail'            => 'Invalid email address!',
+    'error.invalidFile'             => 'Invalid file, must be an image with maximum 8 MB',
     'error.invalidImageFile'        => 'Invalid file format',
     'error.invalidUserName'         => 'Invalid user name!',
     'error.nameTaken'               => 'Name already taken!',

@@ -72,17 +72,17 @@ class MemeController extends Controller
         $title = $request->request->get("title");
         $description = $request->request->get("description");
 
-        if (strlen($title) < 3) {
-            $response = [];
+        /** @var UploadedFile $file */
+        $file = $request->files->get("file");
+
+        if (!$file) {
+            $response= [];
             $response["errors"][] = [
-                "source" => "title",
-                "detail" => $i18n->trans('error.titleTooShort')
+                "source" => "file",
+                "detail" => $i18n->trans('error.invalidFile')
             ];
             return $this->json($response);
         }
-
-        /** @var UploadedFile $file */
-        $file = $request->files->get("file");
 
         $fileSize = $file->getClientSize();
 
@@ -103,6 +103,15 @@ class MemeController extends Controller
             $response["errors"][] = [
                 "source" => "file",
                 "detail" => $i18n->trans('error.invalidImageFile')
+            ];
+            return $this->json($response);
+        }
+
+        if (strlen($title) < 3) {
+            $response = [];
+            $response["errors"][] = [
+                "source" => "title",
+                "detail" => $i18n->trans('error.titleTooShort')
             ];
             return $this->json($response);
         }
