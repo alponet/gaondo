@@ -34,7 +34,7 @@ services:
     #     arguments:
     #         $someArgument: 'some_value'
 
-    app.imageUpload_listener:
+    app.image_upload_listener:
         class: AppBundle\EventListener\ImageUploadListener
         tags:
             - { name: kernel.event_listener, event: vich_uploader.pre_upload, method: convertToJpeg }

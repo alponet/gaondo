@@ -7,7 +7,6 @@
 namespace AppBundle\EventListener;
 
 use Gregwar\Image\Image;
-use Symfony\Component\HttpKernel\HttpKernel;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Vich\UploaderBundle\Event\Event;
 

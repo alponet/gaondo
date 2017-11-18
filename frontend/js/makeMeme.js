@@ -44,8 +44,8 @@ var MakeMeme = {
                         MakeMeme.description = e.currentTarget.value;
                     }}),
                 m(".status", MakeMeme.status.hasOwnProperty("errors") ?
-                    MakeMeme.status.errors.map(function (t) {
-                        return m("label.error", t.detail);
+                    MakeMeme.status.errors.map(function (err) {
+                        return m("label.error", err.detail);
                     }) :
                     MakeMeme.status.hasOwnProperty('success') ?
                         m("label.success", MakeMeme.status.success) :
