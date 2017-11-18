@@ -1,7 +1,9 @@
 <?php
 return [
     'error.emailAlreadyRegistered'  => 'Email address already registered!',
+    'error.fileTooBig'              => 'The file is too big (maximum 8 MB)',
     'error.invalidEmail'            => 'Invalid email address!',
+    'error.invalidImageFile'        => 'Invalid file format',
     'error.invalidUserName'         => 'Invalid user name!',
     'error.nameTaken'               => 'Name already taken!',
     'error.oldPasswordWrong'        => 'Your old password is wrong',
@@ -10,6 +12,7 @@ return [
     'error.passwordWrong'           => 'Your password is wrong',
     'error.permissionDenied'        => 'Permission denied!',
     'error.pleaseLogIn'             => 'please log in',
+    'error.titleTooShort'           => 'title must contain at least 3 characters',
     'main.cancel'   => 'Cancel',
     'main.login'    => 'Login',
     'main.logout'   => 'Logout',
