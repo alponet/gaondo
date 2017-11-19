@@ -1,7 +1,10 @@
 <?php
 return [
     'error.emailAlreadyRegistered'  => 'La dirección de email ya está registrada',
+    'error.fileTooBig'              => 'El archivo es demasiado grande (máximo 8 MB)',
     'error.invalidEmail'            => 'La dirección de email es inválida',
+    'error.invalidFile'             => 'Archivo inválido, tiene que ser una imagen con máximo 8 MB',
+    'error.invalidImageFile'        => 'Formato de archivo inválido',
     'error.invalidUserName'         => 'El nombre de usuario es inválido',
     'error.nameTaken'               => 'Ese nombre ya esta en uso!',
     'error.oldPasswordWrong'        => 'Tu antiguo password está mal',
@@ -10,6 +13,7 @@ return [
     'error.passwordWrong'           => 'Tu password está mal',
     'error.permissionDenied'        => '¡Permiso denegado!',
     'error.pleaseLogIn'             => 'Por favor hace el log in',
+    'error.titleTooShort'           => 'El título debe contener como mínimo 3 caractéres',
     'main.cancel'   => 'Cancelar',
     'main.login'    => 'Login',
     'main.logout'   => 'Logout',
