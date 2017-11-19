@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block header %}
+    <div id="header">
+        <div class="header">
+            <h1 class="logo">
+                <a href="/">Gaondo</a>
+            </h1>
+            <div class="nav">
+                <a href="/#!register">{% trans %}main.register{% endtrans %}</a>
+                <a href="/login">{% trans %}main.login{% endtrans %}</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block content %}
+    <div id="content" class="meme">
+        <h2>{{ meme.title }}</h2>
+
+        {{ meme.getDescription() }}
+        <img src="{{ meme.imageUrl }}">
+        {{ meme.creationDate|date() }}
+        <br>
+        {{ author.username }}
+    </div>
+
+    {% block scripts %}{% endblock %}
+{% endblock %}

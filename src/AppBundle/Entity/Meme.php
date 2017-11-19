@@ -92,6 +92,15 @@ class Meme extends BasePost
     /**
      * @return string
      */
+    public function getImageUrl()
+    {
+        return "/images/memes/" . $this->imageName;
+    }
+
+
+    /**
+     * @return string
+     */
     public function getImageName()
     {
         return $this->imageName;

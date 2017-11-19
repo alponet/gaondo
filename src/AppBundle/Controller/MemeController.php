@@ -53,6 +53,28 @@ class MemeController extends Controller
 
 
     /**
+     * @Route("/m/{id}")
+     * @param int $id
+     * @return Response
+     */
+    public function getMemeAction($id, Request $request)
+    {
+        $repository = $this->getDoctrine()->getRepository(Meme::class);
+
+        $meme = $repository->find($id);
+
+        if (!$meme) {
+            throw $this->createNotFoundException('Meme not found!');
+        }
+
+        return $this->render('meme/meme.html.twig', [
+            'meme' => $meme,
+            'author' => $meme->getAuthor()
+        ]);
+    }
+
+
+    /**
      * @Route("/m/")
      * @Method("POST")
      * @param Request $request

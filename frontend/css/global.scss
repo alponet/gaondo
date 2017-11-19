@@ -43,6 +43,13 @@ body {
     margin: 4em auto;
     max-width: 640px;
 
+    &.meme {
+      img {
+        max-width: 100%;
+        height: auto;
+      }
+    }
+
     .error {
       color: #ff0000;
     }
