@@ -13,7 +13,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Entity
  * @ORM\InheritanceType("JOINED")
  * @ORM\DiscriminatorColumn(name="typeDiscr", type="string")
- * @ORM\DiscriminatorMap({ "meme" = "Meme" })
+ * @ORM\DiscriminatorMap({ "meme" = "Meme", "comment" = "Comment" })
  */
 abstract class BasePost
 {
