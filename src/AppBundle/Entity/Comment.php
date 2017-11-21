@@ -21,7 +21,7 @@ class Comment extends BasePost
     private $subject;
 
     /**
-     * @ORM\Column(type="string", length=128)
+     * @ORM\Column(type="text")
      *
      * @var string
      */
