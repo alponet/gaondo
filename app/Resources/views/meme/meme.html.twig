@@ -23,6 +23,10 @@
         {{ meme.creationDate|date() }}
         <br>
         {{ author.username }}
+
+        <div id="comments" class="commentForm">
+            {{ render(controller('AppBundle:Comment:_embeddedForm', { 'subjectId': meme.id })) }}
+        </div>
     </div>
 
     {% block scripts %}{% endblock %}

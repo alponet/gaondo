@@ -68,8 +68,8 @@ class MemeController extends Controller
         }
 
         return $this->render('meme/meme.html.twig', [
-            'meme' => $meme,
-            'author' => $meme->getAuthor()
+            'meme'          => $meme,
+            'author'        => $meme->getAuthor()
         ]);
     }
 
