@@ -29,6 +29,23 @@ class Comment extends BasePost
 
 
     /**
+     * @return BasePost
+     */
+    public function getSubject()
+    {
+        return $this->subject;
+    }
+
+    /**
+     * @param $subject
+     */
+    public function setSubject($subject)
+    {
+        $this->subject = $subject;
+    }
+
+
+    /**
      * @return string
      */
     public function getText()
