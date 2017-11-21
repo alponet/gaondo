@@ -40,7 +40,7 @@ class Comment extends BasePost
     /**
      * @param string $text
      */
-    public function setText(string $text)
+    public function setText($text)
     {
         $this->text = $text;
     }
