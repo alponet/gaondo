@@ -105,6 +105,19 @@ body {
         height: auto;
       }
     }
+
+    #comments {
+      .comment {
+        border-top: 1px solid #AAAAAA;
+
+        padding: 10px 0;
+
+        .info {
+          font-size: 10px;
+          margin-bottom: 10px;
+        }
+      }
+    }
   }
 
   #footer {

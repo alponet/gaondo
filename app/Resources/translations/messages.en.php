@@ -15,6 +15,7 @@ return [
     'error.pleaseLogIn'             => 'please log in',
     'error.titleTooShort'           => 'title must contain at least 3 characters',
     'main.cancel'   => 'Cancel',
+    'main.comments' => 'Comments',
     'main.login'    => 'Login',
     'main.logout'   => 'Logout',
     'main.password' => 'Password',

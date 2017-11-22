@@ -1,0 +1,9 @@
+{% if comments|length < 1 %}
+    <div>no comments</div>
+{% endif %}
+{% for comment in comments %}
+    <div class="comment">
+        <div class="info">{{ comment.author.username }} - {{ comment.creationDate|date('d.m.Y / H:m') }}</div>
+        <div class="text">{{ comment.text }}</div>
+    </div>
+{% endfor %}

@@ -22,10 +22,12 @@
         <img src="{{ meme.imageUrl }}">
         {{ meme.creationDate|date() }}
         <br>
-        {{ author.username }}
+        {{ meme.author.username }}
 
-        <div id="comments" class="commentForm">
-            {{ render(controller('AppBundle:Comment:_embeddedForm', { 'subjectId': meme.id })) }}
+        <div id="comments">
+            <h3>{% trans %}main.comments{% endtrans %}</h3>
+            {{ render(controller('AppBundle:Comment:_commentForm', { 'subjectId': meme.id })) }}
+            {{ render(controller('AppBundle:Comment:_commentList', { 'subjectId': meme.id })) }}
         </div>
     </div>
 

@@ -71,7 +71,7 @@ class CommentController extends Controller
      * @param integer $subjectId
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function _embeddedFormAction($subjectId)
+    public function _commentFormAction($subjectId)
     {
         $repository = $this->getDoctrine()->getRepository(BasePost::class);
         $subject = $repository->find($subjectId);
@@ -84,5 +84,14 @@ class CommentController extends Controller
         $form->add('subject', HiddenType::class, [ 'data' => $subjectId ]);
 
         return $this->render('comment/new.html.twig', [ 'form' => $form->createView() ]);
+    }
+
+
+    public function _commentListAction($subjectId)
+    {
+        $repo = $this->getDoctrine()->getRepository(Comment::class);
+        $comments = $repo->findBy([ 'subject' => $subjectId ], [ 'creationDate' => 'DESC' ] );
+
+        return $this->render('comment/list.html.twig', [ 'comments' => $comments ]);
     }
 }
