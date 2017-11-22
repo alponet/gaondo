@@ -8,7 +8,23 @@
     </head>
     <body>
         {% block header %}
-            <div id="header"></div>
+            <div id="header">
+                <div class="header">
+                    <h1 class="logo">
+                        <a href="/">Gaondo</a>
+                    </h1>
+                    <div class="nav">
+                        {% if app.user %}
+                            <a href="/#!newMeme">{% trans %}main.upload{% endtrans %}</a>
+                            <a href="/#!profile">{{ app.user.username }}</a>
+                            <a href="/logout">{% trans %}main.login{% endtrans %}</a>
+                        {% else %}
+                            <a href="/#!register">{% trans %}main.register{% endtrans %}</a>
+                            <a href="/login">{% trans %}main.login{% endtrans %}</a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
         {% endblock %}
 
         {% block content %}
