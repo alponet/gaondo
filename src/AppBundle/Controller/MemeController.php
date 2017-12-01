@@ -149,6 +149,9 @@ class MemeController extends Controller
         $em->persist($meme);
         $em->flush();
 
-        return $this->json($meme);
+        $response = [];
+        $response["memeId"] = $meme->getId();
+
+        return $this->json($response);
     }
 }

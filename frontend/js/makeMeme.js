@@ -20,6 +20,10 @@ var MakeMeme = {
             data: formData
         }).then(function (response) {
             MakeMeme.status = response;
+
+            if (response.memeId) {
+                window.location.replace("/m/" + response.memeId);
+            }
         })
     },
     view: function () {
