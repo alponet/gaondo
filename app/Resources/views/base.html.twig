@@ -14,12 +14,12 @@
                         <a href="/">Gaondo</a>
                     </h1>
                     <div class="nav">
-                        {% if app.user %}
-                            <a href="/#!newMeme">{% trans %}main.upload{% endtrans %}</a>
-                            <a href="/#!profile">{{ app.user.username }}</a>
-                            <a href="/logout">{% trans %}main.login{% endtrans %}</a>
+                        {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                            <a href="/newMeme">{% trans %}main.upload{% endtrans %}</a>
+                            <a href="/profile">{{ app.user.username }}</a>
+                            <a href="/logout">{% trans %}main.logout{% endtrans %}</a>
                         {% else %}
-                            <a href="/#!register">{% trans %}main.register{% endtrans %}</a>
+                            <a href="/register">{% trans %}main.register{% endtrans %}</a>
                             <a href="/login">{% trans %}main.login{% endtrans %}</a>
                         {% endif %}
                     </div>
@@ -27,16 +27,18 @@
             </div>
         {% endblock %}
 
-        {% block content %}
-            <div id="content"></div>
-        {% endblock %}
+        <div id="content">
+            {% block content %}
+                Welcome to Gaondo!
+            {% endblock %}
+        </div>
 
         <div id="footer">
             <div class="copyright">© 2017</div>
         </div>
 
         {% block scripts %}
-            <script src="{{ asset('build/app.js') }}"></script>
+            {# <script src="{{ asset('build/app.js') }}"></script> #}
         {% endblock %}
     </body>
 </html>

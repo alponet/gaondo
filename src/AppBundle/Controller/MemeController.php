@@ -19,6 +19,19 @@ use Symfony\Component\HttpFoundation\Response;
 class MemeController extends Controller
 {
 
+	/**
+	 * @Route("/", name="stream")
+	 * @return Response
+	 */
+	public function indexAction()
+	{
+		$repo = $this->getDoctrine()->getRepository(Meme::class);
+		$memes = $repo->findBy([], ['creationDate' => 'DESC'], 10);
+
+		return $this->render('meme/index.html.twig', [ 'memes' => $memes ]);
+	}
+
+
     /**
      * @Route("/m/")
      * @Method("GET")
