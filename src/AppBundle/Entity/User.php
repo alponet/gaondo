@@ -8,55 +8,30 @@ namespace AppBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Security\Core\User\UserInterface;
+use FOS\UserBundle\Model\User as BaseUser;
 
 /**
  * @ORM\Entity
  * @ORM\Table(name="`user`")
  */
-class User implements UserInterface, \Serializable
+class User extends BaseUser
 {
     /**
      * @ORM\Column(type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $id;
-
-    /**
-     * @ORM\Column(type="string", length=64, unique=true)
-     */
-    private $username;
-
-    /**
-     * @ORM\Column(type="string", length=128, unique=true)
-     */
-    private $email;
-
-    /**
-     * @ORM\Column(type="string", length=64)
-     */
-    private $password;
-
-    /**
-     * @ORM\Column(type="datetime")
-     */
-    private $regDate;
-
-    /**
-     * @ORM\Column(type="datetime", nullable=true)
-     */
-    private $activeDate;
+    protected $id;
 
     /**
      * @ORM\Column(type="string", length=128, nullable=true)
      */
-    private $avatarUrl;
+    protected $avatarUrl;
 
     /**
      * @ORM\OneToMany(targetEntity="BasePost", mappedBy="author")
      */
-    private $posts;
+    protected $posts;
 
 
     /**
@@ -64,6 +39,7 @@ class User implements UserInterface, \Serializable
      */
     public function __construct()
     {
+    	parent::__construct();
         $this->posts = new ArrayCollection();
     }
 
@@ -74,87 +50,6 @@ class User implements UserInterface, \Serializable
     public function getId()
     {
         return $this->id;
-    }
-
-
-    /**
-     * @param string $name
-     */
-    public function setUsername($name)
-    {
-        $this->username = $name;
-    }
-
-
-    /**
-     * @return string
-     */
-    public function getEmail()
-    {
-        return $this->email;
-    }
-
-
-    /**
-     * @param string $email
-     */
-    public function setEmail($email)
-    {
-        $this->email = $email;
-    }
-
-
-    /**
-     * @return string
-     */
-    public function getPassword()
-    {
-        return $this->password;
-    }
-
-
-    /**
-     * @param string $password
-     */
-    public function setPassword($password)
-    {
-        $this->password = $password;
-    }
-
-
-    /**
-     * @return string
-     */
-    public function getRegDate()
-    {
-        return $this->regDate;
-    }
-
-
-    /**
-     * @param string $regDate
-     */
-    public function setRegDate($regDate)
-    {
-        $this->regDate = $regDate;
-    }
-
-
-    /**
-     * @return string
-     */
-    public function getActiveDate()
-    {
-        return $this->activeDate;
-    }
-
-
-    /**
-     * update activity date
-     */
-    public function updateActiveDate()
-    {
-        // ToDo
     }
 
 
@@ -173,39 +68,6 @@ class User implements UserInterface, \Serializable
     public function setAvatarUrl($avatarUrl)
     {
         $this->avatarUrl = $avatarUrl;
-    }
-
-
-    /**
-     * Returns the roles granted to the user.
-     *
-     * @return (Role|string)[] The user roles
-     */
-    public function getRoles()
-    {
-        return [ 'ROLE_USER' ];
-    }
-
-
-    /**
-     * Returns the salt that was originally used to encode the password.
-     *
-     * @return string|null The salt
-     */
-    public function getSalt()
-    {
-        return null;
-    }
-
-
-    /**
-     * Returns the username used to authenticate the user.
-     *
-     * @return string The username
-     */
-    public function getUsername()
-    {
-        return $this->username;
     }
 
 
