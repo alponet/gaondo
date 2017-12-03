@@ -33,8 +33,7 @@ class UserController extends Controller
             'id' => $user->getId(),
             'name' => $user->getUsername(),
             'email' => $user->getEmail(),
-            'registrationDate' => $user->getRegDate(),
-            'lastActionDate' => $user->getActiveDate()
+            'lastActionDate' => $user->getLastLogin()
         ];
 
         return $this->json($response);
@@ -149,8 +148,7 @@ class UserController extends Controller
             $response = [
                 'id' => $user->getId(),
                 'name' => $user->getUsername(),
-                'registrationDate' => $user->getRegDate(),
-                'lastActionDate' => $user->getActiveDate()
+                'lastActionDate' => $user->getLastLogin()
             ];
 
             return $this->json($response);

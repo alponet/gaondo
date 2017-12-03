@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block content %}
+    <h2>Nuevo meme</h2>
+    <form>
+        <label>Título</label>
+        <input placeholder="Título" type="text" id="title">
+        <label>Archivo</label>
+        <input accept="image/*" type="file" id="file">
+        <label>Descripción</label>
+        <textarea id="description"></textarea>
+        <div class="status" id="status"></div>
+        <button type="submit" id="submit">Upload</button>
+
+        <script>
+            document.getElementById("submit").addEventListener("click", upload);
+
+            function upload(e) {
+                e.preventDefault();
+                var statusLabel = document.getElementById("status");
+                statusLabel.innerHTML = '<label>Uploading...</label>';
+
+                var formData = new FormData();
+                formData.set("title", document.getElementById("title").value);
+                formData.set("file", document.getElementById("file").files[0]);
+                formData.set("description", document.getElementById("description").value);
+
+                var xhr = new XMLHttpRequest();
+                xhr.open("POST", "/m/", true);
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState === 4) {
+                        var re = JSON.parse(xhr.response);
+
+                        if (re.errors) {
+                            statusLabel = document.getElementById("status");
+                            statusLabel.innerHTML = '<label class="error">' + re.errors[0].detail + '</label>';
+                        }
+
+                        if (re.memeId) {
+                            window.location.replace("/m/" + re.memeId);
+                        }
+                    }
+                };
+                xhr.send(formData);
+            }
+        </script>
+    </form>
+{% endblock %}

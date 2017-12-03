@@ -86,6 +86,16 @@ class MemeController extends Controller
     }
 
 
+	/**
+	 * @Route("/newMeme/")
+	 * @return Response
+	 */
+    public function newMemeAction()
+    {
+    	return $this->render('meme/new.html.twig');
+    }
+
+
     /**
      * @Route("/m/")
      * @Method("POST")
@@ -97,7 +107,7 @@ class MemeController extends Controller
         $i18n = $this->get("translator");
 
         /** @var User $currentUser */
-        $currentUser = $this->get('security.token_storage')->getToken()->getUser();
+        $currentUser = $this->getUser();
 
         if (gettype($currentUser) !== 'object') {
             throw $this->createAccessDeniedException($i18n->trans('error.pleaseLogIn'));
