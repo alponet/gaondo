@@ -1,0 +1,34 @@
+<p>Score: <span id="score_{{ data.subjectId }}">{{ data.score }}</span></p>
+
+{% if app.user %}
+    <p><a href="#up" id="voteUp">up</a>  <a href="#down" id="voteDown">down</a></p>
+    <script>
+        document.getElementById("voteUp").addEventListener("click", voteUp);
+        document.getElementById("voteDown").addEventListener("click", voteDown);
+
+        function voteUp(e) {
+            e.preventDefault();
+            vote( 1 );
+        }
+
+        function voteDown(e) {
+            e.preventDefault();
+            vote( -1 );
+        }
+        
+        function vote(number) {
+            var formData = new FormData();
+            formData.set("value", number);
+
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", "/m/{{ data.subjectId }}/vote", true);
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4) {
+                    console.info("response: " + xhr.response);
+                    document.getElementById("score_{{ data.subjectId }}").innerText = xhr.response;
+                }
+            };
+            xhr.send(formData);
+        }
+    </script>
+{% endif %}
