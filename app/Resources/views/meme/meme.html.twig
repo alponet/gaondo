@@ -10,6 +10,8 @@
         <br>
         {{ meme.author.username }}
 
+        {{ render(controller('AppBundle:Vote:_show', { 'subjectId': meme.id })) }}
+
         <div id="comments">
             <h3>{% trans %}main.comments{% endtrans %}</h3>
             {% if app.user %}
