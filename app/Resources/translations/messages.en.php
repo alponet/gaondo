@@ -37,6 +37,7 @@ return [
     'profile.passwordToConfirm' => 'Enter your password to confirm',
     'profile.reallyDeleteAcc'   => 'Are you sure you want to delete your account?',
     'profile.verifyNewPassword' => 'verify new password',
+	'register.activated'        => 'Your account is now activated',
     'register.email'            => 'Email',
     'register.mailSubject'      => 'Your Gaondo password',
     'register.name'             => 'Name',
