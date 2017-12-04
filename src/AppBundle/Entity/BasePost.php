@@ -13,7 +13,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Entity
  * @ORM\InheritanceType("JOINED")
  * @ORM\DiscriminatorColumn(name="typeDiscr", type="string")
- * @ORM\DiscriminatorMap({ "meme" = "Meme", "comment" = "Comment" })
+ * @ORM\DiscriminatorMap({ "meme" = "Meme", "comment" = "Comment", "vote" = "Vote" })
  */
 abstract class BasePost
 {
@@ -34,6 +34,13 @@ abstract class BasePost
      * @ORM\Column(type="datetime")
      */
     private $creationDate;
+
+
+	/**
+	 * @ORM\OneToMany(targetEntity="Vote", mappedBy="subject")
+	 * @var $votes Vote[]
+	 */
+    private $votes;
 
 
     /**
@@ -78,5 +85,20 @@ abstract class BasePost
     public function setCreationDate($creationDate)
     {
         $this->creationDate = $creationDate;
+    }
+
+
+	/**
+	 * @return int
+	 */
+    public function getScore()
+    {
+    	$score = 0;
+
+    	foreach ($this->votes as $vote) {
+    		$score += $vote->getCount();
+	    }
+
+    	return $score;
     }
 }
