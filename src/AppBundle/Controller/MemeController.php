@@ -70,7 +70,7 @@ class MemeController extends Controller
      * @param int $id
      * @return Response
      */
-    public function getMemeAction($id, Request $request)
+    public function getMemeAction($id)
     {
         $repository = $this->getDoctrine()->getRepository(Meme::class);
 
