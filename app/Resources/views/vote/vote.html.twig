@@ -24,7 +24,6 @@
             xhr.open("POST", "/m/{{ data.subjectId }}/vote", true);
             xhr.onreadystatechange = function () {
                 if (xhr.readyState === 4) {
-                    console.info("response: " + xhr.response);
                     document.getElementById("score_{{ data.subjectId }}").innerText = xhr.response;
                 }
             };
