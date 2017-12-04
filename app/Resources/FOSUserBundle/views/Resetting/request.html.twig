@@ -1,0 +1,6 @@
+{% extends "@FOSUser/layout.html.twig" %}
+
+{% block fos_user_content %}
+    <h2>{% trans %}register.resetPassword{% endtrans %}</h2>
+    {% include "@FOSUser/Resetting/request_content.html.twig" %}
+{% endblock fos_user_content %}
