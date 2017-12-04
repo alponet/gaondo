@@ -1,0 +1,7 @@
+{% extends "@FOSUser/layout.html.twig" %}
+
+{% block fos_user_content %}
+    <h2>{% trans %}main.login{% endtrans %}</h2>
+    {{ include('@FOSUser/Security/login_content.html.twig') }}
+    <a href="{{ path('fos_user_resetting_request') }}">{% trans %}register.forgotPassword{% endtrans %}</a>
+{% endblock fos_user_content %}
