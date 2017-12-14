@@ -6,4 +6,8 @@ https://gaondo.com
 
 * `composer install`
 * `npm install`
-* `npm run build`
+* `php bin/console doctrine:schema:create`
+
+## Run
+* `php bin/console server:run`
+* `npm start`
