@@ -12,7 +12,7 @@ Encore
     .cleanupOutputBeforeBuild()
 
     // will output as web/build/app.js
-    .addEntry('app', './frontend/js/main.js')
+    //.addEntry('app', './frontend/js/main.js')
 
     // will output as web/build/global.css
     .addStyleEntry('global', './frontend/css/global.scss')
