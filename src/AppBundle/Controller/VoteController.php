@@ -33,7 +33,8 @@ class VoteController extends Controller {
 
 		$user = $this->getUser();
 		if (!$user) {
-			return $this->json("-");
+			$score = $subject->getScore();
+			return $this->json($score);
 		}
 
 		$repo = $this->getDoctrine()->getRepository(Vote::class);
@@ -52,7 +53,8 @@ class VoteController extends Controller {
 
 		$voteValue = $request->get('value');
 		if (!$voteValue) {
-			return $this->json("-");
+			$score = $subject->getScore();
+			return $this->json($score);
 		}
 
 		if ($voteValue > 0) {
