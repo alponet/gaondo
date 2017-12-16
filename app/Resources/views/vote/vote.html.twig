@@ -1,33 +1,30 @@
-<p>Score: <span id="score_{{ data.subjectId }}">{{ data.score }}</span></p>
+<div class="score">
+    <div class="arrow up" onclick="voteUp({{ data.subjectId }})"></div>
+    <div class="value">
+        <span id="score_{{ data.subjectId }}">{{ data.score }}</span>
+    </div>
+    <div class="arrow down" onclick="voteDown({{ data.subjectId }})"></div>
+</div>
+<script>
+    function voteUp(subjectId) {
+        vote( subjectId, 1 );
+    }
 
-{% if app.user %}
-    <p><a href="" id="voteUp">up</a>  <a href="" id="voteDown">down</a></p>
-    <script>
-        document.getElementById("voteUp").addEventListener("click", voteUp);
-        document.getElementById("voteDown").addEventListener("click", voteDown);
+    function voteDown(subjectId) {
+        vote( subjectId, -1 );
+    }
 
-        function voteUp(e) {
-            e.preventDefault();
-            vote( 1 );
-        }
+    function vote(subjectId, value) {
+        var formData = new FormData();
+        formData.set("value", value);
 
-        function voteDown(e) {
-            e.preventDefault();
-            vote( -1 );
-        }
-        
-        function vote(number) {
-            var formData = new FormData();
-            formData.set("value", number);
-
-            var xhr = new XMLHttpRequest();
-            xhr.open("POST", "/m/{{ data.subjectId }}/vote", true);
-            xhr.onreadystatechange = function () {
-                if (xhr.readyState === 4) {
-                    document.getElementById("score_{{ data.subjectId }}").innerText = xhr.response;
-                }
-            };
-            xhr.send(formData);
-        }
-    </script>
-{% endif %}
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", "/m/" + subjectId + "/vote", true);
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4) {
+                document.getElementById("score_" + subjectId).innerText = xhr.response;
+            }
+        };
+        xhr.send(formData);
+    }
+</script>

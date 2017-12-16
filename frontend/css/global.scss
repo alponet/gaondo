@@ -43,10 +43,27 @@ body {
     margin: 4em auto;
     max-width: 640px;
 
-    &.meme {
+    .meme {
+      a {
+        text-decoration: none;
+
+        h2 {
+          color: #000;
+        }
+      }
+
       img {
         max-width: 100%;
         height: auto;
+      }
+
+      .meta {
+        display: flex;
+        justify-content: space-between;
+      }
+
+      .description {
+        margin-top: 20px;
       }
     }
 
@@ -116,6 +133,40 @@ body {
           font-size: 10px;
           margin-bottom: 10px;
         }
+      }
+    }
+
+    .score {
+      display: inline-block;
+      width: 30px;
+
+      .arrow {
+        width: 0;
+        height: 0;
+        border-style: solid;
+
+        &.up {
+          border-width: 0 15px 15px 15px;
+          border-color: transparent transparent #888888 transparent;
+
+          &:hover {
+            border-bottom-color: #008000;
+          }
+        }
+
+        &.down {
+          border-width: 15px 15px 0 15px;
+          border-color: #888888 transparent transparent transparent;
+
+          &:hover {
+            border-top-color: #800000;
+          }
+        }
+      }
+
+      .value {
+        text-align: center;
+        padding: 3px;
       }
     }
   }
