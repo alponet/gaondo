@@ -48,6 +48,9 @@ fos_user:
 twig:
     debug: '%kernel.debug%'
     strict_variables: '%kernel.debug%'
+    date:
+        timezone: America/Argentina/Buenos_Aires
+        format: d.m.Y, H:i
 
 # Doctrine Configuration
 doctrine:
