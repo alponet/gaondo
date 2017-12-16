@@ -7,21 +7,14 @@
         {% endif %}
         {% for meme in memes %}
             <div id="m{{ meme.id }}" class="meme">
-                <h3>
-                    <a href="m/{{ meme.id }}">{{ meme.title }}</a>
-                </h3>
-                <a href="m/{{ meme.id }}">
-                    <img src="{{ meme.imageUrl }}">
-                </a>
-                <div class="date">
-                    {{ meme.creationdate|date() }}
-                </div>
-                <div class="author">
-                    {{ meme.author.username }}
-                </div>
-                <div class="description">
-                    {{ meme.description }}
-                </div>
+                {% embed ":meme:single.html.twig" with { link: true } %}
+
+                    {% block description %}
+                    {% endblock %}
+
+                    {% block comments %}
+                    {% endblock %}
+                {% endembed %}
             </div>
         {% endfor %}
     </div>
