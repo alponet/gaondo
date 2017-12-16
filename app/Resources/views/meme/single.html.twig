@@ -1,0 +1,34 @@
+{% if link is defined %}
+    <a href="m/{{ meme.id }}">
+{% endif %}
+
+<h2>{{ meme.title }}</h2>
+<img src="{{ meme.imageUrl }}">
+
+{% if link is defined %}
+    </a>
+{% endif %}
+
+<div class="meta">
+    {{ render(controller('AppBundle:Vote:_show', { 'subjectId': meme.id })) }}
+    <div class="author">{{ meme.author.username }}</div>
+    <div class="date">{{ meme.creationDate|date() }}</div>
+</div>
+
+{% block description %}
+    <div class="description">
+        {{ meme.getDescription() }}
+    </div>
+{% endblock %}
+
+{% block comments %}
+    <div id="comments">
+        <h3>{% trans %}main.comments{% endtrans %}</h3>
+        {% if app.user %}
+            {{ render(controller('AppBundle:Comment:_commentForm', { 'subjectId': meme.id })) }}
+        {% else %}
+            {% trans %}log in to post comment{% endtrans %}
+        {% endif %}
+        {{ render(controller('AppBundle:Comment:_commentList', { 'subjectId': meme.id })) }}
+    </div>
+{% endblock %}
