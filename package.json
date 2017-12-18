@@ -1,4 +1,10 @@
 {
+  "repository":
+  {
+    "type": "git",
+    "url": "https://github.com/alponet/gaondo.git"
+  },
+  "license": "UNLICENSED",
   "devDependencies": {
     "@symfony/webpack-encore": "^0.15.1",
     "node-sass": "^4.5.3",
