@@ -1,16 +1,16 @@
 {% extends 'base.html.twig' %}
 
 {% block content %}
-    <h2>Nuevo meme</h2>
+    <h2>{% trans %}meme.newMeme{% endtrans %}</h2>
     <form>
-        <label>Título</label>
+        <label>{% trans %}meme.title{% endtrans %}</label>
         <input placeholder="Título" type="text" id="title">
-        <label>Archivo</label>
+        <label>{% trans %}meme.file{% endtrans %}</label>
         <input accept="image/*" type="file" id="file">
-        <label>Descripción</label>
+        <label>{% trans %}meme.description{% endtrans %}</label>
         <textarea id="description"></textarea>
         <div class="status" id="status"></div>
-        <button type="submit" id="submit">Upload</button>
+        <button type="submit" id="submit">{% trans %}main.upload{% endtrans %}</button>
 
         <script>
             document.getElementById("submit").addEventListener("click", upload);
@@ -18,7 +18,7 @@
             function upload(e) {
                 e.preventDefault();
                 var statusLabel = document.getElementById("status");
-                statusLabel.innerHTML = '<label>Uploading...</label>';
+                statusLabel.innerHTML = {% trans %}status.uploading{% endtrans %};
 
                 var formData = new FormData();
                 formData.set("title", document.getElementById("title").value);
