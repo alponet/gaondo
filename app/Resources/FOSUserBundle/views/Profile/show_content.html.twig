@@ -1,0 +1,41 @@
+{% trans_default_domain 'FOSUserBundle' %}
+
+<div class="userProfile">
+    <h2>{{ user.username }}</h2>
+    <input type="file" accept="image/*" id="avatarFile" />
+    <div class="avatar" onclick="setAvatar()" style="background-image: url({{ user.avatarUrl }})">
+    </div>
+    <div class="status"></div>
+    <p>{{ 'profile.show.username'|trans }}: {{ user.username }}</p>
+    <p>{{ 'profile.show.email'|trans }}: {{ user.email }}</p>
+</div>
+<script>
+    function setAvatar() {
+        $("#avatarFile").trigger('click');
+    }
+
+    $("#avatarFile").on("change", function () {
+        var formData = new FormData();
+        formData.set("file", $("#avatarFile")[0].files[0]);
+
+        $(".status").text({% trans %}status.uploading{% endtrans %});
+
+        $.ajax({
+            type: "POST",
+            url: "/u/avatar/",
+            data: formData,
+            processData: false,
+            contentType: false,
+            success: function (response) {
+                if (response.success) {
+                    location.reload();
+                } else {
+                    if (response.hasOwnProperty("errors")) {
+                        $(".status").text(response.errors[0].detail);
+                    }
+                }
+            }
+        });
+    });
+
+</script>
