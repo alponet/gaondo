@@ -10,6 +10,7 @@ use AppBundle\Entity\User;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -261,5 +262,65 @@ class UserController extends Controller
         $request->getSession()->invalidate(1);
 
         return $this->json([ 'success' => true ]);
+    }
+
+
+	/**
+	 * @Route("/u/avatar/")
+	 * @Method("POST")
+	 * @param Request $request
+	 * @return \Symfony\Component\HttpFoundation\JsonResponse
+	 */
+    public function setAvatarAction(Request $request)
+    {
+	    $i18n = $this->get("translator");
+
+	    /** @var User $currentUser */
+	    $currentUser = $this->getUser();
+
+	    if (gettype($currentUser) !== 'object') {
+		    throw $this->createAccessDeniedException($i18n->trans('error.pleaseLogIn'));
+	    }
+
+	    /** @var UploadedFile $file */
+	    $file = $request->files->get("file");
+
+	    if (!$file) {
+		    $response= [];
+		    $response["errors"][] = [
+			    "source" => "file",
+			    "detail" => $i18n->trans('error.invalidFile')
+		    ];
+		    return $this->json($response);
+	    }
+
+	    $fileSize = $file->getClientSize();
+	    if ($fileSize < 1 || $fileSize > 8388607) {
+		    $response= [];
+		    $response["errors"][] = [
+			    "source" => "file",
+			    "detail" => $i18n->trans('error.fileTooBig')
+		    ];
+		    return $this->json($response);
+	    }
+
+	    $mimeType = $file->getMimeType();
+
+	    if (!preg_match("/^image\/[a-z]+$/", $mimeType)) {
+		    $response = [];
+		    $response["success"] = false;
+		    $response["errors"][] = [
+			    "source" => "file",
+			    "detail" => $i18n->trans('error.invalidImageFile')
+		    ];
+		    return $this->json($response);
+	    }
+
+		$currentUser->setAvatarFile($file);
+	    $em = $this->getDoctrine()->getManager();
+	    $em->persist($currentUser);
+	    $em->flush();
+
+    	return $this->json([ 'success' => true ]);
     }
 }

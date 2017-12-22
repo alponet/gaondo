@@ -9,10 +9,13 @@ namespace AppBundle\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use FOS\UserBundle\Model\User as BaseUser;
+use Symfony\Component\HttpFoundation\File\File;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
  * @ORM\Entity
  * @ORM\Table(name="`user`")
+ * @Vich\Uploadable
  */
 class User extends BaseUser
 {
@@ -28,6 +31,13 @@ class User extends BaseUser
      */
     protected $avatarUrl;
 
+	/**
+	 * @Vich\UploadableField(mapping="avatar_image", fileNameProperty="avatarUrl")
+	 *
+	 * @var File
+	 */
+    protected $avatarFile;
+
     /**
      * @ORM\OneToMany(targetEntity="BasePost", mappedBy="author")
      */
@@ -40,6 +50,7 @@ class User extends BaseUser
     public function __construct()
     {
     	parent::__construct();
+    	$this->avatarUrl = 'default.png';
         $this->posts = new ArrayCollection();
     }
 
@@ -58,7 +69,11 @@ class User extends BaseUser
      */
     public function getAvatarUrl()
     {
-        return $this->avatarUrl;
+	    if (!is_null($this->avatarUrl)) {
+		    return "/images/avatars/" . $this->avatarUrl;
+	    }
+
+	    return '/images/avatars/default.png';
     }
 
 
@@ -68,6 +83,28 @@ class User extends BaseUser
     public function setAvatarUrl($avatarUrl)
     {
         $this->avatarUrl = $avatarUrl;
+    }
+
+
+	/**
+	 * @param File|\Symfony\Component\HttpFoundation\File\UploadedFile $file
+	 */
+    public function setAvatarFile(File $file = null)
+    {
+    	$this->avatarFile = $file;
+
+	    if ($file) {
+		    $this->setLastLogin(new \DateTime('now'));
+	    }
+    }
+
+
+	/**
+	 * @return File|null
+	 */
+    public function getAvatarFile()
+    {
+    	return $this->avatarFile;
     }
 
 
