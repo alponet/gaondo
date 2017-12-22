@@ -35,6 +35,7 @@ npm-debug.log*
 /web/bundles/
 /web/uploads/
 /web/images/memes/
+/web/images/avatars/
 
 # PHPUnit
 /app/phpunit.xml
