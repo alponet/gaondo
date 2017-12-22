@@ -11,7 +11,8 @@
 
 <div class="meta">
     {{ render(controller('AppBundle:Vote:_show', { 'subjectId': meme.id })) }}
-    <div class="author">{{ meme.author.username }}</div>
+    {% embed ":user:widget.html.twig" with { user: meme.author } %}
+    {% endembed %}
     <div class="date">{{ meme.creationDate|date() }}</div>
 </div>
 
