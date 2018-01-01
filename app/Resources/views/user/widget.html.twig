@@ -1,4 +1,6 @@
 <div class="user">
-    <div class="avatar" style="background-image: url({{ user.avatarUrl }})"></div>
+    <div class="avatar" style="background-image: url({{
+        web_image(user.avatarUrl).zoomCrop(40,40,0,'center','center')
+    }})"></div>
     <div class="username">{{ user.username }}</div>
 </div>
