@@ -18,7 +18,7 @@
             function upload(e) {
                 e.preventDefault();
                 var statusLabel = document.getElementById("status");
-                statusLabel.innerHTML = {% trans %}status.uploading{% endtrans %};
+                statusLabel.innerHTML = "{% trans %}status.uploading{% endtrans %}";
 
                 var formData = new FormData();
                 formData.set("title", document.getElementById("title").value);
