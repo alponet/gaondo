@@ -20,6 +20,7 @@ return [
     'main.logout'   => 'Logout',
     'main.password' => 'Password',
     'main.register' => 'Register',
+	'main.reply'    => 'Reply',
     'main.submit'   => 'Submit',
     'main.upload'   => 'Upload',
     'main.username' => 'Username',

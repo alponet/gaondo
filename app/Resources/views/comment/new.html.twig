@@ -1,3 +1,3 @@
-{{ form_start(form) }}
+{{ form_start(form, {'attr': {'id': 'commentForm'}, 'action': '/m/' ~ memeId ~ '/c/', 'method': 'POST'}) }}
 {{ form_widget(form) }}
 {{ form_end(form) }}

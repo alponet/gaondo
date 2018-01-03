@@ -18,11 +18,13 @@ use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 class CommentController extends Controller
 {
     /**
-     * @Route("/c/")
+     * @Route("/m/{memeId}/c/")
      * @Method("POST")
+     * @param int $memeId
+     *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function createAction()
+    public function createAction($memeId)
     {
         $i18n = $this->get("translator");
 
@@ -60,7 +62,9 @@ class CommentController extends Controller
             $em->persist($comment);
             $em->flush();
 
-            return $this->redirect("/m/$subjectId#comments");
+            $commentId = $comment->getId();
+
+            return $this->redirect("/m/$memeId#comment$commentId");
         }
 
         return $this->redirect("/");
@@ -71,7 +75,7 @@ class CommentController extends Controller
      * @param integer $subjectId
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function _commentFormAction($subjectId)
+    public function _commentFormAction($subjectId, $memeId)
     {
         $repository = $this->getDoctrine()->getRepository(BasePost::class);
         $subject = $repository->find($subjectId);
@@ -83,7 +87,10 @@ class CommentController extends Controller
         $form = $this->createForm(CommentType::class, $comment);
         $form->add('subject', HiddenType::class, [ 'data' => $subjectId ]);
 
-        return $this->render('comment/new.html.twig', [ 'form' => $form->createView() ]);
+        return $this->render('comment/new.html.twig', [
+        	'form' => $form->createView(),
+	        'memeId' => $memeId
+        ]);
     }
 
 
