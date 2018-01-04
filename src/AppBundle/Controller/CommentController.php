@@ -99,6 +99,35 @@ class CommentController extends Controller
         $repo = $this->getDoctrine()->getRepository(Comment::class);
         $comments = $repo->findBy([ 'subject' => $subjectId ], [ 'creationDate' => 'DESC' ] );
 
-        return $this->render('comment/list.html.twig', [ 'comments' => $comments ]);
+        $commentTree = [];
+
+        foreach ($comments as $comment) {
+	        $commentTree[] = $this->buildCommentTree( $comment );
+        }
+
+        return $this->render('comment/list.html.twig', [ 'comments' => $comments, 'tree' => $commentTree ]);
     }
+
+
+	/**
+	 * @param Comment $comment
+	 *
+	 * @return array
+	 */
+    private function buildCommentTree($comment) {
+	    $tree = [];
+	    $tree['comment'] = $comment;
+
+    	$repo = $this->getDoctrine()->getRepository(Comment::class);
+	    $comments = $repo->findBy([ 'subject' => $comment->getId() ], [ 'creationDate' => 'DESC' ] );
+
+	    if (sizeof($comments) > 0) {
+	    	$tree['children'] = [];
+		    foreach ($comments as $c) {
+			    $tree['children'][] = $this->buildCommentTree($c);
+		    }
+	    }
+
+	    return $tree;
+	}
 }
