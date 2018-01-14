@@ -26,7 +26,7 @@ class MemeController extends Controller
 	public function indexAction()
 	{
 		$repo = $this->getDoctrine()->getRepository(Meme::class);
-		$memes = $repo->findBy([], ['creationDate' => 'DESC'], 10);
+		$memes = $repo->findBy([], ['creationDate' => 'DESC'], 5);
 
 		return $this->render('meme/index.html.twig', [ 'memes' => $memes ]);
 	}
@@ -37,17 +37,21 @@ class MemeController extends Controller
      * @Method("GET")
      * @return Response
      */
-    public function getMemesAction()
+    public function getMemesAction(Request $request)
     {
+    	$offset = $request->query->get("offset");
+    	$limit = $request->query->get("limit");
+
         $repository = $this->getDoctrine()->getRepository(Meme::class);
 
         /** @var Meme[] $memes */
-        $memes = $repository->findBy([], ['creationDate' => 'DESC']);
+        $memes = $repository->findBy([], ['creationDate' => 'DESC'], $limit, $offset);
 
         if ($memes) {
             $response = [];
 
             foreach ($memes as $meme) {
+            	/*
                 $response[] = [
                     "id"    => $meme->getId(),
                     "title" => $meme->getTitle(),
@@ -56,6 +60,17 @@ class MemeController extends Controller
                     "author"    =>  $meme->getAuthor()->getUsername(),
                     "date" => $meme->getCreationDate()
                 ];
+            	*/
+
+	            $mId = "m" . $meme->getId();
+
+            	$memeData = [];
+            	$memeData["descriptor"] = $mId;
+            	$memeData["element"] = '<div id="' . $mId .'" class="meme">'
+		            . $this->renderView(":meme:single.html.twig", [ 'meme' => $meme] )
+		            . '</div>';
+
+            	$response[] = $memeData;
             }
 
             return $this->json($response);
