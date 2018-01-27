@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block content %}
+    <div class="profile">
+        <h2>{{ user.username }}'s Memes</h2>
+    </div>
+    <div class="stream">
+
+    </div>
+    <script type="text/javascript">
+        var loading = false;
+        var offset = 0;
+
+        $(function () {
+            getMemes();
+
+            $(document).scroll(function () {
+                getMemes();
+            })
+        });
+
+        function getMemes() {
+            if (loading)
+                return false;
+            if ($(window).scrollTop() >= $(document).height() - $(window).height() - 700) {
+                loading = true;
+                $.get("/m/", { offset: offset, limit: 5, author: {{ user.id }} }).done(function (response) {
+                    if (response.length > 0) {
+                        response.forEach(function (meme) {
+                            if (!$("#" + meme["descriptor"]).length) {
+                                $(".stream").append(meme["element"]);
+                            }
+                        });
+                        offset += response.length;
+                        loading = false;
+                    }
+                });
+            }
+        }
+    </script>
+{% endblock %}
+

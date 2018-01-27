@@ -159,6 +159,27 @@ class UserController extends Controller
     }
 
 
+	/**
+	 * @Route("/u/{id}/profile")
+	 * @Method("GET")
+	 * @param int $id
+	 *
+	 * @return Response
+	 */
+    public function getUserProfileAction($id)
+    {
+    	$repo = $this->getDoctrine()->getRepository(User::class);
+    	/** @var User $user */
+    	$user = $repo->find($id);
+
+    	if (!$user) {
+		    throw $this->createNotFoundException('The user does not exist');
+	    }
+
+	    return $this->render("user/profile.html.twig", [ 'user' => $user ]);
+    }
+
+
     /**
      * @Route("/u/{id}")
      * @Method("PUT")

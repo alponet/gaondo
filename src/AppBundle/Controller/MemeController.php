@@ -41,6 +41,7 @@ class MemeController extends Controller
     {
     	$offset = $request->query->get("offset");
     	$limit = $request->query->get("limit");
+    	$author = $request->query->get("author");
 
         $repository = $this->getDoctrine()->getRepository(Meme::class);
 
