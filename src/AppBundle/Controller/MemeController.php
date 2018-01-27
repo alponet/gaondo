@@ -43,10 +43,15 @@ class MemeController extends Controller
     	$limit = $request->query->get("limit");
     	$author = $request->query->get("author");
 
+    	$filter = [];
+    	if ($author) {
+    		$filter["author"] = $author;
+	    }
+
         $repository = $this->getDoctrine()->getRepository(Meme::class);
 
         /** @var Meme[] $memes */
-        $memes = $repository->findBy([], ['creationDate' => 'DESC'], $limit, $offset);
+        $memes = $repository->findBy($filter, ['creationDate' => 'DESC'], $limit, $offset);
 
         if ($memes) {
             $response = [];
