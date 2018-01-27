@@ -67,7 +67,7 @@ class MemeController extends Controller
             	$memeData = [];
             	$memeData["descriptor"] = $mId;
             	$memeData["element"] = '<div id="' . $mId .'" class="meme">'
-		            . $this->renderView(":meme:single.html.twig", [ 'meme' => $meme] )
+		            . $this->renderView(":meme:single.html.twig", [ 'meme' => $meme, 'link' => true ] )
 		            . '</div>';
 
             	$response[] = $memeData;
