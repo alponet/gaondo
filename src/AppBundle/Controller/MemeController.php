@@ -187,7 +187,7 @@ class MemeController extends Controller
         $meme->setTitle($title);
         $meme->setImageFile($file);
         $meme->setDescription($description);
-        $meme->setImageSize(0);
+        $meme->setMimeType($mimeType);
 
         $em = $this->getDoctrine()->getManager();
         $em->persist($meme);

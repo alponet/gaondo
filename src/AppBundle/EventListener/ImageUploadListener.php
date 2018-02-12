@@ -20,6 +20,10 @@ class ImageUploadListener
         $mapping = $event->getMapping();
         $object = $event->getObject();
 
+        if ($mapping->getFile($object)->getMimeType() == "image/gif" ) {
+        	return;
+        }
+
         $path = Image::open($mapping->getFile($object)->getRealPath())
 	        ->cropResize(1024,2048,0)
 	        ->jpeg();

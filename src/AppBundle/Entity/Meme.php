@@ -35,12 +35,12 @@ class Meme extends BasePost
      */
     private $imageName;
 
-    /**
-     * @ORM\Column(type="integer")
-     *
-     * @var integer
-     */
-    private $imageSize;
+	/**
+	 * @ORM\Column(type="string", length=32)
+	 *
+	 * @var string
+	 */
+    private $mimeType;
 
 
     /**
@@ -121,22 +121,22 @@ class Meme extends BasePost
 
 
     /**
-     * @return integer
+     * @return string
      */
-    public function getImageSize()
+    public function getMimeType()
     {
-        return $this->imageSize;
+        return $this->mimeType;
     }
 
 
     /**
-     * @param integer $imageSize
+     * @param string mimeType
      *
      * @return Meme
      */
-    public function setImageSize($imageSize)
+    public function setMimeType($mimeType)
     {
-        $this->imageSize = $imageSize;
+        $this->mimeType = $mimeType;
 
         return $this;
     }

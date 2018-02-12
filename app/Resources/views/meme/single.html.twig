@@ -3,8 +3,12 @@
 {% endif %}
 
 <h2>{{ meme.title }}</h2>
-{% set img = web_image(meme.imageUrl) %}
-<img src="{{ img.cropResize(640, img.height, 0) }}">
+{% if meme.mimeType == "image/gif" %}
+    <img src="{{ meme.imageUrl }}">
+{% else %}
+    {% set img = web_image(meme.imageUrl) %}
+    <img src="{{ img.cropResize(640, img.height, 0) }}">
+{% endif %}
 
 {% if link is defined %}
     </a>
