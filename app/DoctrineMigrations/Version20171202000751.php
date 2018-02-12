@@ -19,6 +19,10 @@ class Version20171202000751 extends AbstractMigration
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
         $this->addSql('ALTER TABLE comment CHANGE text text LONGTEXT NOT NULL');
+
+        $this->addSql('ALTER TABLE user ADD username_canonical VARCHAR(180) NOT NULL');
+	    $this->addSql('ALTER TABLE user ADD email_canonical VARCHAR(180) NOT NULL');
+	    $this->addSql('ALTER TABLE user ADD confirmation_token VARCHAR(180) NOT NULL');
         $this->addSql('CREATE UNIQUE INDEX UNIQ_8D93D64992FC23A8 ON user (username_canonical)');
         $this->addSql('CREATE UNIQUE INDEX UNIQ_8D93D649A0D96FBF ON user (email_canonical)');
         $this->addSql('CREATE UNIQUE INDEX UNIQ_8D93D649C05FB297 ON user (confirmation_token)');
@@ -36,5 +40,6 @@ class Version20171202000751 extends AbstractMigration
         $this->addSql('DROP INDEX UNIQ_8D93D64992FC23A8 ON `user`');
         $this->addSql('DROP INDEX UNIQ_8D93D649A0D96FBF ON `user`');
         $this->addSql('DROP INDEX UNIQ_8D93D649C05FB297 ON `user`');
+        $this->addSql('ALTER TABLE user DROP (username_canonical, email_canonical, confirmation_token)');
     }
 }
