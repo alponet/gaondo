@@ -29,6 +29,7 @@
         {% endblock %}
 
         <div id="content">
+            <div id="react"></div>
             {% block content %}
                 Welcome to Gaondo!
             {% endblock %}
@@ -37,9 +38,7 @@
         <div id="footer">
             <div class="copyright">© 2017</div>
         </div>
-
-        {% block scripts %}
-            {# <script src="{{ asset('build/app.js') }}"></script> #}
-        {% endblock %}
+        
+        <script src="{{ asset('build/app.js') }}"></script>
     </body>
 </html>
