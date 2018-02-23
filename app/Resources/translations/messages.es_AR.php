@@ -18,7 +18,7 @@ return [
     'main.login'    => 'Login',
     'main.logout'   => 'Logout',
     'main.password' => 'Password',
-    'main.register' => 'Unite',
+    'main.register' => 'Unirte',
     'main.submit'   => 'Submit',
     'main.upload'   => 'Upload',
     'main.username' => 'Nombre de usuario',
