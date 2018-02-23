@@ -11,17 +11,17 @@
         {% block header %}
             <div id="header">
                 <div class="header">
-                    <h1 class="logo">
-                        <a href="/">Gaondo</a>
-                    </h1>
+                    <a href="/">
+                      <div class="logo"></div>
+                    </a>
                     <div class="nav">
                         {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-                            <a href="/newMeme">{% trans %}main.upload{% endtrans %}</a>
-                            <a href="/profile">{{ app.user.username }}</a>
-                            <a href="/logout">{% trans %}main.logout{% endtrans %}</a>
+                            <a href="/newMeme" class="button-red">{% trans %}main.upload{% endtrans %}</a>
+                            <a href="/profile" class="button-red">{{ app.user.username }}</a>
+                            <a href="/logout" class="button-red">{% trans %}main.logout{% endtrans %}</a>
                         {% else %}
-                            <a href="/register">{% trans %}main.register{% endtrans %}</a>
-                            <a href="/login">{% trans %}main.login{% endtrans %}</a>
+                            <a href="/register" class="button-red">{% trans %}main.register{% endtrans %}</a>
+                            <a href="/login" class="button-red">{% trans %}main.login{% endtrans %}</a>
                         {% endif %}
                     </div>
                 </div>
