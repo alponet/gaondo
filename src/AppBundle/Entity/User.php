@@ -43,6 +43,16 @@ class User extends BaseUser
      */
     protected $posts;
 
+	/**
+	 * @ORM\Column(type="boolean")
+	 */
+    protected $isAdmin;
+
+	/**
+	 * @ORM\Column(type="datetime", nullable=true)
+	 */
+    protected $createdAt;
+
 
     /**
      * User constructor.
@@ -52,6 +62,7 @@ class User extends BaseUser
     	parent::__construct();
     	$this->avatarUrl = 'default.png';
         $this->posts = new ArrayCollection();
+        $this->createdAt = new \DateTime("now");
     }
 
 
@@ -105,6 +116,15 @@ class User extends BaseUser
     public function getAvatarFile()
     {
     	return $this->avatarFile;
+    }
+
+
+	/**
+	 * @return bool
+	 */
+    public function isAdmin()
+    {
+    	return $this->isAdmin;
     }
 
 
