@@ -46,7 +46,7 @@ class User extends BaseUser
 	/**
 	 * @ORM\Column(type="boolean")
 	 */
-    protected $isAdmin;
+    protected $isAdmin = false;
 
 	/**
 	 * @ORM\Column(type="datetime", nullable=true)
