@@ -1,5 +1,6 @@
 $color-rose: #ec97c0;
 $color-red: #c92027;
+$color-grey: #c0c0c0;
 
 .button-red {
   color: #ffffff;
@@ -11,6 +12,29 @@ $color-red: #c92027;
   &:hover {
     color: $color-red;
     background-color: #ffffff;
+  }
+}
+
+.rose-box {
+  border: 2px solid $color-rose;
+  border-radius: 5px;
+  background-color: rgba(255,255,255,0.5);
+
+  a {
+    text-decoration: none;
+  }
+
+  .title {
+    background-color: $color-rose;
+
+    h2,
+    a h2 {
+      color: #ffffff;
+      margin: 0;
+      padding: 2px 10px;
+      font-size: 14px;
+      font-weight: normal;
+    }
   }
 }
 
@@ -69,18 +93,10 @@ body {
 
   #content {
     display: block;
-    margin: 4em auto;
+    margin: 5em auto;
     max-width: 640px;
 
     .meme {
-      a {
-        text-decoration: none;
-
-        h2 {
-          color: #000;
-        }
-      }
-
       img {
         max-width: 100%;
         height: auto;
@@ -89,6 +105,11 @@ body {
       .meta {
         display: flex;
         justify-content: space-between;
+
+        .date {
+          font-size: 10pt;
+          color: $color-grey;
+        }
       }
 
       .description {
@@ -102,10 +123,6 @@ body {
 
     .success {
       color: #00a000;
-    }
-
-    h2 {
-      padding-top: 1em;
     }
 
     form {
@@ -156,49 +173,38 @@ body {
         height: 40px;
         background-size: cover;
         background-position: center;
-        display: inline-block;
+        display: block;
         vertical-align: top;
+        border-radius: 50%;
       }
 
       .username {
-        display: inline-block;
+        display: block;
+        text-align: center;
+        font-size: 10pt;
       }
     }
 
-    .stream {
-      display: block;
-      padding-top: 20px;
-
-      .meme {
-        margin-top: 1em;
-        border: 2px solid $color-rose;
-        border-radius: 5px;
-        background-color: rgba(255,255,255,0.5);
-
-        .title {
-          background-color: $color-rose;
-
-          h2 {
-            color: #ffffff;
-            margin: 0;
-            padding: 2px 10px;
-            font-size: 14px;
-            font-weight: normal;
-          }
-        }
-
-        .meta {
-          padding: 10px;
-        }
-      }
+    .meme {
+      margin-top: 1em;
 
       img {
         width: 100%;
         height: auto;
       }
+
+      .meta {
+        padding: 10px;
+      }
+    }
+
+    .stream {
+      display: block;
     }
 
     #comments {
+      padding: 10px;
+
       .comment {
         border-top: 1px solid #AAAAAA;
 
@@ -212,36 +218,37 @@ body {
     }
 
     .score {
-      display: inline-block;
-      width: 30px;
+      display: block;
+      width: 55px;
 
-      .arrow {
-        width: 0;
-        height: 0;
-        border-style: solid;
+      .vote {
+        display: inline-block;
+        width: 24px;
+        height: 23px;
 
         &.up {
-          border-width: 0 15px 15px 15px;
-          border-color: transparent transparent #888888 transparent;
-
-          &:hover {
-            border-bottom-color: #008000;
-          }
+          background-image: url('../images/icons/up.png');
+          left: 0;
         }
 
         &.down {
-          border-width: 15px 15px 0 15px;
-          border-color: #888888 transparent transparent transparent;
+          background-image: url('../images/icons/down.png');
+          float: right;
+        }
 
-          &:hover {
-            border-top-color: #800000;
-          }
+        &:hover {
+          opacity: 0.8;
+          cursor: pointer;
         }
       }
 
       .value {
+        background-color: $color-red;
         text-align: center;
         padding: 3px;
+        border-radius: 3px;
+        color: #ffffff;
+        font-size: 10pt;
       }
     }
   }

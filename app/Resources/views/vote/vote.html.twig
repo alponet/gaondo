@@ -1,9 +1,9 @@
 <div class="score">
-    <div class="arrow up" onclick="voteUp({{ data.subjectId }})"></div>
+    <div class="vote up" onclick="voteUp({{ data.subjectId }})"></div>
+    <div class="vote down" onclick="voteDown({{ data.subjectId }})"></div>
     <div class="value">
         <span id="score_{{ data.subjectId }}">{{ data.score }}</span>
     </div>
-    <div class="arrow down" onclick="voteDown({{ data.subjectId }})"></div>
 </div>
 <script>
     function voteUp(subjectId) {

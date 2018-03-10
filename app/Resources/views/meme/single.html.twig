@@ -1,5 +1,5 @@
 {% if link is defined %}
-    <a href="m/{{ meme.id }}">
+    <a href="/m/{{ meme.id }}">
 {% endif %}
 <div class="title">
     <h2>{{ meme.title }}</h2>
@@ -17,9 +17,9 @@
 
 <div class="meta">
     {{ render(controller('AppBundle:Vote:_show', { 'subjectId': meme.id })) }}
+    <div class="date">{{ meme.creationDate|date() }}</div>
     {% embed ":user:widget.html.twig" with { user: meme.author } %}
     {% endembed %}
-    <div class="date">{{ meme.creationDate|date() }}</div>
 </div>
 
 {% if link is not defined %}

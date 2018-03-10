@@ -6,7 +6,7 @@
             hay nada
         {% endif %}
         {% for meme in memes %}
-            <div id="m{{ meme.id }}" class="meme">
+            <div id="m{{ meme.id }}" class="meme rose-box">
                 {% embed ":meme:single.html.twig" with { link: true } %}
 
                     {% block description %}
