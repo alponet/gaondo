@@ -51,6 +51,7 @@ class UserController extends Controller
     {
         $name = $request->request->get("name");
         $email = $request->request->get("email");
+        $location = $request->request->get("location");
 
         $i18n = $this->get("translator");
 
@@ -98,6 +99,7 @@ class UserController extends Controller
         $user->setUsername($name);
         $user->setEmail($email);
         $user->setPassword($passwordHash);
+        $user->setLocation($location);
         $user->setRegDate(new \DateTime());
         $em->persist($user);
         $em->flush();

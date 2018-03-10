@@ -49,6 +49,11 @@ class User extends BaseUser
     protected $isAdmin = false;
 
 	/**
+	 * @ORM\Column(type="string", length=128, nullable=true)
+	 */
+	protected $location;
+
+	/**
 	 * @ORM\Column(type="datetime", nullable=true)
 	 */
     protected $createdAt;
@@ -125,6 +130,24 @@ class User extends BaseUser
     public function isAdmin()
     {
     	return $this->isAdmin;
+    }
+
+
+	/**
+	 * @return string
+	 */
+	public function getLocation()
+    {
+    	return $this->location;
+    }
+
+
+	/**
+	 * @param string $location
+	 */
+	public function setLocation($location)
+    {
+    	$this->location = $location;
     }
 
 

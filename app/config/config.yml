@@ -43,6 +43,8 @@ fos_user:
     registration:
         confirmation:
             enabled: true
+        form:
+            type: AppBundle\Form\RegistrationType
 
 # Twig Configuration
 twig:
