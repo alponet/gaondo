@@ -20,6 +20,12 @@ class Comment extends BasePost
      */
     private $subject;
 
+	/**
+	 * @var Comment
+	 * @ORM\ManyToOne(targetEntity="Comment")
+	 */
+    private $replyTo;
+
     /**
      * @ORM\Column(type="text")
      *
@@ -42,6 +48,24 @@ class Comment extends BasePost
     public function setSubject($subject)
     {
         $this->subject = $subject;
+    }
+
+
+	/**
+	 * @return Comment
+	 */
+    public function getReplyTo()
+    {
+    	return $this->replyTo;
+    }
+
+
+	/**
+	 * @param $comment
+	 */
+    public function setReplyTo($comment)
+    {
+    	$this->replyTo = $comment;
     }
 
 

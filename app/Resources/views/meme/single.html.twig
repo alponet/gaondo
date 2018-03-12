@@ -33,11 +33,11 @@
         <div id="comments">
             <h3>{% trans %}main.comments{% endtrans %}</h3>
             {% if app.user %}
-                {{ render(controller('AppBundle:Comment:_commentForm', { 'subjectId': meme.id, 'memeId': meme.id })) }}
+                {{ render(controller('AppBundle:Comment:_commentForm', { 'memeId': meme.id, 'replyTo': null })) }}
             {% else %}
                 {% trans %}log in to post comment{% endtrans %}
             {% endif %}
-            {{ render(controller('AppBundle:Comment:_commentList', { 'subjectId': meme.id })) }}
+            {{ render(controller('AppBundle:Comment:_commentList', { 'memeId': meme.id })) }}
         </div>
     {% endblock %}
 {% endif %}

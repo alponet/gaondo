@@ -8,6 +8,7 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\BasePost;
 use AppBundle\Entity\Comment;
+use AppBundle\Entity\Meme;
 use AppBundle\Entity\User;
 use AppBundle\Form\CommentType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -41,6 +42,7 @@ class CommentController extends Controller
         $comment = new Comment();
         $form = $this->createForm(CommentType::class, $comment);
         $form->add('subject', HiddenType::class);
+        $form->add('replyTo', HiddenType::class);
         $form->handleRequest($currentRequest);
 
         if ($form->isValid()) {
@@ -55,8 +57,16 @@ class CommentController extends Controller
             if (!$subject) {
                 throw $this->createNotFoundException('Invalid subject');
             }
-
             $comment->setSubject($subject);
+
+            $parentId = $form->get('replyTo')->getData();
+            if ($parentId) {
+	            $repo   = $this->getDoctrine()->getRepository( Comment::class );
+	            $parent = $repo->find( $parentId );
+	            if ( $parent ) {
+		            $comment->setReplyTo( $parent );
+	            }
+            }
 
             $em = $this->getDoctrine()->getManager();
             $em->persist($comment);
@@ -75,31 +85,35 @@ class CommentController extends Controller
      * @param integer $subjectId
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function _commentFormAction($subjectId, $memeId)
+    public function _commentFormAction($memeId, $replyTo)
     {
-        $repository = $this->getDoctrine()->getRepository(BasePost::class);
-        $subject = $repository->find($subjectId);
+        $repository = $this->getDoctrine()->getRepository(Meme::class);
+        $subject = $repository->find($memeId);
         if (!$subject) {
-            throw $this->createNotFoundException('Invalid subject');
+            throw $this->createNotFoundException('Invalid meme');
         }
 
         $comment = new Comment();
         $form = $this->createForm(CommentType::class, $comment);
-        $form->add('subject', HiddenType::class, [ 'data' => $subjectId ]);
+        $form->add('subject', HiddenType::class, [ 'data' => $memeId ]);
+	    $form->add('replyTo', HiddenType::class, [ 'data' => $replyTo ]);
 
         return $this->render('comment/new.html.twig', [
         	'form' => $form->createView(),
-	        'memeId' => $memeId
+	        'memeId' => $memeId,
+	        'replyTo' => $replyTo
         ]);
     }
 
 
-    public function _commentListAction($subjectId)
+    public function _commentListAction($memeId)
     {
         $repo = $this->getDoctrine()->getRepository(Comment::class);
-        $comments = $repo->findBy([ 'subject' => $subjectId ], [ 'creationDate' => 'DESC' ] );
+        $comments = $repo->findBy([ 'subject' => $memeId ], [ 'creationDate' => 'DESC' ] );
 
         $commentTree = [];
+
+        // ToDo: adapt comment tree creation to new Comment model
 
         foreach ($comments as $comment) {
 	        $commentTree[] = $this->buildCommentTree( $comment );

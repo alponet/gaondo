@@ -33,6 +33,6 @@
 <script type="text/javascript">
     function replyForm(subjectId) {
         $('#commentForm').clone().attr('id', 'commentForm'+subjectId).appendTo('#comment'+subjectId);
-        $('#commentForm'+subjectId+' #comment_subject').val(subjectId);
+        $('#commentForm'+subjectId+' #comment_replyTo').val(subjectId);
     }
 </script>
