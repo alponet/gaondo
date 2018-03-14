@@ -168,4 +168,13 @@ class Meme extends BasePost
     {
         $this->description = $description;
     }
+
+
+	/**
+	 * @return int
+	 */
+    public function getCommentCount()
+	{
+		return count($this->comments);
+	}
 }

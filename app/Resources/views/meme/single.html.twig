@@ -17,7 +17,10 @@
 
 <div class="meta">
     {{ render(controller('AppBundle:Vote:_show', { 'subjectId': meme.id })) }}
-    <div class="date">{{ meme.creationDate|date() }}</div>
+    <div class="center">
+        <div class="date">{{ meme.creationDate|date() }}</div>
+        <div class="comment-count">{{ meme.commentCount }} <span class="icon icon-comment"></span></div>
+    </div>
     {% embed ":user:widget.html.twig" with { user: meme.author } %}
     {% endembed %}
 </div>
@@ -31,7 +34,7 @@
 
     {% block comments %}
         <div id="comments">
-            <h3>{% trans %}main.comments{% endtrans %}</h3>
+            <h3>{{ meme.commentCount }} {% trans %}main.comments{% endtrans %}</h3>
             {% if app.user %}
                 {{ render(controller('AppBundle:Comment:_commentForm', { 'memeId': meme.id, 'replyTo': null })) }}
             {% else %}
