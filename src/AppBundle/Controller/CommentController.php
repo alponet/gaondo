@@ -109,12 +109,9 @@ class CommentController extends Controller
     public function _commentListAction($memeId)
     {
         $repo = $this->getDoctrine()->getRepository(Comment::class);
-        $comments = $repo->findBy([ 'subject' => $memeId ], [ 'creationDate' => 'DESC' ] );
+        $comments = $repo->findBy([ 'subject' => $memeId, 'replyTo' => null ], [ 'creationDate' => 'DESC' ] );
 
         $commentTree = [];
-
-        // ToDo: adapt comment tree creation to new Comment model
-
         foreach ($comments as $comment) {
 	        $commentTree[] = $this->buildCommentTree( $comment );
         }
@@ -133,7 +130,7 @@ class CommentController extends Controller
 	    $tree['comment'] = $comment;
 
     	$repo = $this->getDoctrine()->getRepository(Comment::class);
-	    $comments = $repo->findBy([ 'subject' => $comment->getId() ], [ 'creationDate' => 'DESC' ] );
+	    $comments = $repo->findBy([ 'replyTo' => $comment->getId() ], [ 'creationDate' => 'DESC' ] );
 
 	    if (sizeof($comments) > 0) {
 	    	$tree['children'] = [];
