@@ -15,8 +15,8 @@ class Comment extends BasePost
 {
 
     /**
-     * @var BasePost
-     * @ORM\ManyToOne(targetEntity="BasePost")
+     * @var Meme
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Meme", inversedBy="comments")
      */
     private $subject;
 
@@ -35,7 +35,7 @@ class Comment extends BasePost
 
 
     /**
-     * @return BasePost
+     * @return Meme
      */
     public function getSubject()
     {

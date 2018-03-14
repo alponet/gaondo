@@ -6,6 +6,7 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\File;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
@@ -42,14 +43,23 @@ class Meme extends BasePost
 	 */
     private $mimeType;
 
-
     /**
      * @ORM\Column(type="text", nullable=true)
      */
     private $description;
 
+	/**
+	 * @ORM\OneToMany(targetEntity="AppBundle\Entity\Comment", mappedBy="subject")
+	 */
+	private $comments;
 
-    /**
+
+	public function __construct()
+	{
+		$this->comments = new ArrayCollection();
+	}
+
+	/**
      * @return string
      */
     public function getTitle()
