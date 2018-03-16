@@ -51,6 +51,27 @@ input {
   padding: 5px;
 }
 
+form {
+  label {
+    display: block;
+  }
+
+  input,
+  textarea {
+    display: block;
+    margin-bottom: 1em;
+  }
+
+  button {
+    display: inline-block;
+    margin: 1em 0;
+  }
+
+  input[type="submit"] {
+    font-size: 12pt;
+  }
+}
+
 .icon {
   &.icon-comment {
     display: inline-block;
@@ -157,22 +178,7 @@ body {
       color: #00a000;
     }
 
-    form {
-      label {
-        display: block;
-      }
 
-      input,
-      textarea {
-        display: block;
-        margin-bottom: 1em;
-      }
-
-      button {
-        display: inline-block;
-        margin: 1em 0;
-      }
-    }
 
     .userProfile {
       #avatarFile {
@@ -285,27 +291,14 @@ body {
       }
     }
   }
-
-  #footer {
-    display: block;
-    position: fixed;
-    bottom: 0;
-    height: 2em;
-    width: 100%;
-    margin: 0;
-    background-color: $color-red;
-
-    .copyright {
-      color: #fff;
-      text-align: center;
-      padding:10px;
-    }
-  }
 }
 
-.fos_user_registration_register {
-  input[type="submit"] {
-    font-size: 12pt;
+.login {
+  .remember {
+    input,
+    label {
+      display: inline-block;
+    }
   }
 }
 
@@ -313,5 +306,21 @@ body {
   display: none;
   h1 {
     font-size: 10px;
+  }
+}
+
+#footer {
+  display: block;
+  position: fixed;
+  bottom: 0;
+  height: 2em;
+  width: 100%;
+  margin: 0;
+  background-color: $color-red;
+
+  .copyright {
+    color: #fff;
+    text-align: center;
+    padding:10px;
   }
 }
