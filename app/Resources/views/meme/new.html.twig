@@ -1,48 +1,54 @@
 {% extends 'base.html.twig' %}
 
 {% block content %}
-    <h2>{% trans %}meme.newMeme{% endtrans %}</h2>
-    <form>
-        <label>{% trans %}meme.title{% endtrans %}</label>
-        <input placeholder="{% trans %}meme.title{% endtrans %}" type="text" id="title">
-        <label>{% trans %}meme.file{% endtrans %}</label>
-        <input accept="image/*" type="file" id="file">
-        <label>{% trans %}meme.description{% endtrans %}</label>
-        <textarea id="description"></textarea>
-        <div class="status" id="status"></div>
-        <button type="submit" id="submit">{% trans %}main.upload{% endtrans %}</button>
+    <div class="rose-box">
+        <div class="title">
+            <h2>{% trans %}meme.newMeme{% endtrans %}</h2>
+        </div>
+        <div class="content">
+            <form>
+                <label>{% trans %}meme.title{% endtrans %}</label>
+                <input placeholder="{% trans %}meme.title{% endtrans %}" type="text" id="title">
+                <label>{% trans %}meme.file{% endtrans %}</label>
+                <input accept="image/*" type="file" id="file">
+                <label>{% trans %}meme.description{% endtrans %}</label>
+                <textarea id="description"></textarea>
+                <div class="status" id="status"></div>
+                <button type="submit" id="submit" class="button-red">{% trans %}main.upload{% endtrans %}</button>
 
-        <script>
-            document.getElementById("submit").addEventListener("click", upload);
+                <script>
+                    document.getElementById("submit").addEventListener("click", upload);
 
-            function upload(e) {
-                e.preventDefault();
-                var statusLabel = document.getElementById("status");
-                statusLabel.innerHTML = "{% trans %}status.uploading{% endtrans %}";
+                    function upload(e) {
+                        e.preventDefault();
+                        var statusLabel = document.getElementById("status");
+                        statusLabel.innerHTML = "{% trans %}status.uploading{% endtrans %}";
 
-                var formData = new FormData();
-                formData.set("title", document.getElementById("title").value);
-                formData.set("file", document.getElementById("file").files[0]);
-                formData.set("description", document.getElementById("description").value);
+                        var formData = new FormData();
+                        formData.set("title", document.getElementById("title").value);
+                        formData.set("file", document.getElementById("file").files[0]);
+                        formData.set("description", document.getElementById("description").value);
 
-                var xhr = new XMLHttpRequest();
-                xhr.open("POST", "/m/", true);
-                xhr.onreadystatechange = function () {
-                    if (xhr.readyState === 4) {
-                        var re = JSON.parse(xhr.response);
+                        var xhr = new XMLHttpRequest();
+                        xhr.open("POST", "/m/", true);
+                        xhr.onreadystatechange = function () {
+                            if (xhr.readyState === 4) {
+                                var re = JSON.parse(xhr.response);
 
-                        if (re.errors) {
-                            statusLabel = document.getElementById("status");
-                            statusLabel.innerHTML = '<label class="error">' + re.errors[0].detail + '</label>';
-                        }
+                                if (re.errors) {
+                                    statusLabel = document.getElementById("status");
+                                    statusLabel.innerHTML = '<label class="error">' + re.errors[0].detail + '</label>';
+                                }
 
-                        if (re.memeId) {
-                            window.location.replace("/m/" + re.memeId);
-                        }
+                                if (re.memeId) {
+                                    window.location.replace("/m/" + re.memeId);
+                                }
+                            }
+                        };
+                        xhr.send(formData);
                     }
-                };
-                xhr.send(formData);
-            }
-        </script>
-    </form>
+                </script>
+            </form>
+        </div>
+    </div>
 {% endblock %}

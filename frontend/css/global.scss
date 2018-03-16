@@ -45,7 +45,8 @@ $color-grey: #c0c0c0;
   }
 }
 
-input {
+input,
+textarea {
   border: 1px solid $color-rose;
   border-radius: 3px;
   padding: 5px;
@@ -67,7 +68,8 @@ form {
     margin: 1em 0;
   }
 
-  input[type="submit"] {
+  input[type="submit"],
+  button[type="submit"]{
     font-size: 12pt;
   }
 }
