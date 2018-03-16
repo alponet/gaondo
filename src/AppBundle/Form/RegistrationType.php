@@ -13,7 +13,7 @@ class RegistrationType extends AbstractType
 {
 	public function buildForm(FormBuilderInterface $builder, array $options)
 	{
-		$builder->add('location');
+		$builder->add('location', null, [ 'label' => 'register.location'] );
 	}
 
 	public function getParent()

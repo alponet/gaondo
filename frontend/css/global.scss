@@ -5,6 +5,7 @@ $color-grey: #c0c0c0;
 .button-red {
   color: #ffffff;
   background-color: $color-red;
+  border: 1px solid transparent;
   border-radius: 3px;
   text-decoration: none;
   padding: 2px 12px;
@@ -12,6 +13,8 @@ $color-grey: #c0c0c0;
   &:hover {
     color: $color-red;
     background-color: #ffffff;
+    border: 1px solid $color-red;
+    cursor: pointer;
   }
 }
 
@@ -36,6 +39,16 @@ $color-grey: #c0c0c0;
       font-weight: normal;
     }
   }
+
+  .content {
+    padding: 10px;
+  }
+}
+
+input {
+  border: 1px solid $color-rose;
+  border-radius: 3px;
+  padding: 5px;
 }
 
 .icon {
@@ -287,6 +300,12 @@ body {
       text-align: center;
       padding:10px;
     }
+  }
+}
+
+.fos_user_registration_register {
+  input[type="submit"] {
+    font-size: 12pt;
   }
 }
 

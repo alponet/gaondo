@@ -43,6 +43,7 @@ return [
 	'register.forgotPassword'   => 'Forgot password?',
     'register.mailSubject'      => 'Your Gaondo password',
     'register.name'             => 'Name',
+	'register.location'         => 'Location',
     'register.register'         => 'Register',
 	'register.resetPassword'    => 'Reset password',
     'register.success'          => 'Your password has been sent to you by email.',
