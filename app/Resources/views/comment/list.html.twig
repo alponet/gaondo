@@ -40,9 +40,10 @@
         $('.commentForm:not(:first)').remove();
         cf.attr('id', 'commentForm'+subjectId).appendTo('#comment'+subjectId+" .text").hide().fadeIn();
         cf.find('#comment_replyTo').val(subjectId);
-        cf.find('input[type="text"]').focus();
+        cf.find('input[type="text"]').attr('id', 'comment_text'+subjectId).focus();
+        cf.find('label[for="comment_text"]').attr('for', 'comment_text'+subjectId);
         $('.close-commentForm').click(function () {
             $('.commentForm:not(:first)').fadeOut();
         });
-    };
+    }
 </script>
