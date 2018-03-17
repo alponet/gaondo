@@ -1,8 +1,4 @@
 <hr />
-{% if comments|length < 1 %}
-    <div>{% trans %}comments.noComments{% endtrans %}</div>
-{% endif %}
-
 {% macro comment_tree(tree) %}
     {% import _self as macros %}
     {% for node in tree %}
@@ -44,6 +40,7 @@
         $('.commentForm:not(:first)').remove();
         cf.attr('id', 'commentForm'+subjectId).appendTo('#comment'+subjectId+" .text").hide().fadeIn();
         cf.find('#comment_replyTo').val(subjectId);
+        cf.find('input[type="text"]').focus();
         $('.close-commentForm').click(function () {
             $('.commentForm:not(:first)').fadeOut();
         });
