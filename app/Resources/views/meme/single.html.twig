@@ -33,7 +33,8 @@
     {% endblock %}
 
     {% block comments %}
-        <div id="comments">
+        <hr />
+        <div class="comments">
             <h3>{{ meme.commentCount }} {% trans %}main.comments{% endtrans %}</h3>
             {% if app.user %}
                 {{ render(controller('AppBundle:Comment:_commentForm', { 'memeId': meme.id, 'replyTo': null })) }}

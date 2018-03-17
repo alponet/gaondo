@@ -1,5 +1,6 @@
+<hr />
 {% if comments|length < 1 %}
-    <div>no comments</div>
+    <div>{% trans %}comments.noComments{% endtrans %}</div>
 {% endif %}
 
 {% macro comment_tree(tree) %}
@@ -8,10 +9,16 @@
         <li>
             <div class="comment" id="comment{{ node.comment.id }}">
                 <div class="info">
-                    {% embed "user/widget.html.twig" with { user: node.comment.author} %}{% endembed %}{{ node.comment.creationDate|date('d.m.Y / H:m') }}</div>
-                <div class="text">{{ node.comment.text }}</div>
+
+
+                </div>
+                <div class="text">
+                    {% embed "user/widget.html.twig" with { user: node.comment.author} %}{% endembed %}
+                    <div class="datetime">{{ node.comment.creationDate|date('d.m.Y / H:m') }}</div>
+                    <p>{{ node.comment.text }}</p>
+                </div>
                 {% if app.user %}
-                    <div class="actions"><span class="link" onclick="replyForm({{ node.comment.id }})">{% trans %}main.reply{% endtrans %}</span></div>
+                    <div class="actions"><a onclick="replyForm({{ node.comment.id }})">{% trans %}main.reply{% endtrans %}</a></div>
                 {% endif %}
             </div>
 
@@ -26,13 +33,17 @@
 {% endmacro %}
 
 {% import _self as macros %}
-
-<ul class="comments">
+<ul>
     {{ macros.comment_tree(tree) }}
 </ul>
 <script type="text/javascript">
     function replyForm(subjectId) {
-        $('#commentForm').clone().attr('id', 'commentForm'+subjectId).appendTo('#comment'+subjectId);
-        $('#commentForm'+subjectId+' #comment_replyTo').val(subjectId);
-    }
+        let cf = $('.commentForm').first().clone();
+        $('.commentForm:not(:first)').fadeOut();
+        cf.attr('id', 'commentForm'+subjectId).appendTo('#comment'+subjectId+" .text").hide().fadeIn();
+        cf.find('#comment_replyTo').val(subjectId);
+        $('.close-commentForm').click(function () {
+            $('.commentForm:not(:first)').fadeOut();
+        });
+    };
 </script>

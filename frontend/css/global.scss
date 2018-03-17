@@ -4,6 +4,7 @@ $color-grey: #c0c0c0;
 
 .button-red {
   color: #ffffff;
+  font-size: 12pt;
   background-color: $color-red;
   border: 1px solid transparent;
   border-radius: 3px;
@@ -18,10 +19,16 @@ $color-grey: #c0c0c0;
   }
 }
 
+.button-rose {
+  color: $color-red;
+  background-color: $color-rose;
+}
+
 .rose-box {
   border: 2px solid $color-rose;
   border-radius: 5px;
   background-color: rgba(255,255,255,0.5);
+  box-shadow: 2px 4px 5px rgba(0, 0, 0, 0.3);
 
   a {
     text-decoration: none;
@@ -43,6 +50,12 @@ $color-grey: #c0c0c0;
   .content {
     padding: 10px;
   }
+}
+
+hr {
+  width: 99%;
+  color: $color-rose;
+  border: 0; height: 1px; background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(236, 151, 192, 1), rgba(0, 0, 0, 0));
 }
 
 input,
@@ -107,6 +120,7 @@ body {
     height: 4em;
     width: 100%;
     background-color: $color-rose;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
 
     .logo {
       display: block;
@@ -243,21 +257,6 @@ body {
       display: block;
     }
 
-    #comments {
-      padding: 10px;
-
-      .comment {
-        border-top: 1px solid #AAAAAA;
-
-        padding: 10px 0;
-
-        .info {
-          font-size: 10px;
-          margin-bottom: 10px;
-        }
-      }
-    }
-
     .score {
       display: block;
       width: 55px;
@@ -303,6 +302,119 @@ body {
     }
   }
 }
+
+.commentForm {
+  .close-commentForm {
+    display: none;
+  }
+
+  div,
+  form,
+  label {
+    display: inline-block;
+    vertical-align: top;
+  }
+
+  label {
+    vertical-align: middle;
+  }
+
+  button {
+    margin: 0 6px;
+  }
+
+  input[type="text"] {
+    display: inline-block;
+    width: 200px;
+    margin: 0 6px;
+  }
+}
+
+.comments {
+  padding: 10px;
+
+  .info {
+    display: inline-block;
+  }
+
+  .user {
+    float: left;
+    margin-right: 10px;
+    background-color: #ffffff;
+    padding: 1px;
+    border-radius: 50%;
+    border: 1px solid $color-red;
+  }
+  
+  .username {
+    display: none !important;
+  }
+  
+  .datetime {
+    float: right;
+    background-color: #ffffff;
+    border-radius: 3px;
+    font-size: 10pt;
+    color: $color-grey;
+    padding: 2px;
+    margin-left: 10px;
+  }
+
+  ul {
+    list-style: none;
+    padding: 0;
+
+    li {
+      border-left: 1px solid $color-rose;
+      border-image: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(236, 151, 192, 1), rgba(0, 0, 0, 0)) 1 100%;
+      padding-left: 1px;
+    }
+  }
+
+  .text {
+    background-color: rgba(236, 151, 192, 0.2);
+    border-radius: 5px;
+    padding: 10px;
+    margin-left: 5px;
+
+    .commentForm {
+      text-align: center;
+      // background-color: #ffffff;
+      border: 1px solid $color-rose;
+      padding: 5px;
+      border-radius: 5px;
+
+      .close-commentForm {
+        display: inline-block;
+      }
+    }
+  }
+
+  .actions {
+    text-align: center;
+
+    a {
+      background-color: rgba(236, 151, 192, 0.2);
+      padding: 0 10px 5px;
+      border-bottom-left-radius: 5px;
+      border-bottom-right-radius: 5px;
+      color: $color-red;
+      
+      &:hover {
+        text-decoration: underline;
+        cursor: pointer;
+      }
+    }
+
+    .button-red {
+      background-color: rgba(236, 151, 192, 0.2);
+      padding: 0 5px;
+      margin-top: -40px;
+    }
+  }
+}
+
+
 
 #react {
   display: none;
