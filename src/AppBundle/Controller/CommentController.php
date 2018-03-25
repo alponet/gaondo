@@ -15,6 +15,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
+use Symfony\Component\HttpFoundation\Response;
 
 class CommentController extends Controller
 {
@@ -78,6 +79,35 @@ class CommentController extends Controller
         }
 
         return $this->redirect("/");
+    }
+
+
+	/**
+	 * @Route("/c/{commentId}/")
+	 * @Method("DELETE")
+	 * @param int $commentId
+	 *
+	 * @return Response
+	 */
+    public function deleteAction($commentId)
+    {
+	    $repo = $this->getDoctrine()->getRepository(Comment::class);
+	    $comment = $repo->find($commentId);
+	    if (!$comment) {
+		    return new Response('Comment not found', Response::HTTP_NOT_FOUND);
+	    }
+
+	    /** @var User $currentUser */
+	    $currentUser = $this->get('security.token_storage')->getToken()->getUser();
+	    if (!($currentUser->isAdmin() || $currentUser == $comment->getAuthor())) {
+		    return new Response('Forbidden', Response::HTTP_FORBIDDEN);
+	    }
+
+	    $comment->setText(null);
+	    $em = $this->getDoctrine()->getManager();
+		$em->flush();
+
+	    return new Response('', Response::HTTP_NO_CONTENT);
     }
 
 
