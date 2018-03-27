@@ -6,6 +6,8 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\Comment;
+use AppBundle\Entity\Meme;
 use AppBundle\Entity\User;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -245,46 +247,64 @@ class UserController extends Controller
 
 
     /**
-     * @Route("/u/{id}")
+     * @Route("/u/{userId}/")
      * @Method("DELETE")
-     * @param $id
+     * @param $userId
      * @param Request $request
-     * @return \Symfony\Component\HttpFoundation\JsonResponse
+     *
+     * @return Response
      */
-    public function deleteUserAction($id, Request $request)
+    public function deleteUserAction($userId, Request $request)
     {
-        /** @var User $currentUser */
-        $currentUser = $this->get('security.token_storage')->getToken()->getUser();
+	    $repository = $this->getDoctrine()->getRepository(User::class);
+	    $user = $repository->find($userId);
+	    if (!$user) {
+		    return new Response('User not found', Response::HTTP_NOT_FOUND);
+	    }
 
-        $i18n = $this->get('translator');
+	    /** @var User $currentUser */
+	    $currentUser = $this->get('security.token_storage')->getToken()->getUser();
+	    if (!($currentUser->isAdmin() || $currentUser == $user)) {
+		    return new Response('Forbidden', Response::HTTP_FORBIDDEN);
+	    }
 
-        if (gettype($currentUser) !== 'object') {
-            throw $this->createAccessDeniedException($i18n->trans('error.pleaseLogIn'));
-        }
+	    $em = $this->getDoctrine()->getManager();
+	    $comments = $em->getRepository(Comment::class)->findBy(['author' => $user->getId()]);
 
-        if ($currentUser->getId() != $id) {
-            return $this->json([ "success" => false, "detail" => $i18n->trans('error.permissionDenied') ]);
-        }
+	    foreach ($comments as $c) {
+	    	$c->setAuthor(null);
+	    	$c->setText(null);
+	    }
 
-        $attributes = json_decode($request->getContent());
+	    $memes = $em->getRepository(Meme::class)->findBy(['author' => $user->getId()]);
 
-        if (!password_verify($attributes->password, $currentUser->getPassword())) {
-            $response = [];
-            $response["success"] = false;
-            $response["errors"][] = [
-                "source" => "password",
-                "detail" => $i18n->trans('error.passwordWrong')
-            ];
-            return $this->json($response);
-        }
+	    foreach ($memes as $meme) {
+		    $comments = $em->getRepository(Comment::class)->findBy(['subject' => $meme->getId()]);
+
+		    foreach ($comments as $c) {
+			    $c->setReplyTo(null);
+			    $c->setSubject(null);
+		    }
+		    $em->flush();
+
+		    foreach ($comments as $c) {
+			    $em->remove($c);
+		    }
+		    $em->flush();
+		    
+		    $em->remove($meme);
+		    $em->flush();
+	    }
 
         $em = $this->getDoctrine()->getManager();
-        $em->remove($currentUser);
+        $em->remove($user);
         $em->flush();
 
-        $request->getSession()->invalidate(1);
+        if (!$currentUser->isAdmin()) {
+	        $request->getSession()->invalidate( 1 );
+        }
 
-        return $this->json([ 'success' => true ]);
+	    return new Response('', Response::HTTP_NO_CONTENT);
     }
 
 

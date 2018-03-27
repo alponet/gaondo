@@ -8,6 +8,10 @@
     <div class="status"></div>
     <p>{{ 'profile.show.username'|trans }}: {{ user.username }}</p>
     <p>{{ 'profile.show.email'|trans }}: {{ user.email }}</p>
+    <hr />
+    <p>
+        <a class="button-red small" onclick="deleteAccount()">{% trans from 'app'%}profile.deleteAccount{% endtrans %}</a>
+    </p>
 </div>
 <script>
     function setAvatar() {
@@ -37,5 +41,16 @@
             }
         });
     });
+
+    function deleteAccount() {
+        if ( window.confirm( "{% trans %}profile.reallyDeleteAcc{% endtrans %}" ) ) {
+            $.ajax({
+                url: "/u/{{ user.id }}/",
+                type: 'DELETE'
+            }).done((response) => {
+                window.location.replace("/");
+            });
+        }
+    }
 
 </script>
