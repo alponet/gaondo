@@ -10,13 +10,25 @@
                 </div>
                 <div class="text">
                     {% embed "user/widget.html.twig" with { user: node.comment.author} %}{% endembed %}
+                    <!-- ToFix: date filter always printing date of first node -->
                     <div class="datetime">{{ node.comment.creationDate|date('d.m.Y / H:m') }}</div>
                     <p class="author">{{ node.comment.author }}</p>
                     <hr>
-                    <p>{{ node.comment.text }}</p>
+                    <p>
+                        {% if node.comment.text %}
+                            {{ node.comment.text }}
+                        {% else %}
+                            <i>{% trans %}comments.deleted{% endtrans %}</i>
+                        {% endif %}
+                    </p>
                 </div>
-                {% if app.user %}
-                    <div class="actions"><a onclick="replyForm({{ node.comment.id }})">{% trans %}main.reply{% endtrans %}</a></div>
+                {% if app.user and node.comment.text %}
+                    <div class="actions">
+                        <a onclick="replyForm({{ node.comment.id }})">{% trans %}main.reply{% endtrans %}</a>
+                        {% if app.user.isAdmin or app.user.name == node.comment.author %}
+                            <a onclick="deleteComment({{ node.comment.id }})">{% trans %}main.delete{% endtrans %}</a>
+                        {% endif %}
+                    </div>
                 {% endif %}
             </div>
 
@@ -45,5 +57,17 @@
         $('.close-commentForm').click(function () {
             $('.commentForm:not(:first)').fadeOut();
         });
+    }
+
+    function deleteComment(commentId) {
+        if ( window.confirm( "{% trans %}comments.delete.confirm{% endtrans %}" ) ) {
+            $.ajax({
+                url: "/c/" + commentId + "/",
+                type: 'DELETE'
+            }).done((response) => {
+                console.log(response);
+                window.location.reload();
+            });
+        }
     }
 </script>
