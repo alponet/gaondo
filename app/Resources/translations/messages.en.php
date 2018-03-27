@@ -30,6 +30,8 @@ return [
     'meme.file'         => 'file',
     'meme.newMeme'      => 'New Meme',
     'meme.title'        => 'title',
+	'meme.delete'       => 'Delete Meme',
+	'meme.delete.confirm'   =>  'Do you really want to delete this meme?',
 	'comments.noComments'       => 'no comments',
 	'comments.loginRequired'    => 'please log in to post comments',
 	'comments.delete.confirm'   => 'Do you really want to delete this comment?',

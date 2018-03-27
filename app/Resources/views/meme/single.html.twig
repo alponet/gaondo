@@ -20,6 +20,11 @@
     <div class="center">
         <div class="date">{{ meme.creationDate|date() }}</div>
         <div class="comment-count">{{ meme.commentCount }} <span class="icon icon-comment"></span></div>
+        {% if app.user %}
+            {% if app.user.isAdmin or app.user == meme.author %}
+                <div class="delete"><a class="button-red small" onclick="deleteMeme()">{% trans %}meme.delete{% endtrans %}</a></div>
+            {% endif %}
+        {% endif %}
     </div>
     {% embed ":user:widget.html.twig" with { user: meme.author } %}
     {% endembed %}
@@ -45,3 +50,16 @@
         </div>
     {% endblock %}
 {% endif %}
+
+<script type="text/javascript">
+    function deleteMeme() {
+        if ( window.confirm( "{% trans %}meme.delete.confirm{% endtrans %}" ) ) {
+            $.ajax({
+                url: "/m/{{ meme.id }}/",
+                type: 'DELETE'
+            }).done((response) => {
+                window.location.reload();
+            });
+        }
+    }
+</script>
