@@ -17,6 +17,10 @@ $color-grey: #c0c0c0;
     border: 1px solid $color-red;
     cursor: pointer;
   }
+
+  &.small {
+    font-size: 10pt;
+  }
 }
 
 .button-rose {
@@ -175,7 +179,7 @@ body {
         }
 
         .comment-count {
-          margin-top: 10px;
+          margin: 10px;
           text-align: center;
         }
       }

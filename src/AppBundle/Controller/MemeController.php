@@ -6,6 +6,7 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\Comment;
 use AppBundle\Entity\Meme;
 use AppBundle\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -197,5 +198,49 @@ class MemeController extends Controller
         $response["memeId"] = $meme->getId();
 
         return $this->json($response);
+    }
+
+
+	/**
+	 * @Route("/m/{memeId}/")
+	 * @Method("DELETE")
+	 * @param int $memeId
+	 *
+	 * @return Response
+	 */
+    public function deleteAction($memeId)
+    {
+	    $repository = $this->getDoctrine()->getRepository(Meme::class);
+	    $meme = $repository->find($memeId);
+	    if (!$meme) {
+		    return new Response('Meme not found', Response::HTTP_NOT_FOUND);
+	    }
+
+	    /** @var User $currentUser */
+	    $currentUser = $this->get('security.token_storage')->getToken()->getUser();
+	    if (!($currentUser->isAdmin() || $currentUser == $meme->getAuthor())) {
+		    return new Response('Forbidden', Response::HTTP_FORBIDDEN);
+	    }
+
+	    $em = $this->getDoctrine()->getManager();
+	    $comments = $em->getRepository(Comment::class)->findBy(['subject' => $memeId]);
+
+	    foreach ($comments as $c) {
+	    	$c->setReplyTo(null);
+	    	$c->setSubject(null);
+	    }
+
+	    $em->flush();
+
+	    foreach ($comments as $c) {
+		    $em->remove($c);
+	    }
+
+	    $em->flush();
+
+	    $em->remove($meme);
+	    $em->flush();
+
+	    return new Response('', Response::HTTP_NO_CONTENT);
     }
 }
