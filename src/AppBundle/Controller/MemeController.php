@@ -9,6 +9,7 @@ namespace AppBundle\Controller;
 use AppBundle\Entity\Comment;
 use AppBundle\Entity\Meme;
 use AppBundle\Entity\User;
+use AppBundle\Entity\Vote;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -234,6 +235,11 @@ class MemeController extends Controller
 
 	    foreach ($comments as $c) {
 		    $em->remove($c);
+	    }
+
+	    $votes = $em->getRepository(Vote::class)->findBy(['subject' => $memeId]);
+	    foreach ($votes as $v) {
+	    	$em->remove($v);
 	    }
 
 	    $em->flush();

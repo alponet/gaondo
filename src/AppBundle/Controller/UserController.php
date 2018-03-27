@@ -9,6 +9,7 @@ namespace AppBundle\Controller;
 use AppBundle\Entity\Comment;
 use AppBundle\Entity\Meme;
 use AppBundle\Entity\User;
+use AppBundle\Entity\Vote;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -290,13 +291,22 @@ class UserController extends Controller
 		    foreach ($comments as $c) {
 			    $em->remove($c);
 		    }
+
+		    $votes = $em->getRepository(Vote::class)->findBy(['subject' => $meme->getId()]);
+		    foreach ($votes as $v) {
+			    $em->remove($v);
+		    }
 		    $em->flush();
 		    
 		    $em->remove($meme);
 		    $em->flush();
 	    }
 
-        $em = $this->getDoctrine()->getManager();
+	    $votes = $em->getRepository(Vote::class)->findBy(['author' => $user->getId()]);
+	    foreach ($votes as $v) {
+		    $em->remove($v);
+	    }
+	    $em->flush();
         $em->remove($user);
         $em->flush();
 
