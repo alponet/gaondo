@@ -36,7 +36,14 @@
         </div>
 
         <div id="footer">
-            <div class="copyright">© 2018</div>
+            <div class="copyright">
+                {% if app.user %}
+                    {% if app.user.isAdmin %}
+                        <a href="/admin" class="button-red">Users</a>
+                    {% endif %}
+                {% endif %}
+                <span>© 2018</span>
+            </div>
         </div>
         
         <script src="{{ asset('build/app.js') }}"></script>

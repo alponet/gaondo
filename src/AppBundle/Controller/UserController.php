@@ -44,6 +44,38 @@ class UserController extends Controller
     }
 
 
+	/**
+	 * @Route("/users/")
+	 * @Method("GET")
+	 * @return \Symfony\Component\HttpFoundation\JsonResponse|Response
+	 */
+    public function getAllUsers()
+    {
+	    /** @var User $currentUser */
+	    $currentUser = $this->get('security.token_storage')->getToken()->getUser();
+	    if (!($currentUser->isAdmin())) {
+		    return new Response('Forbidden', Response::HTTP_FORBIDDEN);
+	    }
+
+	    $em = $this->getDoctrine()->getManager();
+	    $users = $em->getRepository(User::class)->findAll();
+
+	    $response = [];
+
+	    foreach ($users as $user) {
+	    	$response[] = [
+	    		"id" => $user->getId(),
+			    "name" => $user->getUsername(),
+			    "email" => $user->getEmail(),
+			    "location" => $user->getLocation(),
+			    "created_at" => $user->getCreatedAt()
+		    ];
+	    }
+
+	    return $this->json($response);
+    }
+
+
     /**
      * @Route("/u/")
      * @Method("POST")

@@ -151,6 +151,15 @@ class User extends BaseUser
     }
 
 
+	/**
+	 * @return \DateTime
+	 */
+    public function getCreatedAt()
+    {
+    	return $this->createdAt;
+    }
+
+
     /**
      * Removes sensitive data from the user.
      *
