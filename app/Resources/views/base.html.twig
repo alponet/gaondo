@@ -15,15 +15,24 @@
                     <a href="/">
                       <div class="logo"></div>
                     </a>
-                    <div class="nav">
-                        {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                    <div class="nav-wrapper">
+                        <div class="nav nav-add">
                             <a href="/newMeme" class="button-red">{% trans %}main.upload{% endtrans %}</a>
-                            <a href="/profile" class="button-red">{{ app.user.username }}</a>
-                            <a href="/logout" class="button-red">{% trans %}main.logout{% endtrans %}</a>
-                        {% else %}
-                            <a href="/register" class="button-red">{% trans %}main.register{% endtrans %}</a>
-                            <a href="/login" class="button-red">{% trans %}main.login{% endtrans %}</a>
-                        {% endif %}
+                        </div>
+                        <div class="nav nav-user">
+                            <div class="user">
+                                {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                                    <a href="/profile">
+                                        <div class="avatar" style="background-image: url({{
+                                        web_image(app.user.avatarUrl).zoomCrop(40,40,0,'center','center')
+                                        }})"></div>
+                                    </a>
+                                {% else %}
+                                    <a href="/login" class="button-red">{% trans %}main.login{% endtrans %}</a>
+                                    <a href="/register" class="button-red">{% trans %}main.register{% endtrans %}</a>
+                                {% endif %}
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

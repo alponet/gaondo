@@ -146,15 +146,32 @@ body {
       margin: 0.5em;
       color: #fff;
     }
+  }
+}
 
-    .nav {
-      position: absolute;
-      right: 1em;
-      top: 1.5em;
+.nav-wrapper {
+  position: relative;
+  max-width: 640px;
+  margin: 0 auto;
+}
 
-      a {
-        margin: 10px;
-      }
+.nav-add {
+  position: relative;
+  left: 0;
+  top: 23px;
+  display: inline-block;
+}
+
+.nav-user {
+  position: absolute;
+  top: 23px;
+  right: 0;
+
+  .avatar {
+    margin-top: -10px;
+
+    &:hover {
+      opacity: 0.7;
     }
   }
 }
@@ -224,25 +241,6 @@ body {
     }
   }
 
-  .user {
-    .avatar {
-      width: 40px;
-      height: 40px;
-      background-size: cover;
-      background-position: center;
-      display: block;
-      vertical-align: top;
-      border-radius: 50%;
-      margin: auto;
-    }
-
-    .username {
-      display: block;
-      text-align: center;
-      font-size: .8em;
-    }
-  }
-
   .meme {
     margin-top: 1em;
 
@@ -293,6 +291,26 @@ body {
       color: #ffffff;
       font-size: .8em;
     }
+  }
+}
+
+.user {
+  .avatar {
+    width: 40px;
+    height: 40px;
+    background-size: cover;
+    background-position: center;
+    display: block;
+    vertical-align: top;
+    border-radius: 50%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .username {
+    display: block;
+    text-align: center;
+    font-size: .8em;
   }
 }
 
@@ -454,5 +472,9 @@ body {
 @media (max-width: 640px) {
   #content {
     margin: 5em 0.5em;
+  }
+
+  .nav-wrapper {
+    margin: 0 .6em;
   }
 }
