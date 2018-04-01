@@ -10,6 +10,10 @@
             {{ include('@FOSUser/Security/login_content.html.twig') }}
             <a href="{{ path('fos_user_resetting_request') }}">{% trans %}register.forgotPassword{% endtrans %}</a>
         </div>
+        <div class="register">
+            <hr />
+            <a href="/register" class="button-red">{% trans %}main.register{% endtrans %}</a>
+        </div>
     </div>
 </div>
 {% endblock fos_user_content %}
