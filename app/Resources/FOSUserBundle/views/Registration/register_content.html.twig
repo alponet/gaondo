@@ -7,6 +7,9 @@
     <div class="content">
         {{ form_start(form, {'method': 'post', 'action': path('fos_user_registration_register'), 'attr': {'class': 'fos_user_registration_register'}}) }}
             {{ form_widget(form) }}
+            <div class="tos">
+                {% embed "tos.html.twig" %}{% endembed %}
+            </div>
             <p>
                 <input type="submit" class="button-red" value="{{ 'registration.submit'|trans }}" />
             </p>

@@ -343,6 +343,16 @@ body {
   }
 }
 
+form .tos {
+  max-height: 200px;
+  overflow-y: scroll;
+  border: 1px solid $color-rose;
+  padding: 10px;
+  background-color: #e7e7e7;
+  border-radius: 5px;
+  font-size: 8pt;
+}
+
 .commentForm {
   text-align: center;
 
