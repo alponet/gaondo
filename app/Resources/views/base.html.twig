@@ -18,7 +18,9 @@
                     </a>
                     <div class="nav-wrapper">
                         <div class="nav nav-add">
-                            <a href="/newMeme" class="icon icon-add"><i class="far fa-image"></i></a>
+                            {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                                <a href="/newMeme" class="icon icon-add"><i class="far fa-image"></i></a>
+                            {% endif %}
                         </div>
                         <div class="nav nav-user">
                             <div class="user">
