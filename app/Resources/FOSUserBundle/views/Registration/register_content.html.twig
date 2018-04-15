@@ -10,6 +10,10 @@
             <div class="tos">
                 {% embed "tos.html.twig" %}{% endembed %}
             </div>
+            <div class="signTos">
+                <label for="form_signTos" class="required">{{ 'register.signTos'|trans({}, "messages") }}</label>
+                <input id="form_signTos" name="form[signTos]" required="required" class="tos" value="1" type="checkbox">
+            </div>
             <p>
                 <input type="submit" class="button-red" value="{{ 'registration.submit'|trans }}" />
             </p>

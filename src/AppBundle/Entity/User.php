@@ -58,6 +58,11 @@ class User extends BaseUser
 	 */
     protected $createdAt;
 
+	/**
+	 * @ORM\Column(type="datetime", nullable=true)
+	 */
+    protected $tosSignedAt;
+
 
     /**
      * User constructor.
@@ -68,6 +73,7 @@ class User extends BaseUser
     	$this->avatarUrl = 'default.png';
         $this->posts = new ArrayCollection();
         $this->createdAt = new \DateTime("now");
+        $this->tosSignedAt = new \DateTime("now");
     }
 
 
@@ -157,6 +163,12 @@ class User extends BaseUser
     public function getCreatedAt()
     {
     	return $this->createdAt;
+    }
+
+
+    public function signTos()
+    {
+    	$this->tosSignedAt = new \DateTime("now");
     }
 
 

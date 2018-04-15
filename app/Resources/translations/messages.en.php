@@ -57,6 +57,7 @@ return [
     'register.success'          => 'Your password has been sent to you by email.',
     'register.welcomeToGaondo'  => 'Welcome to Gaondo',
     'register.yourPasswordIs'   => 'Your password is',
+	'register.signTos'          => 'I have read and accept the Terms of Service',
     'status.loading'    => 'loading...',
     'status.uploading'  => 'uploading...',
 ];

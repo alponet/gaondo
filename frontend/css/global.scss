@@ -343,6 +343,15 @@ body {
   }
 }
 
+.signTos {
+  margin: 20px 0;
+
+  label,
+  input[type="checkbox"] {
+    display: inline-block;
+  }
+}
+
 form .tos {
   max-height: 200px;
   overflow-y: scroll;
