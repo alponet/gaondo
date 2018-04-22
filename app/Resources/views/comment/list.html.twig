@@ -12,8 +12,7 @@
                     {% if node.comment.author %}
                         {% embed "user/widget.html.twig" with { user: node.comment.author} %}{% endembed %}
                     {% endif %}
-                    <!-- ToFix: date filter always printing date of first node -->
-                    <div class="datetime">{{ node.comment.creationDate|date('d.m.Y / H:m') }}</div>
+                    <div class="datetime">{{ node.comment.getCreationDateAsString }}</div>
                     {% if node.comment.author %}
                         <p class="author">{{ node.comment.author }}</p>
                     {% endif %}
