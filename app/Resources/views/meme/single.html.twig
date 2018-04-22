@@ -19,7 +19,9 @@
     {{ render(controller('AppBundle:Vote:_show', { 'subjectId': meme.id })) }}
     <div class="center">
         <div class="date">{{ meme.creationDate|date() }}</div>
-        <div class="comment-count">{{ meme.commentCount }} <span class="icon icon-comment"></span></div>
+        <a href="/m/{{ meme.id }}#comments">
+            <div class="comment-count">{{ meme.commentCount }} <span class="icon icon-comment"></span></div>
+        </a>
         {% if app.user %}
             {% if app.user.isAdmin or app.user == meme.author %}
                 <div class="delete"><a class="button-red small" onclick="deleteMeme()">{% trans %}meme.delete{% endtrans %}</a></div>
@@ -39,6 +41,7 @@
 
     {% block comments %}
         <hr />
+        <a name="comments"></a>
         <div class="comments">
             <h3>{{ meme.commentCount }} {% trans %}main.comments{% endtrans %}</h3>
             {% if app.user %}
