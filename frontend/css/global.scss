@@ -216,6 +216,11 @@ body {
       .comment-count {
         margin: 10px;
         text-align: center;
+        color: #000000;
+      }
+
+      .delete {
+        text-align: center;
       }
     }
 
@@ -301,7 +306,7 @@ body {
     }
 
     .value {
-      background-color: $color-red;
+      background-color: $color-rose;
       text-align: center;
       padding: 3px;
       border-radius: 3px;
@@ -328,6 +333,12 @@ body {
     display: block;
     text-align: center;
     font-size: .8em;
+    color: $color-red;
+    font-weight: bold;
+    
+    &:hover {
+      color: #000000;
+    }
   }
 }
 
