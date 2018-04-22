@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block content %}
+    <div class="rose-box">
+        <div class="title">
+            <h2>{% trans %}error.pageNotFoundTitle{% endtrans %}</h2>
+        </div>
+        <a href="/">
+            <img src="{{ asset('images/404.jpg') }}" />
+        </a>
+        <div class="content">
+            {% trans %}error.pageNotFoundContent{% endtrans %}
+        </div>
+    </div>
+{% endblock %}
