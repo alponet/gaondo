@@ -15,6 +15,7 @@ The following directories (and everything inside them) should be writable by bot
 * `var/logs`
 * `var/sessions`
 * `web/images`
+* `web/cache`
 
 ## Run
 * `php bin/console server:run`
