@@ -3,52 +3,92 @@
 {% block content %}
     <div class="rose-box">
         <div class="title">
-            <h2>{% trans %}meme.newMeme{% endtrans %}</h2>
+            <input id="title" type="text" placeholder="{% trans %}meme.title{% endtrans %}" autocomplete="off">
+        </div>
+        <div id="canvas_area">
+            <canvas id="canvas"></canvas>
+            <div id="CMA_image_selector">
+                <div id="CMA_image_selector_close"><i class="fas fa-times fa-lg"></i></div>
+                <h2></h2>
+                <p>
+                    <button id="CMA_file_button" type="button" class="button-red">Seleccionar archivo local</button>
+                </p>
+                <p>
+                    <input id="URL" type="text" placeholder="Inserte URL de la imagen" autocomplete="off">
+                    <input type="submit" value="Cargar" onclick="addRemoteImage()">
+                </p>
+            </div>
         </div>
         <div class="content">
-            <form>
-                <label>{% trans %}meme.title{% endtrans %}</label>
-                <input placeholder="{% trans %}meme.title{% endtrans %}" type="text" id="title">
-                <label>{% trans %}meme.file{% endtrans %}</label>
-                <input accept="image/*" type="file" id="file">
-                <label>{% trans %}meme.description{% endtrans %}</label>
-                <textarea id="description"></textarea>
-                <div class="status" id="status"></div>
-                <button type="submit" id="submit" class="button-red">{% trans %}main.upload{% endtrans %}</button>
+            <div id="toolbox">
+                <div class="toolbox-left">
+                    <table>
+                        <tr>
+                            <td id="CMA_text_box">
+                                <div id="CMA_text_button" class="button-anim"></div>
+                                <div id="CMA_text_more">
+                                    <select id="font" onchange="setFont()" autocomplete="off">
+                                        <option value="sans" selected>Sans</option>
+                                        <option value="times">Times</option>
+                                        <option value="mono">Monospace</option>
+                                    </select>
+                                    <div>
+                                        <div class="CMA_color_box button-anim" onclick="setTextColor('black')" style="background-color:black"></div>
+                                        <div class="CMA_color_box button-anim" onclick="setTextColor('white')" style="background-color:white"></div>
+                                        <div class="CMA_color_box button-anim" onclick="setTextColor('red')" style="background-color:red"></div>
+                                        <div class="CMA_color_box button-anim" onclick="setTextColor('green')" style="background-color:green"></div>
+                                        <div class="CMA_color_box button-anim" onclick="setTextColor('blue')" style="background-color:blue"></div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td id="CMA_image_box">
+                                <div id="CMA_image_button" class="button-anim"></div>
+                            </td>
+                            <td id="CMA_crop_box">
+                                <div id="CMA_crop_button" class="button-anim"></div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="toolbox-right">
+                    <div id="CMA_eraser_button" class="button-anim" onclick="removeSelected()"></div>
+                </div>
+            </div>
+            <div style="display:flex">
+                <textarea id="description" placeholder="Acá podés escribir una descripción" autocomplete="off"></textarea>
+            </div>
+            <div class="status" id="status"></div>
+            <button id="submit" type="button" class="button-red">{% trans %}main.upload{% endtrans %}</button>
+            <script>
+                document.getElementById("submit").addEventListener("click", function (e) {
+                    e.preventDefault();
+                    var statusLabel = document.getElementById("status");
+                    statusLabel.innerHTML = "{% trans %}status.uploading{% endtrans %}";
 
-                <script>
-                    document.getElementById("submit").addEventListener("click", upload);
+                    var formData = new FormData();
+                    formData.set("title", document.getElementById("title").value);
+                    formData.set("file", document.getElementById("file").files[0]);
+                    formData.set("description", document.getElementById("description").value);
 
-                    function upload(e) {
-                        e.preventDefault();
-                        var statusLabel = document.getElementById("status");
-                        statusLabel.innerHTML = "{% trans %}status.uploading{% endtrans %}";
+                    var xhr = new XMLHttpRequest();
+                    xhr.open("POST", "/m/", true);
+                    xhr.onreadystatechange = function () {
+                        if (xhr.readyState === 4) {
+                            var re = JSON.parse(xhr.response);
 
-                        var formData = new FormData();
-                        formData.set("title", document.getElementById("title").value);
-                        formData.set("file", document.getElementById("file").files[0]);
-                        formData.set("description", document.getElementById("description").value);
-
-                        var xhr = new XMLHttpRequest();
-                        xhr.open("POST", "/m/", true);
-                        xhr.onreadystatechange = function () {
-                            if (xhr.readyState === 4) {
-                                var re = JSON.parse(xhr.response);
-
-                                if (re.errors) {
-                                    statusLabel = document.getElementById("status");
-                                    statusLabel.innerHTML = '<label class="error">' + re.errors[0].detail + '</label>';
-                                }
-
-                                if (re.memeId) {
-                                    window.location.replace("/m/" + re.memeId);
-                                }
+                            if (re.errors) {
+                                statusLabel = document.getElementById("status");
+                                statusLabel.innerHTML = '<label class="error">' + re.errors[0].detail + '</label>';
                             }
-                        };
-                        xhr.send(formData);
-                    }
-                </script>
-            </form>
+
+                            if (re.memeId) {
+                                window.location.replace("/m/" + re.memeId);
+                            }
+                        }
+                    };
+                    xhr.send(formData);
+                });
+            </script>
         </div>
     </div>
 {% endblock %}

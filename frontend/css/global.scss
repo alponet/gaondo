@@ -518,3 +518,196 @@ form .tos {
     margin: 0 .6em;
   }
 }
+
+
+/* CMA STUFF (some clean-up is needed) */
+
+#canvas_area {
+	position: relative;
+	min-height: 300px;
+}
+
+#CMA_image_selector {
+	width: 100%;
+	min-height: 100%;
+	background-color: rgba(255, 255, 255, 0.5);
+	position: absolute;
+	top: 0;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+#CMA_image_selector_close {
+	position: absolute;
+	top: 10px;
+	right: 10px;
+}
+
+button#submit {
+	margin-top: 10px;
+}
+
+#toolbox {
+	border: 1px solid #ec97c0;
+	padding: 10px;
+	margin-bottom: 10px;
+	line-height: 0;
+	display: flex;
+}
+
+.toolbox-left {
+	flex: auto;
+}
+
+.toolbox-right {
+	flex: none;
+}
+
+#toolbox table {
+	border: 0;
+	border-collapse: collapse;
+}
+
+#CMA_text_more {
+	display: inline-flex;
+	align-items: center;
+	overflow: hidden;
+	white-space: nowrap;
+
+	transition: all 100ms ease-in;
+	margin-left: 0px;
+	max-width: 0px;
+	opacity: 0;
+}
+
+#CMA_text_more > * {
+	flex-shrink: 0;
+}
+
+#CMA_text_more.open_toolbox {
+	margin-left: 10px;
+	max-width: 600px; /* HACK this constant could be precalculated and set with JS */
+	opacity: 1;
+}
+
+#toolbox tr {
+	display: inline-flex;
+}
+
+#toolbox td {
+	padding-right: 10px;
+	display: inline-flex;
+}
+
+#toolbox td:not(:first-child) {
+	border-left: 1px solid #ec97c0;
+	padding-left: 10px;
+}
+
+#CMA_text_more > :not(:first-child) {
+	margin-left: 10px;
+}
+
+#CMA div.title {
+	display: flex;
+}
+
+input#title {
+	flex: auto;
+	margin-bottom: 2px;
+	background: rgba(255, 255, 255, 0.5);
+	font-size: 1em;
+	font-weight: normal;
+}
+
+select {
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+	padding-right: 1em;
+	border: 1px solid #ec97c0;
+	border-radius: 3px;
+	background: white center right/1em url('../select_arrow.png') no-repeat;
+	color: #ec97c0;
+	font-size: 1em;
+}
+
+textarea#description {
+	flex: auto;
+}
+
+.CMA_color_box {
+	display: inline-block;
+	border: #ec97c0 solid 2px;
+	width: 1em;
+	height: 1em;
+}
+
+#CMA_image_button {
+	width: 30px;
+	height: 30px;
+	background: transparent top left/30px url('../CMA_image.png') no-repeat;
+}
+
+#CMA_crop_button {
+	width: 30px;
+	height: 30px;
+	background: transparent top left/30px url('../CMA_crop.png') no-repeat;
+	display: inline-block;
+}
+
+#CMA_text_button {
+	width: 30px;
+	height: 30px;
+	background: transparent top left/30px url('../CMA_text.png') no-repeat;
+	display: inline-block;
+}
+
+#CMA_eraser_button {
+	width: 30px;
+	height: 30px;
+	background: transparent top left/30px url('../CMA_eraser.png') no-repeat;
+	display: inline-block;
+}
+
+.button-anim {
+	transition: filter 50ms linear;
+}
+
+.button-anim:hover {
+	filter: brightness(1.2);
+}
+
+.button-anim:active {
+	animation-timing-function: ease-in-out;
+	animation-duration: 50ms;
+	animation-name: button-anim;
+}
+
+@keyframes button-anim {
+	0% {
+		opacity: 1.0;
+		transform: scale(1.0, 1.0);
+	}
+
+	50% {
+		opacity: 0.8;
+		transform: scale(0.9, 0.9);
+	}
+
+	100% {
+		opacity: 1.0;
+		transform: scale(1.0, 1.0);
+	}
+}
+
+/******************\
+|* Initial states *|
+\******************/
+div#CMA,
+td#CMA_crop_box {
+	display: none;
+}
+
