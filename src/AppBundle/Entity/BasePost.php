@@ -79,6 +79,15 @@ abstract class BasePost
     }
 
 
+	/**
+	 * @return string
+	 */
+    public function getCreationDateAsString()
+    {
+	    return date_format($this->creationDate,"d.m.Y / H:i");
+    }
+
+
     /**
      * @param string $creationDate
      */

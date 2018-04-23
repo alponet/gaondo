@@ -53,6 +53,9 @@ twig:
     date:
         timezone: America/Argentina/Buenos_Aires
         format: d.m.Y, H:i
+    globals:
+        piwik_host: '%piwik_host%'
+        piwik_siteId: '%piwik_siteId%'
 
 # Doctrine Configuration
 doctrine:

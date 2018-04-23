@@ -14,6 +14,8 @@ return [
     'error.permissionDenied'        => 'Permission denied!',
     'error.pleaseLogIn'             => 'please log in',
     'error.titleTooShort'           => 'title must contain at least 3 characters',
+	'error.pageNotFoundTitle'       => 'Page not found',
+    'error.pageNotFoundContent'     => 'We have not found what you are looking for!',
     'main.cancel'   => 'Cancel',
 	'main.comment'  => 'Comment',
     'main.comments' => 'Comments',
