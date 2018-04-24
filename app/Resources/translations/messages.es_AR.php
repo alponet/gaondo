@@ -31,7 +31,7 @@ return [
     'meme.newMeme'          => 'Nuevo meme',
     'meme.title'            => 'Titulo',
 	'meme.delete'           => 'Borrar',
-	'meme.delete.confirm'   => '¿Posta querer borrar el meme?',
+	'meme.delete.confirm'   => '¿Posta queres borrar el meme?',
 	'comments.loginRequired'    => 'Conectate para comentar',
 	'comments.delete.confirm'   => '¿Querés fletar el comentario?',
 	'comments.deleted'          => 'El comentario se fue al mazo',
