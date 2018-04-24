@@ -60,38 +60,8 @@
             <div style="display:flex">
                 <textarea id="description" placeholder="Acá podés escribir una descripción" autocomplete="off"></textarea>
             </div>
-            <div class="status" id="status"></div>
             <button id="submit" type="button" class="button-red">{% trans %}main.upload{% endtrans %}</button>
-            <script>
-                document.getElementById("submit").addEventListener("click", function (e) {
-                    e.preventDefault();
-                    var statusLabel = document.getElementById("status");
-                    statusLabel.innerHTML = "{% trans %}status.uploading{% endtrans %}";
-
-                    var formData = new FormData();
-                    formData.set("title", document.getElementById("title").value);
-                    formData.set("file", document.getElementById("file").files[0]);
-                    formData.set("description", document.getElementById("description").value);
-
-                    var xhr = new XMLHttpRequest();
-                    xhr.open("POST", "/m/", true);
-                    xhr.onreadystatechange = function () {
-                        if (xhr.readyState === 4) {
-                            var re = JSON.parse(xhr.response);
-
-                            if (re.errors) {
-                                statusLabel = document.getElementById("status");
-                                statusLabel.innerHTML = '<label class="error">' + re.errors[0].detail + '</label>';
-                            }
-
-                            if (re.memeId) {
-                                window.location.replace("/m/" + re.memeId);
-                            }
-                        }
-                    };
-                    xhr.send(formData);
-                });
-            </script>
+            <a class="status" id="status"></a>
         </div>
     </div>
 {% endblock %}

@@ -194,5 +194,39 @@ $(function() {
 		$('#CMA_text_more').toggleClass('open_toolbox', false);
 		$('#CMA_image_selector').fadeIn(100);
 	});
+
+	$('#submit').click(function() {
+		var statusLabel = document.getElementById("status");
+		statusLabel.innerHTML = "uploading...";
+
+		var formData = new FormData();
+		formData.set("title", document.getElementById("title").value);
+		//formData.set("file", document.getElementById("file").files[0]);
+		var byteString = atob(canvas.toDataURL().split(',')[1]);
+		var ia = new Uint8Array(byteString.length);
+		for (var i = 0; i < byteString.length; i++) {
+			ia[i] = byteString.charCodeAt(i);
+		}
+		formData.set("file", (new File( [(new Blob([ia], {type:'image/png'}))], 'blob.png', {type:'image/png'})));
+		formData.set("description", document.getElementById("description").value);
+
+		var xhr = new XMLHttpRequest();
+		xhr.open("POST", "/m/", true);
+		xhr.onreadystatechange = function () {
+			if (xhr.readyState === 4) {
+				var re = JSON.parse(xhr.response);
+
+				if (re.errors) {
+					statusLabel = document.getElementById("status");
+					statusLabel.innerHTML = '<label class="error">' + re.errors[0].detail + '</label>';
+				}
+
+				if (re.memeId) {
+					window.location.replace("/m/" + re.memeId);
+				}
+			}
+		};
+		xhr.send(formData);
+	});
 });
 
