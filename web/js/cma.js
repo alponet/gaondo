@@ -2,7 +2,7 @@ var MAX_W = 636;
 var MAX_H = 1000;
 var canvas;
 
-function handleBackgroundFile(files) {
+function addLocalBackground(files) {
 
 	console.log('Loading "' + files[0].name + '"...');
 
@@ -42,7 +42,7 @@ function handleBackgroundFile(files) {
 	}
 }
 
-function handleFiles(files) {
+function addLocalImage(files) {
 
 	console.log('Loading "' + files[0].name + '"...');
 
@@ -72,8 +72,39 @@ function handleFiles(files) {
 	}
 }
 
-function addRemoteImage() {
-	var URL = document.getElementById('URL').value;
+function addRemoteBackground(URL) {
+	var img = new Image();
+
+	console.log('Loading image from', URL);
+
+	img.onload = function () {
+		var imgInstance = new fabric.Image(img);
+		var w = imgInstance.width;
+		var h = imgInstance.height;
+		if (w > MAX_W) {
+			h = h * (MAX_W/w);
+			w = MAX_W;
+			imgInstance.set({scaleX: w/imgInstance.width, scaleY: h/imgInstance.height});
+		}
+		if (h > MAX_H) {
+			w = w * (MAX_H/h);
+			h = MAX_H;
+		}
+		canvas.setBackgroundImage(imgInstance, function() {
+			canvas.setDimensions({width: w, height: h});
+			canvas.renderAll();
+		}, {
+			originX: 'left',
+			originY: 'top',
+		});
+
+		console.log('OK');
+	};
+
+	img.src = URL;
+}
+
+function addRemoteImage(URL) {
 	var img = new Image();
 
 	console.log('Loading image from', URL);
@@ -89,15 +120,9 @@ function addRemoteImage() {
 }
 
 function addText() {
-	/*var e = document.getElementById('text');
-	if (e.value) {
-		var text = new fabric.Text(e.value);
-		console.log('Adding text object');
-		canvas.add(text);
-		e.value = '';
-	}
-	*/
+
 	console.log('Adding text object');
+
 	var itext = new fabric.IText('Escribí algo acá', {
 		left: 20,
 		top: 20,
@@ -157,27 +182,38 @@ $(function() {
 
 	var initial_state_flag = true;
 
-	$('#CMA_file_button').click(function() {
-		var input = document.createElement('input');
-		input.type = 'file';
-		input.accept = 'image/*';
-
-		input.addEventListener('change', function(e) {
+	var hideLoader = function(bgimgFunc, objimgFunc) {
+		return function(arg) {
 			if (initial_state_flag) {
 				initial_state_flag = false;
-				handleBackgroundFile(e.target.files);
+				bgimgFunc(arg);
 				$('#CMA_image_selector').hide();
 				$("#CMA_image_selector > h2").text("Imagen para collage");
 				$('#CMA_image_selector_close').show();
 				$('#toolbox').show();
 				$('#submit').show();
 			} else {
-				handleFiles(e.target.files);
+				objimgFunc(arg);
 				$('#CMA_image_selector').hide();
 			}
+		};
+	}
+
+	$('#CMA_file_button').click(function() {
+		var input = document.createElement('input');
+		input.type = 'file';
+		input.accept = 'image/*';
+
+		input.addEventListener('change', function(e) {
+			(hideLoader(addLocalBackground, addLocalImage))(e.target.files);
 		});
 
 		input.click();
+	});
+
+	$('#CMA_URL_button').click(function() {
+		(hideLoader(addRemoteBackground, addRemoteImage))(document.getElementById('URL').value);
+		document.getElementById('URL').value = '';
 	});
 
 	$('#CMA_image_selector_close').click(function() {
