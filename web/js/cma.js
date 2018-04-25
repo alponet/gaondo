@@ -74,6 +74,7 @@ function addLocalImage(files) {
 
 function addRemoteBackground(URL) {
 	var img = new Image();
+	img.crossOrigin = 'Anonymous';
 
 	console.log('Loading image from', URL);
 
@@ -106,6 +107,7 @@ function addRemoteBackground(URL) {
 
 function addRemoteImage(URL) {
 	var img = new Image();
+	img.crossOrigin = 'Anonymous';
 
 	console.log('Loading image from', URL);
 
