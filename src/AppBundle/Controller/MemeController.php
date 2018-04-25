@@ -136,7 +136,7 @@ class MemeController extends Controller
             throw $this->createAccessDeniedException($i18n->trans('error.pleaseLogIn'));
         }
 
-        $title = $request->request->get("title");
+        $title = trim($request->request->get("title"));
         $description = $request->request->get("description");
 
         /** @var UploadedFile $file */
