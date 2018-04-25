@@ -10,7 +10,7 @@ function addLocalBackground(files) {
 	reader.onload = function() {
 		var img = new Image();
 
-		img.onload = function () {
+		img.onload = function() {
 			var imgInstance = new fabric.Image(img);
 			var w = imgInstance.width;
 			var h = imgInstance.height;
@@ -50,7 +50,7 @@ function addLocalImage(files) {
 	reader.onload = function() {
 		var img = new Image();
 
-		img.onload = function () {
+		img.onload = function() {
 			/*
 			var canvas = document.getElementById("canvas");
 			canvas.width = img.width;
@@ -78,7 +78,7 @@ function addRemoteBackground(URL) {
 
 	console.log('Loading image from', URL);
 
-	img.onload = function () {
+	img.onload = function() {
 		var imgInstance = new fabric.Image(img);
 		var w = imgInstance.width;
 		var h = imgInstance.height;
@@ -102,6 +102,10 @@ function addRemoteBackground(URL) {
 		console.log('OK');
 	};
 
+	img.onerror = function(e) {
+		console.log('ERROR:', e);
+	};
+
 	img.src = URL;
 }
 
@@ -111,11 +115,15 @@ function addRemoteImage(URL) {
 
 	console.log('Loading image from', URL);
 
-	img.onload = function () {
+	img.onload = function() {
 		var imgInstance = new fabric.Image(img);
 		canvas.add(imgInstance);
 
 		console.log('OK');
+	};
+
+	img.onerror = function(e) {
+		console.log('ERROR:', e);
 	};
 
 	img.src = URL;
@@ -250,7 +258,7 @@ $(function() {
 
 		var xhr = new XMLHttpRequest();
 		xhr.open("POST", "/m/", true);
-		xhr.onreadystatechange = function () {
+		xhr.onreadystatechange = function() {
 			if (xhr.readyState === 4) {
 				var re = JSON.parse(xhr.response);
 
