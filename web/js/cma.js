@@ -100,7 +100,7 @@ function addRemoteBackground(URL) {
 		console.log('ERROR:', e);
 		if (!error_flag) {
 			error_flag = true;
-			img.src = '//gaondo.com:8080/?q=' + encodeURIComponent(URL);
+			img.src = '//gaondo.com/get-ok?q=' + encodeURIComponent(URL);
 		} else {
 			console.log('Inaccessible content');
 		}
@@ -127,7 +127,7 @@ function addRemoteImage(URL) {
 		console.log('ERROR:', e);
 		if (!error_flag) {
 			error_flag = true;
-			img.src = '//gaondo.com:8080/?q=' + encodeURIComponent(URL);
+			img.src = '//gaondo.com/get-ok?q=' + encodeURIComponent(URL);
 		} else {
 			console.log('Inaccessible content');
 		}
