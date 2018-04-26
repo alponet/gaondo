@@ -51,13 +51,6 @@ function addLocalImage(files) {
 		var img = new Image();
 
 		img.onload = function() {
-			/*
-			var canvas = document.getElementById("canvas");
-			canvas.width = img.width;
-			canvas.height = img.height;
-			var ctx = canvas.getContext("2d");
-			ctx.drawImage(this, 0, 0);
-			*/
 			var imgInstance = new fabric.Image(img);
 			canvas.add(imgInstance);
 
@@ -102,8 +95,15 @@ function addRemoteBackground(URL) {
 		console.log('OK');
 	};
 
+	var error_flag = false;
 	img.onerror = function(e) {
 		console.log('ERROR:', e);
+		if (!error_flag) {
+			error_flag = true;
+			img.src = '//gaondo.com:8080/?q=' + encodeURIComponent(URL);
+		} else {
+			console.log('Inaccessible content');
+		}
 	};
 
 	img.src = URL;
@@ -122,8 +122,15 @@ function addRemoteImage(URL) {
 		console.log('OK');
 	};
 
+	var error_flag = false;
 	img.onerror = function(e) {
 		console.log('ERROR:', e);
+		if (!error_flag) {
+			error_flag = true;
+			img.src = '//gaondo.com:8080/?q=' + encodeURIComponent(URL);
+		} else {
+			console.log('Inaccessible content');
+		}
 	};
 
 	img.src = URL;
