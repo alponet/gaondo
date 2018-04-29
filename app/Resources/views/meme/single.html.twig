@@ -24,7 +24,7 @@
         </a>
         {% if app.user %}
             {% if app.user.isAdmin or app.user == meme.author %}
-                <div class="delete"><a class="button-red small" onclick="deleteMeme()">{% trans %}meme.delete{% endtrans %}</a></div>
+                <div class="delete"><a class="button-red small" onclick="deleteMeme({{ meme.id }})">{% trans %}meme.delete{% endtrans %}</a></div>
             {% endif %}
         {% endif %}
     </div>
@@ -55,10 +55,10 @@
 {% endif %}
 
 <script type="text/javascript">
-    function deleteMeme() {
+    function deleteMeme(id) {
         if ( window.confirm( "{% trans %}meme.delete.confirm{% endtrans %}" ) ) {
             $.ajax({
-                url: "/m/{{ meme.id }}/",
+                url: "/m/" + id + "/",
                 type: 'DELETE'
             }).done((response) => {
                 window.location.replace("/");
