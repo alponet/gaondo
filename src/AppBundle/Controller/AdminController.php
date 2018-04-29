@@ -23,4 +23,15 @@ class AdminController extends Controller
 		return $this->render("admin/index.html.twig");
 	}
 
+
+	/**
+	 * @Route("/support/")
+	 * @Method("GET")
+	 * @return Response
+	 */
+	public function supportForm()
+	{
+		return $this->render("admin/supportForm.html.twig");
+	}
+
 }
