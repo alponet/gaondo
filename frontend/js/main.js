@@ -48,7 +48,7 @@ gaondo.voteDown = function(subjectId) {
 
 let vote = function(subjectId, value) {
     let formData = new FormData();
-    formData.set("value", value);
+    formData.append("value", value);
 
     let xhr = new XMLHttpRequest();
     xhr.open("POST", "/m/" + subjectId + "/vote", true);

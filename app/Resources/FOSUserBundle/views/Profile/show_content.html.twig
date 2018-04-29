@@ -21,7 +21,7 @@
 
     $("#avatarFile").on("change", function () {
         var formData = new FormData();
-        formData.set("file", $("#avatarFile")[0].files[0]);
+        formData.append("file", $("#avatarFile")[0].files[0]);
 
         $(".status").text({% trans %}status.uploading{% endtrans %});
 
