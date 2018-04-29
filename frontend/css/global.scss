@@ -186,6 +186,7 @@ body {
 
   .avatar {
     border: 3px solid $color-red;
+    image-orientation: from-image;
 
     &:hover {
       border-color: #ffffff;
