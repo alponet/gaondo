@@ -1,6 +1,6 @@
 import React from "react";
-// import ReactDOM from "react-dom";
-// import Administration from "./components/Administration";
+import ReactDOM from "react-dom";
+import Administration from "./components/Administration";
 
 
 window.gaondo = {};
@@ -77,11 +77,9 @@ gaondo.deleteMeme = function(id) {
 };
 
 
-/*
 if ($('#admin-page').length) {
     ReactDOM.render(
         <Administration />,
         document.getElementById("admin-page")
     );
 }
-*/
