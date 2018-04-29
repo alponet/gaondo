@@ -14,7 +14,8 @@
     "webpack": "^3.6.0"
   },
   "scripts": {
-    "start": "node_modules/.bin/encore dev --watch"
+    "start": "node_modules/.bin/encore dev --watch",
+    "build": "node_modules/.bin/encore production"
   },
   "dependencies": {
     "react": "^16.2.0",
