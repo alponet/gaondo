@@ -28,6 +28,7 @@ return [
 	'main.delete'   => 'Borrar',
 	'main.create'   => 'Crear',
 	'main.account'  => 'Cuenta',
+	'main.goHome'   => 'Ir a página principal',
 	'meme.description'      => '¿Que onda?',
     'meme.file'             => 'Archivo',
     'meme.newMeme'          => 'Nuevo meme',

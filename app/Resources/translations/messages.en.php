@@ -30,6 +30,7 @@ return [
 	'main.delete'   => 'Delete',
 	'main.create'   => 'Create',
 	'main.account'  => 'Account',
+	'main.goHome'   => 'Go to home page',
     'meme.description'  => 'description',
     'meme.file'         => 'file',
     'meme.newMeme'      => 'New Meme',
