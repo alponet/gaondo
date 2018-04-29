@@ -28,6 +28,8 @@ return [
     'main.upload'   => 'Upload',
     'main.username' => 'Username',
 	'main.delete'   => 'Delete',
+	'main.create'   => 'Create',
+	'main.account'  => 'Account',
     'meme.description'  => 'description',
     'meme.file'         => 'file',
     'meme.newMeme'      => 'New Meme',

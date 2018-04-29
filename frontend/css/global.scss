@@ -166,6 +166,11 @@ body {
     font-size: 40px;
     color: $color-red;
 
+    span {
+      position: absolute;
+      font-size: 12px;
+    }
+
     &:hover {
       color: #ffffff;
     }
@@ -175,14 +180,31 @@ body {
 .nav-add {
   position: relative;
   left: 0;
-  top: 10px;
+  top: 7px;
   display: inline-block;
+
+  span.description {
+    bottom: -7px;
+    left: 4px;
+  }
 }
 
 .nav-user {
   position: absolute;
-  top: 10px;
   right: 0;
+
+  &.logged-in {
+    top: 10px;
+  }
+
+  &.logged-out {
+    top: 4px;
+  }
+
+  span.description {
+    bottom: -10px;
+    right: 1px;
+  }
 
   .avatar {
     border: 3px solid $color-red;

@@ -26,6 +26,8 @@ return [
 	'main.upload'   => 'Subilo',
 	'main.username' => '¿Quien sos?',
 	'main.delete'   => 'Borrar',
+	'main.create'   => 'Crear',
+	'main.account'  => 'Cuenta',
 	'meme.description'      => '¿Que onda?',
     'meme.file'             => 'Archivo',
     'meme.newMeme'          => 'Nuevo meme',

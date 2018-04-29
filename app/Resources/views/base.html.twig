@@ -32,10 +32,13 @@
                     <div class="nav-wrapper">
                         <div class="nav nav-add">
                             {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-                                <a href="/newMeme" class="icon icon-add"><i class="far fa-image"></i></a>
+                                <a href="/newMeme" class="icon icon-add">
+                                    <i class="far fa-image"></i>
+                                    <span class="description">{% trans %}main.create{% endtrans %}</span>
+                                </a>
                             {% endif %}
                         </div>
-                        <div class="nav nav-user">
+                        <div class="nav nav-user {{ is_granted("IS_AUTHENTICATED_REMEMBERED") ? "logged-in" : "logged-out" }}">
                             <div class="user">
                                 {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
                                     <a href="/profile">
@@ -44,7 +47,10 @@
                                         }})"></div>
                                     </a>
                                 {% else %}
-                                    <a href="/login" class="icon icon-user"><i class="far fa-user"></i></a>
+                                    <a href="/login" class="icon icon-user">
+                                        <i class="far fa-user"></i>
+                                        <span class="description">{% trans %}main.account{% endtrans %}</span>
+                                    </a>
                                 {% endif %}
                             </div>
                         </div>
