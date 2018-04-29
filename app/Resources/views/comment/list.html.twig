@@ -27,9 +27,9 @@
                 </div>
                 {% if app.user and node.comment.text %}
                     <div class="actions">
-                        <a onclick="replyForm({{ node.comment.id }})">{% trans %}main.reply{% endtrans %}</a>
+                        <a onclick="gaondo.replyForm({{ node.comment.id }})">{% trans %}main.reply{% endtrans %}</a>
                         {% if app.user.isAdmin or app.user == node.comment.author %}
-                            <a onclick="deleteComment({{ node.comment.id }})">{% trans %}main.delete{% endtrans %}</a>
+                            <a onclick="gaondo.deleteComment({{ node.comment.id }})">{% trans %}main.delete{% endtrans %}</a>
                         {% endif %}
                     </div>
                 {% endif %}
@@ -49,28 +49,3 @@
 <ul>
     {{ macros.comment_tree(tree) }}
 </ul>
-<script type="text/javascript">
-    function replyForm(subjectId) {
-        let cf = $('.commentForm').first().clone();
-        $('.commentForm:not(:first)').remove();
-        cf.attr('id', 'commentForm'+subjectId).appendTo('#comment'+subjectId+" .text").hide().fadeIn();
-        cf.find('#comment_replyTo').val(subjectId);
-        cf.find('input[type="text"]').attr('id', 'comment_text'+subjectId).focus();
-        cf.find('label[for="comment_text"]').attr('for', 'comment_text'+subjectId);
-        $('.close-commentForm').click(function () {
-            $('.commentForm:not(:first)').fadeOut();
-        });
-    }
-
-    function deleteComment(commentId) {
-        if ( window.confirm( "{% trans %}comments.delete.confirm{% endtrans %}" ) ) {
-            $.ajax({
-                url: "/c/" + commentId + "/",
-                type: 'DELETE'
-            }).done((response) => {
-                console.log(response);
-                window.location.reload();
-            });
-        }
-    }
-</script>
