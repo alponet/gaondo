@@ -219,10 +219,16 @@ $(function() {
 	$('#CMA_file_button').click(function() {
 		var input = document.createElement('input');
 		input.type = 'file';
-		input.accept = 'image/*';
+		input.id = 'CMA_file_input';
+		//input.accept = 'image/*'; // XXX Chrome for Android is currently crashing with this one (2018-04-30)
+		input.value = null;
+		input.hidden = true;
+
+		document.body.appendChild(input); // Workaround for WebKit on iOS (change event didn't trigger)
 
 		input.addEventListener('change', function(e) {
 			(hideLoader(addLocalBackground, addLocalImage))(e.target.files);
+			document.body.removeChild(input); // XXX if user cancels this is never removed
 		});
 
 		input.click();
@@ -253,15 +259,14 @@ $(function() {
 		statusLabel.innerHTML = "uploading...";
 
 		var formData = new FormData();
-		formData.set("title", document.getElementById("title").value);
-		//formData.set("file", document.getElementById("file").files[0]);
+		formData.append("title", document.getElementById("title").value);
 		var byteString = atob(canvas.toDataURL().split(',')[1]);
 		var ia = new Uint8Array(byteString.length);
 		for (var i = 0; i < byteString.length; i++) {
 			ia[i] = byteString.charCodeAt(i);
 		}
-		formData.set("file", (new File( [(new Blob([ia], {type:'image/png'}))], 'blob.png', {type:'image/png'})));
-		formData.set("description", document.getElementById("description").value);
+		formData.append("file", (new File( [(new Blob([ia], {type:'image/png'}))], 'blob.png', {type:'image/png'})));
+		formData.append("description", document.getElementById("description").value);
 
 		var xhr = new XMLHttpRequest();
 		xhr.open("POST", "/m/", true);
