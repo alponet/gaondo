@@ -28,6 +28,9 @@ return [
     'main.upload'   => 'Upload',
     'main.username' => 'Username',
 	'main.delete'   => 'Delete',
+	'main.create'   => 'Create',
+	'main.account'  => 'Account',
+	'main.goHome'   => 'Go to home page',
     'meme.description'  => 'description',
     'meme.file'         => 'file',
     'meme.newMeme'      => 'New Meme',
@@ -60,6 +63,7 @@ return [
     'register.welcomeToGaondo'  => 'Welcome to Gaondo',
     'register.yourPasswordIs'   => 'Your password is',
 	'register.signTos'          => 'I have read and accept the Terms of Service',
+	'registration.spam_hint'    => 'If you cannot find it, please check your spam folder.',
     'status.loading'    => 'loading...',
     'status.uploading'  => 'uploading...',
 ];

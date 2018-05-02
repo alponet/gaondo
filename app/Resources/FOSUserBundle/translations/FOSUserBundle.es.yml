@@ -2,7 +2,7 @@ registration:
     check_email: 'Salió el pichón con el mensaje a tu casilla de correo. Tiene el enlace de activación que tenés que presionar para activar la cuenta y salir a la cancha a romper todo.'
     email:
         message: |
-            Hola %username%!
+            ¡Hola %username%!
 
             ¡Ya casi estas! Valida tu cuenta: %confirmationUrl%
             

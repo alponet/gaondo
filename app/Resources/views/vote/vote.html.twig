@@ -1,30 +1,10 @@
 <div class="score">
-    <div class="vote up" onclick="voteUp({{ data.subjectId }})"></div>
-    <div class="vote down" onclick="voteDown({{ data.subjectId }})"></div>
+    <div class="vote up" onclick="gaondo.voteUp({{ data.subjectId }})"></div>
+    <div class="vote down" onclick="gaondo.voteDown({{ data.subjectId }})"></div>
     <div class="value">
         <span id="score_{{ data.subjectId }}">{{ data.score }}</span>
     </div>
 </div>
 <script>
-    function voteUp(subjectId) {
-        vote( subjectId, 1 );
-    }
 
-    function voteDown(subjectId) {
-        vote( subjectId, -1 );
-    }
-
-    function vote(subjectId, value) {
-        var formData = new FormData();
-        formData.set("value", value);
-
-        var xhr = new XMLHttpRequest();
-        xhr.open("POST", "/m/" + subjectId + "/vote", true);
-        xhr.onreadystatechange = function () {
-            if (xhr.readyState === 4) {
-                document.getElementById("score_" + subjectId).innerText = xhr.response;
-            }
-        };
-        xhr.send(formData);
-    }
 </script>
