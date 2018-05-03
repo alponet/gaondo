@@ -6,11 +6,8 @@ function addLocalBackground(files) {
 
 	console.log('Loading "' + files[0].name + '"...');
 
-	var reader = new FileReader();
-	reader.onload = function() {
-		var img = new Image();
-
-		img.onload = function() {
+	if (files[0]) {
+		loadImage(files[0], function(img) {
 			var imgInstance = new fabric.Image(img);
 			var w = imgInstance.width;
 			var h = imgInstance.height;
@@ -32,13 +29,7 @@ function addLocalBackground(files) {
 			});
 
 			console.log('OK');
-		};
-
-		img.src = reader.result;
-	};
-
-	if (files[0]) {
-		reader.readAsDataURL(files[0])
+		});
 	}
 }
 
