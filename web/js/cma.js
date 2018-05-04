@@ -29,6 +29,9 @@ function addLocalBackground(files) {
 			});
 
 			console.log('OK');
+		}, {
+			orientation: true,
+			meta: true
 		});
 	}
 }
