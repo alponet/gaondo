@@ -21,10 +21,12 @@ function addLocalBackground(files) {
 				w = c_w;
 				imgInstance.set({scaleX: w/imgInstance.width, scaleY: h/imgInstance.height});
 			}
+			/*
 			if (h > c_h) {
 				w = w * (c_h/h);
 				h = c_h;
 			}
+			*/
 			console.log(w,h);
 			canvas.setBackgroundImage(imgInstance, function() {
 				canvas.setDimensions({width: w, height: h}, {cssOnly: false});
