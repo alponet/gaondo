@@ -26,6 +26,17 @@ class AdminController extends Controller
 
 
 	/**
+	 * @Route("/tos/")
+	 * @Method("GET")
+	 * @return Response
+	 */
+	public function getTos()
+	{
+		return $this->render("admin/tos.html.twig");
+	}
+
+
+	/**
 	 * @Route("/support/")
 	 * @Method("GET")
 	 * @return Response
@@ -43,8 +54,8 @@ class AdminController extends Controller
 	 * @param Request $request
 	 * @return Response
 	 */
-	public function newSupportMessage(Request $request) {
-
+	public function newSupportMessage(Request $request)
+	{
 		$name = $request->request->get("name");
 		$email = $request->request->get("email");
 		$subject = $request->request->get("subject");
