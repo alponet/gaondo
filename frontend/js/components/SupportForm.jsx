@@ -58,7 +58,7 @@ export default class SupportForm extends React.Component {
                 self.setState({ status: re["errors"][0].detail });
             } else if(re.hasOwnProperty("success")) {
                 self.setState({
-                    status: "Your message was sent. Thank you!",
+                    status: "Mensaje enviado, gracias.",
                     name: '',
                     email: '',
                     subject: '',
@@ -89,7 +89,7 @@ export default class SupportForm extends React.Component {
                         <label htmlFor="message">Mensaje *</label>
                         <textarea name="message" rows="8" placeholder="Mensaje" value={this.state.message} onChange={this.handleMessageChange} />
                         <p>{this.state.status}</p>
-                        <button type="submit" className="button-red">Send</button>
+                        <button type="submit" className="button-red">Enviar</button>
                     </form>
                 </div>
             </div>

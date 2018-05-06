@@ -74,7 +74,7 @@ class AdminController extends Controller
 		if (strlen($message) < 6) {
 			$response['errors'][] = [
 				'source' => 'message',
-				'detail' => 'Please give us some words!'
+				'detail' => 'El mensaje es muy corto'
 			];
 			return $this->json($response);
 		}
