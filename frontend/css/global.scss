@@ -525,6 +525,20 @@ form .tos {
   }
 }
 
+#support-form {
+  input[type="text"] {
+    min-width: 50%;
+    display: block;
+    box-sizing: border-box;
+  }
+
+  textarea {
+    width: 100%;
+    display: block;
+    box-sizing: border-box;
+  }
+}
+
 #footer {
   display: block;
   position: fixed;
