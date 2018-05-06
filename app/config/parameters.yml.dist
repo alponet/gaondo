@@ -21,3 +21,4 @@ parameters:
 
     piwik_host: '//analytics.gaondo.com/'
     piwik_siteId: 1
+    support_mail: 'admin@gaondo.com'
