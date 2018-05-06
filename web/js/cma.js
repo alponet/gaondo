@@ -11,17 +11,23 @@ function addLocalBackground(files) {
 			var imgInstance = new fabric.Image(img);
 			var w = imgInstance.width;
 			var h = imgInstance.height;
-			if (w > MAX_W) {
-				h = h * (MAX_W/w);
-				w = MAX_W;
+			var c_w = $('#canvas_area').width(); 
+			var c_h = $('#canvas_area').height(); 
+			//canvas.setZoom(c_w / MAX_W);
+			//canvas.calcOffset();
+			console.log(w,h);
+			if (w > c_w) {
+				h = h * (c_w/w);
+				w = c_w;
 				imgInstance.set({scaleX: w/imgInstance.width, scaleY: h/imgInstance.height});
 			}
-			if (h > MAX_H) {
-				w = w * (MAX_H/h);
-				h = MAX_H;
+			if (h > c_h) {
+				w = w * (c_h/h);
+				h = c_h;
 			}
+			console.log(w,h);
 			canvas.setBackgroundImage(imgInstance, function() {
-				canvas.setDimensions({width: w, height: h});
+				canvas.setDimensions({width: w, height: h}, {cssOnly: false});
 				canvas.renderAll();
 			}, {
 				originX: 'left',
