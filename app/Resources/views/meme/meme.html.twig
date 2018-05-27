@@ -1,4 +1,11 @@
 {% extends 'base.html.twig' %}
+{% block og_meta_tags %}
+    <meta property="og:url" content="{{ app.request.httpHost }}/m/{{ meme.id }}" />
+    <meta property="og:title" content="Gaondo" />
+    <meta property="og:image" content="{{ app.request.httpHost }}{{ meme.imageUrl }}" />
+    <meta property="og:description" content="{{ meme.title }}" />
+    <meta property="fb:app_id" content="{{ facebook_appId }}" />
+{% endblock %}
 
 {% block content %}
     <div class="meme rose-box">

@@ -4,6 +4,8 @@
         <meta charset="UTF-8" />
         <title>{% block title %}Gaondo{% endblock %}</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+        {% block og_meta_tags %}
+        {% endblock %}
         <link rel="stylesheet" href="{{ asset('build/global.css') }}">
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}?v=new" />
         <script src="{{ asset('js/jquery-3.3.1.min.js') }}"></script>
