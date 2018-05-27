@@ -238,12 +238,21 @@ body {
       .date {
         font-size: .7em;
         color: $color-grey;
+        text-align: center;
       }
 
-      .comment-count {
+      .comment-count,
+      .share-fb {
         margin: 10px;
         text-align: center;
         color: #000000;
+        display: inline-block;
+        font-size: 1.2em;
+
+        &:hover {
+          color: $color-red;
+          cursor: pointer;
+        }
       }
 
       .delete {

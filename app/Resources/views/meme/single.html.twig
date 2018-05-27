@@ -20,7 +20,13 @@
     <div class="center">
         <div class="date">{{ meme.creationDate|date() }}</div>
         <a href="/m/{{ meme.id }}#comments">
-            <div class="comment-count">{{ meme.commentCount }} <span class="icon icon-comment"></span></div>
+            <div class="comment-count">{{ meme.commentCount }} <i class="far fa-comments"></i></div>
+        </a>
+        <a class="share-fb" onclick="FB.ui({
+            method: 'share',
+            href: window.location.origin + '/m/{{ meme.id }}'
+        }, function(response){});">
+            <div class="share"><i class="fab fa-facebook-square"></i></div>
         </a>
         {% if app.user %}
             {% if app.user.isAdmin or app.user == meme.author %}
