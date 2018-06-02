@@ -5,6 +5,11 @@
         <title>{% block title %}Gaondo{% endblock %}</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
         {% block og_meta_tags %}
+            <meta property="og:url" content="{{ app.request.schemeAndHttpHost }}" />
+            <meta property="og:title" content="Gaondo" />
+            <meta property="og:image" content="{{ asset('images/gaondo_logo_big.png') }}" />
+            <meta property="og:description" content="Memes y humor Argentinian" />
+            <meta property="fb:app_id" content="{{ facebook_appId }}" />
         {% endblock %}
         <link rel="stylesheet" href="{{ asset('build/global.css') }}">
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}?v=new" />
