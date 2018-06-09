@@ -584,6 +584,11 @@ form .tos {
 
 /* CMA STUFF (some clean-up is needed) */
 
+@font-face {
+	font-family: 'impactreg';
+	src: url('impactreg.woff') format('woff');
+}
+
 #canvas_area {
 	position: relative;
 	min-height: 300px;

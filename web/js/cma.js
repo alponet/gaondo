@@ -149,9 +149,11 @@ function addText() {
 		cursorDelay: 400,
 		cursorDuration: 200,
 		fontSize: 40,
-		fontWeight: 'bold',
-		fontFamily: 'Sans',
+		strokeWidth: 2,
 	});
+	canvas.setActiveObject(itext);
+	setFont(); // Use default font
+	setTextColor("white");
 	itext.selectAll();
 	canvas.add(itext).setActiveObject(itext);
 	itext.enterEditing();
@@ -160,15 +162,40 @@ function addText() {
 function setTextColor(c) {
 	var objects = canvas.getActiveObjects();
 	objects.forEach(function(e) {
-		e.set({fill: c});
+		switch (c) {
+			case "white":
+				e.set({fill: "white", stroke: "black"});
+				break;
+			case "black":
+				e.set({fill: "black", stroke: "white"});
+				break;
+			default:
+				console.log("Color selection error");
+		}
 	});
 	canvas.renderAll();
+}
+
+function loadAndUse(font) {
+	var myfont = new FontFaceObserver(font);
+	myfont.load().then(function() {
+			canvas.getActiveObject().set('fontFamily', font);
+			canvas.getActiveObject().set('fontWeight', 'bold');
+			canvas.requestRenderAll();
+	}).catch(function(e) {
+		console.log(e)
+		alert('font loading failed ' + font);
+	});
 }
 
 function setFont() {
 	var objects = canvas.getActiveObjects();
 	objects.forEach(function(e) {
-		e.set({fontFamily: document.getElementById("font").value});
+		var font = document.getElementById("font").value;
+		if (font == "impactreg") {
+			loadAndUse(font);
+		}
+		e.set({fontFamily: font});
 	});
 	canvas.renderAll();
 }
