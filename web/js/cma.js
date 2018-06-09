@@ -285,7 +285,7 @@ $(function() {
 
 	$('#submit').click(function() {
 		var statusLabel = document.getElementById("status");
-		statusLabel.innerHTML = "uploading...";
+		statusLabel.innerHTML = "subiendo...";
 
 		var formData = new FormData();
 		formData.append("title", document.getElementById("title").value);

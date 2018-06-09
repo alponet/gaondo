@@ -4,8 +4,16 @@
         <meta charset="UTF-8" />
         <title>{% block title %}Gaondo{% endblock %}</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+        <meta name="description" content="Memes y humor Argentinian" />
+        {% block og_meta_tags %}
+            <meta property="og:url" content="{{ app.request.schemeAndHttpHost }}" />
+            <meta property="og:title" content="Gaondo" />
+            <meta property="og:image" content="https://www.gaondo.com{{ asset('images/gaondo_logo_big.png') }}" />
+            <meta property="og:description" content="Memes y humor Argentinian" />
+            <meta property="fb:app_id" content="{{ facebook_appId }}" />
+        {% endblock %}
         <link rel="stylesheet" href="{{ asset('build/global.css') }}">
-        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}?v=new" />
         <script src="{{ asset('js/jquery-3.3.1.min.js') }}"></script>
         <script src="{{ asset('js/fontawesome-all.min.js') }}"></script>
         <script type="text/javascript">
@@ -23,11 +31,29 @@
         </script>
     </head>
     <body>
+        <script>
+            window.fbAsyncInit = function() {
+                FB.init({
+                    appId            : {{ facebook_appId }},
+                    autoLogAppEvents : true,
+                    xfbml            : true,
+                    version          : 'v3.0'
+                });
+            };
+
+            (function(d, s, id){
+                var js, fjs = d.getElementsByTagName(s)[0];
+                if (d.getElementById(id)) {return;}
+                js = d.createElement(s); js.id = id;
+                js.src = "https://connect.facebook.net/es_AR/sdk.js";
+                fjs.parentNode.insertBefore(js, fjs);
+            }(document, 'script', 'facebook-jssdk'));
+        </script>
         {% block header %}
             <div id="header">
                 <div class="header">
                     <a href="/">
-                      <div class="logo"></div>
+                      <div class="logo"><span class="blinker" /></div>
                     </a>
                     <div class="nav-wrapper">
                         <div class="nav nav-add">
@@ -73,7 +99,6 @@
                     {% endif %}
                 {% endif %}
                 <a href="/support/" class="button-red">Contacto</a>
-                <a href="/tos/" class="button-red">TYC</a>
             </div>
         </div>
         

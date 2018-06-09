@@ -131,20 +131,25 @@ body {
 
     .logo {
       display: block;
-      height: 43px;
-      width: 141px;
+      height: 4em;
+      width: 180px;
       position: absolute;
-      top: 10px;
+      top: 0;
       margin: 0 auto;
       left: 0;
       right: 0;
-      background-image: url('../images/gaondo_logo.png');
+      background-image: url('../images/gaondo_logo01.png');
       background-position: center center;
       background-repeat: no-repeat;
+      background-size: contain;
       z-index: 100;
 
+      .blinker {
+        background: url('../images/gaondo_logo03.png') no-repeat -9999px -9999px;
+      }
+
       &:hover {
-        opacity: .8;
+        background-image: url('../images/gaondo_logo03.png');
       }
     }
 
@@ -233,12 +238,22 @@ body {
       .date {
         font-size: .7em;
         color: $color-grey;
+        text-align: center;
       }
 
-      .comment-count {
+      .comment-count,
+      .share-fb,
+      .share-twitter {
         margin: 10px;
         text-align: center;
         color: #000000;
+        display: inline-block;
+        font-size: 1.2em;
+
+        &:hover {
+          color: $color-red;
+          cursor: pointer;
+        }
       }
 
       .delete {

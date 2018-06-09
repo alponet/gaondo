@@ -8,7 +8,8 @@
     <div class="status"></div>
     <p>{{ 'profile.show.username'|trans }}: {{ user.username }}</p>
     <p>{{ 'profile.show.email'|trans }}: {{ user.email }}</p>
-    <a href="/logout" class="button-red">{% trans from 'messages' %}main.logout{% endtrans %}</a>
+    <p><a href="/logout" class="button-red">{% trans from 'messages' %}main.logout{% endtrans %}</a></p>
+    <p><a href="/tos/" class="button-red">Términos y condiciones</a></p>
     <hr />
     <p>
         <a class="button-red small" onclick="deleteAccount()">{% trans from 'messages'%}profile.deleteAccount{% endtrans %}</a>
