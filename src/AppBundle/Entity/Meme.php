@@ -53,11 +53,18 @@ class Meme extends BasePost
 	 */
 	private $comments;
 
+	/**
+	 * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Tag")
+	 */
+	private $tags;
+
 
 	public function __construct()
 	{
 		$this->comments = new ArrayCollection();
+		$this->tags = new ArrayCollection();
 	}
+
 
 	/**
      * @return string
@@ -176,5 +183,15 @@ class Meme extends BasePost
     public function getCommentCount()
 	{
 		return count($this->comments);
+	}
+
+
+	/**
+	 * @param Tag $tag
+	 */
+	public function addTag(Tag $tag)
+	{
+		$tag->addMeme($this);
+		$this->tags[] = $tag;
 	}
 }
