@@ -353,7 +353,10 @@ body {
   }
 }
 
-.user {
+.user-widget {
+  max-width: 30%;
+  overflow: hidden;
+
   .avatar {
     width: 40px;
     height: 40px;
@@ -371,9 +374,11 @@ body {
     text-align: center;
     font-size: .8em;
     color: $color-red;
-    font-weight: bold;
-    
-    &:hover {
+    font-weight: normal;
+  }
+
+  &:hover {
+    .username {
       color: #000000;
     }
   }

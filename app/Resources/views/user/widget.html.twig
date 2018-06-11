@@ -1,5 +1,5 @@
-<div class="user">
-    <a href="/u/{{ user.id }}/profile">
+<div class="user-widget">
+    <a href="/u/{{ user.id }}/profile" title="{{ user.username }}">
         <div class="avatar" style="background-image: url({{
             web_image(user.avatarUrl).zoomCrop(40,40,0,'center','center')
         }})"></div>
