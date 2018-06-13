@@ -103,5 +103,10 @@
         </div>
         
         <script src="{{ asset('build/app.js') }}"></script>
+        <script type="text/javascript">
+            {% if app.user %}
+                gaondo.isLoggedIn = true;
+            {% endif %}
+        </script>
     </body>
 </html>

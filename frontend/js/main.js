@@ -6,6 +6,8 @@ import SupportForm from "./components/SupportForm";
 
 window.gaondo = {};
 
+gaondo.isLoggedIn = false;
+
 /**
  * reply to comments
  */
@@ -48,17 +50,21 @@ gaondo.voteDown = function(subjectId) {
 };
 
 let vote = function(subjectId, value) {
-    let formData = new FormData();
-    formData.append("value", value);
+    if(!gaondo.isLoggedIn) {
+        window.location.href = "/login";
+    } else {
+        let formData = new FormData();
+        formData.append("value", value);
 
-    let xhr = new XMLHttpRequest();
-    xhr.open("POST", "/m/" + subjectId + "/vote", true);
-    xhr.onreadystatechange = function () {
-        if (xhr.readyState === 4) {
-            document.getElementById("score_" + subjectId).innerText = xhr.response;
-        }
-    };
-    xhr.send(formData);
+        let xhr = new XMLHttpRequest();
+        xhr.open("POST", "/m/" + subjectId + "/vote", true);
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4) {
+                document.getElementById("score_" + subjectId).innerText = xhr.response;
+            }
+        };
+        xhr.send(formData);
+    }
 };
 
 
