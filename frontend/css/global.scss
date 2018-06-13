@@ -3,6 +3,7 @@
 $color-rose: #ec97c0;
 $color-red: #c92027;
 $color-grey: #c0c0c0;
+$color-green: #00a000;
 
 .button-red {
   color: #ffffff;
@@ -281,7 +282,7 @@ body {
   }
 
   .success {
-    color: #00a000;
+    color: $color-green;
   }
 
   .userProfile {
@@ -331,32 +332,42 @@ body {
     width: 55px;
 
     .vote {
-      display: inline-block;
-      width: 24px;
-      height: 23px;
+      display: block;
+      padding-bottom: 8px;
+      font-size: 1.4em;
+      color: $color-rose;
 
-      &.up {
-        background-image: url('../images/icons/up.png');
-        left: 0;
-      }
+      a {
+        margin-bottom: 12px;
 
-      &.down {
-        background-image: url('../images/icons/down.png');
-        float: right;
-      }
+        &:hover {
+          cursor: pointer;
+        }
 
-      &:hover {
-        opacity: 0.8;
-        cursor: pointer;
+        &.up {
+          &:hover,
+          &.selected {
+            color: $color-green;
+          }
+        }
+
+        &.down {
+          float: right;
+
+          &:hover,
+          &.selected {
+            color: $color-red;
+          }
+        }
       }
     }
 
     .value {
-      background-color: $color-rose;
       text-align: center;
       padding: 3px;
       border-radius: 3px;
-      color: #ffffff;
+      border: 1px solid $color-rose;
+      color: $color-rose;
       font-size: .8em;
     }
   }

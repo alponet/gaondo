@@ -1,6 +1,12 @@
 <div class="score">
-    <div class="vote up" onclick="gaondo.voteUp({{ data.subjectId }})"></div>
-    <div class="vote down" onclick="gaondo.voteDown({{ data.subjectId }})"></div>
+    <div class="vote">
+        <a class="up" onclick="gaondo.voteUp({{ data.subjectId }})">
+            <i class="far fa-thumbs-up"></i>
+        </a>
+        <a class="down" onclick="gaondo.voteDown({{ data.subjectId }})">
+            <i class="far fa-thumbs-down" ></i>
+        </a>
+    </div>
     <div class="value">
         <span id="score_{{ data.subjectId }}">{{ data.score }}</span>
     </div>
