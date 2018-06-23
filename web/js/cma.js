@@ -311,7 +311,7 @@ $(function() {
                 }
             };
             xhr.send(formData);
-        }, "image/jpeg");
+        }, "image/jpeg", 1.0);
 	});
 });
 
