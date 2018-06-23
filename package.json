@@ -6,10 +6,10 @@
   "license": "UNLICENSED",
   "devDependencies": {
     "@symfony/webpack-encore": "^0.15.1",
-    "babel-core": "^6.26.0",
-    "babel-preset-env": "^1.6.1",
+    "babel-core": "^6.26.3",
+    "babel-preset-env": "^1.7.0",
     "babel-preset-react": "^6.24.1",
-    "node-sass": "^4.5.3",
+    "node-sass": "^4.9.0",
     "sass-loader": "^6.0.6",
     "webpack": "^3.6.0"
   },
