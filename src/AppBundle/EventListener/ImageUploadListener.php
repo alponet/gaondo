@@ -26,7 +26,7 @@ class ImageUploadListener
 
         $path = Image::open($mapping->getFile($object)->getRealPath())
 	        ->cropResize(1024,2048,0)
-	        ->jpeg();
+	        ->jpeg(95);
         $convertedImage = new UploadedFile($path, '', 'jpeg', 1, null, true);
 
         $mapping->setFile($object, $convertedImage);
