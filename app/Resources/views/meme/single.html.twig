@@ -53,11 +53,7 @@
         <a name="comments"></a>
         <div class="comments">
             <h3>{{ meme.commentCount }} {% trans %}main.comments{% endtrans %}</h3>
-            {% if app.user %}
-                {{ render(controller('AppBundle:Comment:_commentForm', { 'memeId': meme.id, 'replyTo': null })) }}
-            {% else %}
-                {% trans %}comments.loginRequired{% endtrans %}
-            {% endif %}
+            {{ render(controller('AppBundle:Comment:_commentForm', { 'memeId': meme.id, 'replyTo': null })) }}
             {{ render(controller('AppBundle:Comment:_commentList', { 'memeId': meme.id })) }}
         </div>
     {% endblock %}

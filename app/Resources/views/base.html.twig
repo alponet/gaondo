@@ -29,6 +29,12 @@
                 g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
             })();
         </script>
+        <script src="{{ asset('build/app.js') }}"></script>
+        <script type="text/javascript">
+            {% if app.user %}
+                gaondo.isLoggedIn = true;
+            {% endif %}
+        </script>
     </head>
     <body>
         <script>
@@ -57,17 +63,10 @@
                     </a>
                     <div class="nav-wrapper">
                         <div class="nav nav-add">
-                            {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-                                <a href="/newMeme" class="icon icon-add">
-                                    <i class="far fa-image"></i>
-                                    <span class="description">{% trans %}main.create{% endtrans %}</span>
-                                </a>
-                            {% else %}
-                                <a href="/login" class="icon icon-add">
-                                    <i class="far fa-image"></i>
-                                    <span class="description">{% trans %}main.create{% endtrans %}</span>
-                                </a>
-                            {% endif %}
+                            <a href="/newMeme" class="icon icon-add">
+                                <i class="far fa-image"></i>
+                                <span class="description">{% trans %}main.create{% endtrans %}</span>
+                            </a>
                         </div>
                         <div class="nav nav-user {{ is_granted("IS_AUTHENTICATED_REMEMBERED") ? "logged-in" : "logged-out" }}">
                             <div class="user">
@@ -90,6 +89,8 @@
             </div>
         {% endblock %}
 
+        <div id="overlay"></div>
+
         <div id="content">
             {% block content %}
                 Welcome to Gaondo!
@@ -106,12 +107,5 @@
                 <a href="/support/" class="button-red">Contacto</a>
             </div>
         </div>
-        
-        <script src="{{ asset('build/app.js') }}"></script>
-        <script type="text/javascript">
-            {% if app.user %}
-                gaondo.isLoggedIn = true;
-            {% endif %}
-        </script>
     </body>
 </html>

@@ -1,6 +1,11 @@
 {% extends 'base.html.twig' %}
 
 {% block content %}
+    <script type="text/javascript">
+        if(gaondo.isLoggedIn) {
+            window.location.replace("/profile");
+        }
+    </script>
     <div class="login" id="login-form">
         {# content gets rendered by React #}
     </div>

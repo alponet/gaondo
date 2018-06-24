@@ -284,34 +284,38 @@ $(function() {
 	});
 
 	$('#submit').click(function() {
-		var statusLabel = document.getElementById("status");
-		statusLabel.innerHTML = "subiendo...";
+        if(!gaondo.isLoggedIn) {
+            gaondo.showLoginOverlay();
+        } else {
+            var statusLabel = document.getElementById("status");
+            statusLabel.innerHTML = "subiendo...";
 
-        $("#canvas").get(0).toBlob(function(blob) {
-            var formData = new FormData();
+            $("#canvas").get(0).toBlob(function(blob) {
+                var formData = new FormData();
 
-            formData.append("title", document.getElementById("title").value);
-            formData.append("file", blob, "file.jpeg");
-            formData.append("description", document.getElementById("description").value);
+                formData.append("title", document.getElementById("title").value);
+                formData.append("file", blob, "file.jpeg");
+                formData.append("description", document.getElementById("description").value);
 
-            var xhr = new XMLHttpRequest();
-            xhr.open("POST", "/m/", true);
-            xhr.onreadystatechange = function() {
-                if (xhr.readyState === 4) {
-                    var re = JSON.parse(xhr.response);
+                var xhr = new XMLHttpRequest();
+                xhr.open("POST", "/m/", true);
+                xhr.onreadystatechange = function() {
+                    if (xhr.readyState === 4) {
+                        var re = JSON.parse(xhr.response);
 
-                    if (re.errors) {
-                        statusLabel = document.getElementById("status");
-                        statusLabel.innerHTML = '<label class="error">' + re.errors[0].detail + '</label>';
+                        if (re.errors) {
+                            statusLabel = document.getElementById("status");
+                            statusLabel.innerHTML = '<label class="error">' + re.errors[0].detail + '</label>';
+                        }
+
+                        if (re.memeId) {
+                            window.location.replace("/m/" + re.memeId);
+                        }
                     }
-
-                    if (re.memeId) {
-                        window.location.replace("/m/" + re.memeId);
-                    }
-                }
-            };
-            xhr.send(formData);
-        }, "image/jpeg", 1.0);
+                };
+                xhr.send(formData);
+            }, "image/jpeg", 1.0);
+		}
 	});
 });
 

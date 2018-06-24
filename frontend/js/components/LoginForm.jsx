@@ -7,7 +7,8 @@ export default class LoginForm extends React.Component {
         this.state = {
             _username: '',
             _password: '',
-            status: ''
+            status: '',
+            embedded: !window.location.pathname.includes("/login")
         };
 
         this.handleNameChange = this.handleNameChange.bind(this);
@@ -45,8 +46,12 @@ export default class LoginForm extends React.Component {
                     password: ''
                 });
 
-                if (window.location.pathname.includes("/login")) {
+                gaondo.isLoggedIn = true;
+
+                if (!self.state.embedded) {
                     window.location.replace("/");
+                } else {
+                    document.getElementById("overlay").style.display = "none";
                 }
             } else {
                 self.setState({
@@ -72,12 +77,12 @@ export default class LoginForm extends React.Component {
                         <input id="_submit" name="_submit" className="button-red" value="Entrar" type="submit" />
                     </form>
                     <p>
-                        <a href="/resetting/request">¿Olvidaste el password?</a>
+                        <a href="/resetting/request" target={ this.state.embedded ? "_blank" : undefined }>¿Olvidaste el password?</a>
                     </p>
                 </div>
                 <div className="register">
                     <hr />
-                    <a href="/register" className="button-red">Crear cuenta</a>
+                    <a href="/register" className="button-red" target={ this.state.embedded ? "_blank" : undefined }>Crear cuenta</a>
                 </div>
             </div>
 

@@ -52,7 +52,7 @@ gaondo.voteDown = function(subjectId) {
 
 let vote = function(subjectId, value) {
     if(!gaondo.isLoggedIn) {
-        window.location.href = "/login";
+        gaondo.showLoginOverlay();
     } else {
         let formData = new FormData();
         formData.append("value", value);
@@ -82,6 +82,20 @@ gaondo.deleteMeme = function(id) {
             window.location.replace("/");
         });
     }
+};
+
+
+gaondo.showLoginOverlay = function() {
+    ReactDOM.render(<LoginForm/>, document.getElementById("overlay"));
+
+    let overlay = document.getElementById("overlay");
+    overlay.style.display = "block";
+    overlay.addEventListener("click", function( e ){
+        e = window.event || e;
+        if(this === e.target) {
+            overlay.style.display = "none";
+        }
+    });
 };
 
 

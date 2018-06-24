@@ -596,6 +596,27 @@ form .tos {
   }
 }
 
+#overlay {
+  position: fixed;
+  display: none;
+  width: 100%;
+  height: 100%;
+  padding: 10%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0,0,0,0.8);
+  z-index: 999;
+  cursor: pointer;
+
+  .rose-box {
+    background-color: #ffffff;
+    width: 80%;
+    cursor: default;
+  }
+}
+
 @media (max-width: 640px) {
   #content {
     margin: 5em 0.5em;
