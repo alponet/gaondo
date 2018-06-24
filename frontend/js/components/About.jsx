@@ -14,6 +14,7 @@ export default class About extends React.Component {
         this.setState({
             showText: !this.state.showText
         }, function() {
+            _paq.push(['trackEvent', 'toggleAboutText']);
         });
     }
 

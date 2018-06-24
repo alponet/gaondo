@@ -95,8 +95,11 @@ gaondo.showLoginOverlay = function() {
         e = window.event || e;
         if(this === e.target) {
             overlay.style.display = "none";
+            _paq.push(['trackEvent', 'LoginOverlay', 'hide']);
         }
     });
+
+    _paq.push(['trackEvent', 'LoginOverlay', 'show']);
 };
 
 
