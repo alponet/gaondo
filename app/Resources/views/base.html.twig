@@ -29,12 +29,6 @@
                 g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
             })();
         </script>
-        <script src="{{ asset('build/app.js') }}"></script>
-        <script type="text/javascript">
-            {% if app.user %}
-                gaondo.isLoggedIn = true;
-            {% endif %}
-        </script>
     </head>
     <body>
         <script>
@@ -107,5 +101,11 @@
                 <a href="/support/" class="button-red">Contacto</a>
             </div>
         </div>
+        <script src="{{ asset('build/app.js') }}"></script>
+        <script type="text/javascript">
+            {% if app.user %}
+            gaondo.isLoggedIn = true;
+            {% endif %}
+        </script>
     </body>
 </html>
