@@ -2,6 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import Administration from "./components/Administration";
 import SupportForm from "./components/SupportForm";
+import LoginForm from "./components/LoginForm";
 
 
 window.gaondo = {};
@@ -95,5 +96,12 @@ if ($('#support-form').length) {
     ReactDOM.render(
         <SupportForm/>,
         document.getElementById("support-form")
+    );
+}
+
+if ($('#login-form').length) {
+    ReactDOM.render(
+        <LoginForm/>,
+        document.getElementById("login-form")
     );
 }

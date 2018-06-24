@@ -1,19 +1,7 @@
-{% extends "@FOSUser/layout.html.twig" %}
+{% extends 'base.html.twig' %}
 
-{% block fos_user_content %}
-<div class="login">
-    <div class="login rose-box">
-        <div class="title">
-            <h2>{% trans %}main.login{% endtrans %}</h2>
-        </div>
-        <div class="content">
-            {{ include('@FOSUser/Security/login_content.html.twig') }}
-            <a href="{{ path('fos_user_resetting_request') }}">{% trans %}register.forgotPassword{% endtrans %}</a>
-        </div>
-        <div class="register">
-            <hr />
-            <a href="/register" class="button-red">{% trans %}main.register{% endtrans %}</a>
-        </div>
+{% block content %}
+    <div class="login" id="login-form">
+        {# content gets rendered by React #}
     </div>
-</div>
-{% endblock fos_user_content %}
+{% endblock %}

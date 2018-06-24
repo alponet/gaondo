@@ -34,6 +34,12 @@ services:
     #     arguments:
     #         $someArgument: 'some_value'
 
+    authentication_handler:
+        class:  AppBundle\Handler\AuthenticationHandler
+        arguments:  [ "@router" ]
+        tags:
+            - { name: 'monolog.logger', channel: 'security' }
+
     app.image_upload_listener:
         class: AppBundle\EventListener\ImageUploadListener
         tags:
