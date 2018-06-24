@@ -3,6 +3,7 @@ import ReactDOM from "react-dom";
 import Administration from "./components/Administration";
 import SupportForm from "./components/SupportForm";
 import LoginForm from "./components/LoginForm";
+import About from "./components/About";
 
 
 window.gaondo = {};
@@ -99,23 +100,32 @@ gaondo.showLoginOverlay = function() {
 };
 
 
-if ($('#admin-page').length) {
-    ReactDOM.render(
-        <Administration />,
-        document.getElementById("admin-page")
-    );
-}
+$('document').ready(function(){
+    if ($('#admin-page').length) {
+        ReactDOM.render(
+            <Administration />,
+            document.getElementById("admin-page")
+        );
+    }
 
-if ($('#support-form').length) {
-    ReactDOM.render(
-        <SupportForm/>,
-        document.getElementById("support-form")
-    );
-}
+    if ($('#support-form').length) {
+        ReactDOM.render(
+            <SupportForm/>,
+            document.getElementById("support-form")
+        );
+    }
 
-if ($('#login-form').length) {
-    ReactDOM.render(
-        <LoginForm/>,
-        document.getElementById("login-form")
-    );
-}
+    if ($('#login-form').length) {
+        ReactDOM.render(
+            <LoginForm/>,
+            document.getElementById("login-form")
+        );
+    }
+
+    if ($('#about').length && !gaondo.isLoggedIn) {
+        ReactDOM.render(
+            <About/>,
+            document.getElementById("about")
+        );
+    }
+});
