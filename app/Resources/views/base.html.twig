@@ -62,6 +62,11 @@
                                     <i class="far fa-image"></i>
                                     <span class="description">{% trans %}main.create{% endtrans %}</span>
                                 </a>
+                            {% else %}
+                                <a href="/login" class="icon icon-add">
+                                    <i class="far fa-image"></i>
+                                    <span class="description">{% trans %}main.create{% endtrans %}</span>
+                                </a>
                             {% endif %}
                         </div>
                         <div class="nav nav-user {{ is_granted("IS_AUTHENTICATED_REMEMBERED") ? "logged-in" : "logged-out" }}">
