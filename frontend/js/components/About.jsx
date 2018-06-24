@@ -25,7 +25,7 @@ export default class About extends React.Component {
                 <div className = "title">
                     <h2>¡Bienvenid@!</h2>
                 </div>
-                <div className="content" onClick={() => this.toggleText()}>
+                <div className="content" onClick={() => this.toggleText()} style={{ cursor: "pointer" }}>
                     <h3>¿Que es Gaondo?</h3>
                     <div style={{ display: this.state.showText ? "block" : "none" }}>
                         <p>Gaondo es una comunidad online dedicada a los memes y el humor argentino, hecho por y para nosotr@s. Particularmente nos interesa el humor político, social y futbolístico, pero reír es reír, así que otras temáticas también nos divierten.</p>
