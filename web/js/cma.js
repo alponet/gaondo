@@ -54,6 +54,23 @@ function addLocalImage(files) {
 
 		img.onload = function() {
 			var imgInstance = new fabric.Image(img);
+			var w = imgInstance.width;
+			var h = imgInstance.height;
+			var c_w = $('#canvas_area').width(); 
+			var c_h = $('#canvas_area').height(); 
+			//canvas.setZoom(c_w / MAX_W);
+			//canvas.calcOffset();
+			console.log(w,h);
+			if (w > c_w) {
+				h = h * (c_w/w);
+				w = c_w;
+				imgInstance.set({scaleX: w/imgInstance.width, scaleY: h/imgInstance.height});
+			}
+			if (h > c_h) {
+				w = w * (c_h/h);
+				h = c_h;
+				imgInstance.set({scaleX: w/imgInstance.width, scaleY: h/imgInstance.height});
+			}
 			canvas.add(imgInstance);
 
 			console.log('OK');
@@ -119,6 +136,23 @@ function addRemoteImage(URL) {
 
 	img.onload = function() {
 		var imgInstance = new fabric.Image(img);
+		var w = imgInstance.width;
+		var h = imgInstance.height;
+		var c_w = $('#canvas_area').width(); 
+		var c_h = $('#canvas_area').height(); 
+		//canvas.setZoom(c_w / MAX_W);
+		//canvas.calcOffset();
+		console.log(w,h);
+		if (w > c_w) {
+			h = h * (c_w/w);
+			w = c_w;
+			imgInstance.set({scaleX: w/imgInstance.width, scaleY: h/imgInstance.height});
+		}
+		if (h > c_h) {
+			w = w * (c_h/h);
+			h = c_h;
+			imgInstance.set({scaleX: w/imgInstance.width, scaleY: h/imgInstance.height});
+		}
 		canvas.add(imgInstance);
 
 		console.log('OK');
