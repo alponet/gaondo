@@ -245,6 +245,7 @@ function removeSelected() {
 
 $(function() {
 	canvas = new fabric.Canvas('canvas');
+	canvas.selection = false;
 
 	var bringToFront = function(e) {
 		canvas.bringToFront(e.target);
