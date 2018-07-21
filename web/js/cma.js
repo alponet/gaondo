@@ -325,31 +325,59 @@ $(function() {
             var statusLabel = document.getElementById("status");
             statusLabel.innerHTML = "subiendo...";
 
-            $("#canvas").get(0).toBlob(function(blob) {
-                var formData = new FormData();
+            // $("#canvas").get(0).toBlob(function(blob) {
+            //     var formData = new FormData();
+            //
+            //     formData.append("title", document.getElementById("title").value);
+            //     formData.append("file", blob, "file.jpeg");
+            //     formData.append("description", document.getElementById("description").value);
+            //
+            //     var xhr = new XMLHttpRequest();
+            //     xhr.open("POST", "/m/", true);
+            //     xhr.onreadystatechange = function() {
+            //         if (xhr.readyState === 4) {
+            //             var re = JSON.parse(xhr.response);
+            //
+            //             if (re.errors) {
+            //                 statusLabel = document.getElementById("status");
+            //                 statusLabel.innerHTML = '<label class="error">' + re.errors[0].detail + '</label>';
+            //             }
+            //
+            //             if (re.memeId) {
+            //                 window.location.replace("/m/" + re.memeId);
+            //             }
+            //         }
+            //     };
+            //     xhr.send(formData);
+            // }, "image/jpeg", 1.0);
 
-                formData.append("title", document.getElementById("title").value);
-                formData.append("file", blob, "file.jpeg");
-                formData.append("description", document.getElementById("description").value);
 
-                var xhr = new XMLHttpRequest();
-                xhr.open("POST", "/m/", true);
-                xhr.onreadystatechange = function() {
-                    if (xhr.readyState === 4) {
-                        var re = JSON.parse(xhr.response);
 
-                        if (re.errors) {
-                            statusLabel = document.getElementById("status");
-                            statusLabel.innerHTML = '<label class="error">' + re.errors[0].detail + '</label>';
-                        }
+            var formData = new FormData();
+            formData.append("title", document.getElementById("title").value);
+            var byteString = atob(canvas.toDataURL().split(',')[1]);
+            var ia = new Uint8Array(byteString.length);
+            for (var i = 0; i < byteString.length; i++) {
+            	ia[i] = byteString.charCodeAt(i);
+            }
+            formData.append("file", (new File( [(new Blob([ia], {type:'image/png'}))], 'blob.png', {type:'image/png'})));
+            formData.append("description", document.getElementById("description").value);
 
-                        if (re.memeId) {
-                            window.location.replace("/m/" + re.memeId);
-                        }
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", "/m/", true);
+            xhr.onreadystatechange = function() {
+            	if (xhr.readyState === 4) {
+            		var re = JSON.parse(xhr.response);
+                    if (re.errors) {
+                    	statusLabel = document.getElementById("status");
+                        statusLabel.innerHTML = '<label class="error">' + re.errors[0].detail + '</label>';
                     }
-                };
-                xhr.send(formData);
-            }, "image/jpeg", 1.0);
+                    if (re.memeId) {
+                    	window.location.replace("/m/" + re.memeId);
+                    }
+            	}
+            };
+            xhr.send(formData);
 		}
 	});
 });
