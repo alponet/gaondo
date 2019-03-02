@@ -59,22 +59,16 @@ class MemeController extends Controller
             $response = [];
 
             foreach ($memes as $meme) {
-            	/*
-                $response[] = [
-                    "id"    => $meme->getId(),
-                    "title" => $meme->getTitle(),
-                    "file"  => "images/memes/" . $meme->getImageName(),
-                    "description" => $meme->getDescription(),
-                    "author"    =>  $meme->getAuthor()->getUsername(),
-                    "date" => $meme->getCreationDate()
-                ];
-            	*/
-
-	            $mId = "m" . $meme->getId();
-
-            	$memeData = [];
-            	$memeData["descriptor"] = $mId;
-            	$memeData["element"] = '<div id="' . $mId .'" class="meme rose-box">'
+            	$memeData = [
+								"id"    => $meme->getId(),
+								"title" => $meme->getTitle(),
+								"file"  => "images/memes/" . $meme->getImageName(),
+								"description" => $meme->getDescription(),
+								"author"    =>  $meme->getAuthor()->getUsername(),
+								"date" => $meme->getCreationDate()
+							];
+            	$memeData["descriptor"] = "m" . $meme->getId();
+            	$memeData["element"] = '<div id="' . $meme->getId() .'" class="meme rose-box">'
 		            . $this->renderView(":meme:single.html.twig", [ 'meme' => $meme, 'link' => true ] )
 		            . '</div>';
 
